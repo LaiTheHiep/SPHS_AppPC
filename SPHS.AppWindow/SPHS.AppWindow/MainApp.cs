@@ -10,6 +10,7 @@ using System.IO;
 using System.IO.Ports;
 using tesseract;
 using System.Threading;
+using SPHS.AppWindow.parameters;
 
 
 namespace SPHS.AppWindow
@@ -20,6 +21,7 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
+            Utils.compareStringLike("hondA", "Honda");
         }
 
         #region Define
@@ -39,6 +41,31 @@ namespace SPHS.AppWindow
 
         //int current = 0;
         Capture capture = null;
+
+        #endregion
+
+        #region layout
+
+        private void setInfomation(string _name, string _cmt, string _phone, string _role, string _balance, string _timeIn, bool isIn)
+        {
+            if (isIn)
+            {
+                lbNameIn.Text = _name;
+                lbCMTIn.Text = _cmt;
+                lbPhoneIn.Text = _phone;
+                lbRoleIn.Text = _role;
+                lbBalanceIn.Text = _balance;
+            }
+            else
+            {
+                lbNameOut.Text = _name;
+                lbCMTOut.Text = _cmt;
+                lbPhoneOut.Text = _phone;
+                lbRoleOut.Text = _role;
+                lbBalanceOut.Text = _balance;
+                lbTimeIn.Text = _timeIn;
+            }
+        }
 
         #endregion
 
@@ -203,7 +230,7 @@ namespace SPHS.AppWindow
                 FindContours con = new FindContours();
                 Bitmap color;
                 int c = con.IdentifyContours(src.ToBitmap(), 50, false, out grayframe, out color, out listRect);  // find contour
-                if(picInorOut)
+                if (picInorOut)
                     picNumberPlate_in.Image = color;
                 else
                     picNumberPlate_out.Image = color;
@@ -363,49 +390,6 @@ namespace SPHS.AppWindow
             }
         }
 
-        private void btnLoadImageIn_Click(object sender, EventArgs e)
-        {
-            //while (true) ;
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
-            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            {
-                return;
-            }
-            string startupPath = dlg.FileName;
-
-            Image temp1;
-            string temp2, temp3;
-            Reconize(true, startupPath, out temp1, out temp2, out temp3);
-            pic_vehicle_in.Image = temp1;
-            if (temp3 == "")
-                txtNumberPlate_in.Text = "Cannot recognize license plate !";
-            else
-                txtNumberPlate_in.Text = temp3;
-        }
-
-        private void btnLoadImageOut_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
-            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            {
-                return;
-            }
-            string startupPath = dlg.FileName;
-
-            Image temp1;
-            string temp2, temp3;
-            Reconize(false, startupPath, out temp1, out temp2, out temp3);
-            pic_vehicle_out.Image = temp1;
-            if (temp3 == "")
-                txtNumberPlate_out.Text = "Cannot recognize license plate !";
-            else
-                txtNumberPlate_out.Text = temp3;
-        }
-
         private void MainApp_Load(object sender, EventArgs e)
         {
             //capture = new Emgu.CV.Capture();
@@ -449,7 +433,55 @@ namespace SPHS.AppWindow
             }
         }
 
+        private void btnLoadImageIn_Click(object sender, EventArgs e)
+        {
+            //while (true) ;
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            string startupPath = dlg.FileName;
+
+            Image temp1;
+            string temp2, temp3;
+            Reconize(true, startupPath, out temp1, out temp2, out temp3);
+            pic_vehicle_in.Image = temp1;
+            if (temp3 == "")
+                txtNumberPlate_in.Text = "Cannot recognize license plate !";
+            else
+                txtNumberPlate_in.Text = temp3;
+        }
+
+        private void btnLoadImageOut_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            string startupPath = dlg.FileName;
+
+            Image temp1;
+            string temp2, temp3;
+            Reconize(false, startupPath, out temp1, out temp2, out temp3);
+            pic_vehicle_out.Image = temp1;
+            if (temp3 == "")
+                txtNumberPlate_out.Text = "Cannot recognize license plate !";
+            else
+                txtNumberPlate_out.Text = temp3;
+        }
+
         private void btnSaveIn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnPass_Click(object sender, EventArgs e)
         {
 
         }

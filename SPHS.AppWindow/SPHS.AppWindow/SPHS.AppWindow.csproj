@@ -85,8 +85,16 @@
     <Compile Include="MainApp.Designer.cs">
       <DependentUpon>MainApp.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\companies.cs" />
+    <Compile Include="models\parkingTickets.cs" />
+    <Compile Include="models\roles.cs" />
+    <Compile Include="models\transactions.cs" />
+    <Compile Include="models\users.cs" />
+    <Compile Include="models\vehicleTypes.cs" />
+    <Compile Include="parameters\Parameter_Special.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="MainApp.resx">
       <DependentUpon>MainApp.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +132,8 @@
     <Content Include="lib\cv\Emgu.Util.dll" />
     <Content Include="lib\tessarct\tesseractengine3.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="actions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
