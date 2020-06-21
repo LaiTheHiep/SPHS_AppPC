@@ -16,5 +16,15 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
         }
+
+        private void btnLoadImageIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLoadImageOut_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
