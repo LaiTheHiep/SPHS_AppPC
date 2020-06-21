@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FindContours.cs" />
     <Compile Include="MainApp.cs">
       <SubType>Form</SubType>
     </Compile>
