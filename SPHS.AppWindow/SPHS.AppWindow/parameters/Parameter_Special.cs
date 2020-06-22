@@ -32,8 +32,8 @@ namespace SPHS.AppWindow.parameters
         users,
         transactions,
         companies,
-        parkingTickets,
-        vehicleTypes
+        parkingtickets,
+        vehicletypes
     }
 
     public enum DATARESPONSE

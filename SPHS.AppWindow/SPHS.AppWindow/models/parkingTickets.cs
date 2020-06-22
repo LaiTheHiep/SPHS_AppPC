@@ -9,7 +9,6 @@ namespace SPHS.AppWindow.models
     public class parkingTickets
     {
         public string _id { get; set; }
-        public string name { get; set; }
         public string port { get; set; }
         public string description { get; set; }
         public string timeIn { get; set; }

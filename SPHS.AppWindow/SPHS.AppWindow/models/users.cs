@@ -9,6 +9,8 @@ namespace SPHS.AppWindow.models
     public class users
     {
         public string _id { get; set; }
+        public string account { get; set; }
+        public string password { get; set; }
         public string name { get; set; }
         public string companyId { get; set; }
         public string cmt { get; set; }
@@ -16,7 +18,7 @@ namespace SPHS.AppWindow.models
         public string email { get; set; }
         public string role { get; set; }
         public string numberPlate { get; set; }
-        public string balance { get; set; }
+        public int balance { get; set; }
         public string description { get; set; }
         public string vehicleColor { get; set; }
         public string vehicleBranch { get; set; }
