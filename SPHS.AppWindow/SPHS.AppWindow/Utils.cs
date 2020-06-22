@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SPHS.AppWindow.parameters;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +30,46 @@ namespace SPHS.AppWindow
             catch
             {
                 return -1;
+            }
+        }
+
+        public static string createLinkAPI(object _collection, string _query)
+        {
+            if(_query != null)
+                return Parameter_Special.ADDRESS_BASE_API + "/" + _collection.ToString() + $"?{_query}";
+
+            return Parameter_Special.ADDRESS_BASE_API + "/" + _collection.ToString();
+        }
+
+        public static string ClassToJsonString<T>(T obj)
+        {
+            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        }
+
+        public static T JsonStringToClass<T>(string json)
+        {
+            T obj = Activator.CreateInstance<T>();
+            MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
+            obj = (T)serializer.ReadObject(ms);
+            ms.Close();
+            return obj;
+        }
+
+        // data properties obj_in -> obj_out
+        public static void MappingMessageToMessage(object obj_in, object obj_out)
+        {
+            PropertyInfo[] props_out = obj_out.GetType().GetProperties();
+            foreach (var item in props_out)
+            {
+                if (obj_in.GetType().GetProperty(item.Name) == null)
+                    continue;
+
+                object value = obj_in.GetType().GetProperty(item.Name).GetValue(obj_in);
+                if (value != null)
+                {
+                    obj_out.GetType().GetProperty(item.Name).SetValue(obj_out, value);
+                }
             }
         }
     }

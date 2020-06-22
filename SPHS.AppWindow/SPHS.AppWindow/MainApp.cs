@@ -11,7 +11,8 @@ using System.IO.Ports;
 using tesseract;
 using System.Threading;
 using SPHS.AppWindow.parameters;
-
+using SPHS.AppWindow.actions;
+using SPHS.AppWindow.models;
 
 namespace SPHS.AppWindow
 {
@@ -21,7 +22,6 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
-            Utils.compareStringLike("hondA", "Honda");
         }
 
         #region Define
@@ -478,7 +478,7 @@ namespace SPHS.AppWindow
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnPass_Click(object sender, EventArgs e)

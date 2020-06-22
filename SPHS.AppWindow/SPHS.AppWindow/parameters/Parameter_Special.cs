@@ -9,6 +9,7 @@ namespace SPHS.AppWindow.parameters
     public class Parameter_Special
     {
         public static string UNKNOWN_STRING = "Unknown";
+        public static string ADDRESS_BASE_API = "http://localhost:8080";
     }
 
     public enum ROLES
@@ -23,5 +24,23 @@ namespace SPHS.AppWindow.parameters
     {
         car,
         motobike
+    }
+
+    public enum COLLECTIONS
+    {
+        roles,
+        users,
+        transactions,
+        companies,
+        parkingTickets,
+        vehicleTypes
+    }
+
+    public enum DATARESPONSE
+    {
+        total,
+        data,
+        errorName,
+        errorMessage
     }
 }
