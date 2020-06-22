@@ -14,6 +14,8 @@ namespace SPHS.AppWindow.models
         public string description { get; set; }
         public string timeIn { get; set; }
         public string timeOut { get; set; }
+        public string imageIn { get; set; }
+        public string imageOut { get; set; }
         public string author { get; set; } // employee
         public string userId { get; set; } // vehicle parked
     }
