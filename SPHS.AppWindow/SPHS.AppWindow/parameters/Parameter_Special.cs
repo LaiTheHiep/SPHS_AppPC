@@ -12,6 +12,7 @@ namespace SPHS.AppWindow.parameters
         public static string UNKNOWN_STRING = "Unknown";
         public static string ADDRESS_BASE_API = "http://localhost:8080";
         public static users USER_PRESENT = new users();
+        public static companies COMPANY_PRESENT = new companies();
     }
 
     public enum ROLES

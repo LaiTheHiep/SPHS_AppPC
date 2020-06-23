@@ -50,6 +50,8 @@
             this.pic_vehicle_in = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbTotalOut = new System.Windows.Forms.Label();
+            this.lbTotalOutContent = new System.Windows.Forms.Label();
             this.lbTimesOut = new System.Windows.Forms.Label();
             this.lbTimesOutContent = new System.Windows.Forms.Label();
             this.lbTimeIn = new System.Windows.Forms.Label();
@@ -79,8 +81,19 @@
             this.tabPageRegistration = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.lbTotalOut = new System.Windows.Forms.Label();
-            this.lbTotalOutContent = new System.Windows.Forms.Label();
+            this.picEmployee = new System.Windows.Forms.PictureBox();
+            this.lbNameEmployee = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbPhoneEmployee = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbRoleEmployee = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbCompanyEmployee = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lbAddressComEmployee = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbPortsCompany = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -94,7 +107,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_vehicle_out)).BeginInit();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPageInfomation.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -354,6 +369,27 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Information Vehicle";
             // 
+            // lbTotalOut
+            // 
+            this.lbTotalOut.AutoSize = true;
+            this.lbTotalOut.Location = new System.Drawing.Point(61, 204);
+            this.lbTotalOut.Name = "lbTotalOut";
+            this.lbTotalOut.Size = new System.Drawing.Size(53, 13);
+            this.lbTotalOut.TabIndex = 26;
+            this.lbTotalOut.Text = "Unknown";
+            this.lbTotalOut.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbTotalOutContent
+            // 
+            this.lbTotalOutContent.AutoSize = true;
+            this.lbTotalOutContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalOutContent.Location = new System.Drawing.Point(5, 204);
+            this.lbTotalOutContent.Name = "lbTotalOutContent";
+            this.lbTotalOutContent.Size = new System.Drawing.Size(40, 13);
+            this.lbTotalOutContent.TabIndex = 25;
+            this.lbTotalOutContent.Text = "Total:";
+            this.lbTotalOutContent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // lbTimesOut
             // 
             this.lbTimesOut.AutoSize = true;
@@ -612,6 +648,19 @@
             // 
             // tabPageInfomation
             // 
+            this.tabPageInfomation.Controls.Add(this.label9);
+            this.tabPageInfomation.Controls.Add(this.cbPortsCompany);
+            this.tabPageInfomation.Controls.Add(this.lbAddressComEmployee);
+            this.tabPageInfomation.Controls.Add(this.label14);
+            this.tabPageInfomation.Controls.Add(this.lbCompanyEmployee);
+            this.tabPageInfomation.Controls.Add(this.label13);
+            this.tabPageInfomation.Controls.Add(this.lbRoleEmployee);
+            this.tabPageInfomation.Controls.Add(this.label12);
+            this.tabPageInfomation.Controls.Add(this.lbPhoneEmployee);
+            this.tabPageInfomation.Controls.Add(this.label11);
+            this.tabPageInfomation.Controls.Add(this.lbNameEmployee);
+            this.tabPageInfomation.Controls.Add(this.label10);
+            this.tabPageInfomation.Controls.Add(this.picEmployee);
             this.tabPageInfomation.Location = new System.Drawing.Point(4, 22);
             this.tabPageInfomation.Name = "tabPageInfomation";
             this.tabPageInfomation.Padding = new System.Windows.Forms.Padding(3);
@@ -657,26 +706,140 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "SMART PARKING HOUSE SYSTEM";
             // 
-            // lbTotalOut
+            // picEmployee
             // 
-            this.lbTotalOut.AutoSize = true;
-            this.lbTotalOut.Location = new System.Drawing.Point(61, 204);
-            this.lbTotalOut.Name = "lbTotalOut";
-            this.lbTotalOut.Size = new System.Drawing.Size(53, 13);
-            this.lbTotalOut.TabIndex = 26;
-            this.lbTotalOut.Text = "Unknown";
-            this.lbTotalOut.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.picEmployee.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.picEmployee.Image = global::SPHS.AppWindow.Properties.Resources.Logo_Hust;
+            this.picEmployee.Location = new System.Drawing.Point(106, 17);
+            this.picEmployee.Name = "picEmployee";
+            this.picEmployee.Size = new System.Drawing.Size(172, 216);
+            this.picEmployee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEmployee.TabIndex = 0;
+            this.picEmployee.TabStop = false;
             // 
-            // lbTotalOutContent
+            // lbNameEmployee
             // 
-            this.lbTotalOutContent.AutoSize = true;
-            this.lbTotalOutContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalOutContent.Location = new System.Drawing.Point(5, 204);
-            this.lbTotalOutContent.Name = "lbTotalOutContent";
-            this.lbTotalOutContent.Size = new System.Drawing.Size(40, 13);
-            this.lbTotalOutContent.TabIndex = 25;
-            this.lbTotalOutContent.Text = "Total:";
-            this.lbTotalOutContent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbNameEmployee.AutoSize = true;
+            this.lbNameEmployee.Location = new System.Drawing.Point(169, 302);
+            this.lbNameEmployee.Name = "lbNameEmployee";
+            this.lbNameEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbNameEmployee.TabIndex = 17;
+            this.lbNameEmployee.Text = "Unknown";
+            this.lbNameEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(103, 302);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Name:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbPhoneEmployee
+            // 
+            this.lbPhoneEmployee.AutoSize = true;
+            this.lbPhoneEmployee.Location = new System.Drawing.Point(169, 339);
+            this.lbPhoneEmployee.Name = "lbPhoneEmployee";
+            this.lbPhoneEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbPhoneEmployee.TabIndex = 19;
+            this.lbPhoneEmployee.Text = "Unknown";
+            this.lbPhoneEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(103, 339);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Phone:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbRoleEmployee
+            // 
+            this.lbRoleEmployee.AutoSize = true;
+            this.lbRoleEmployee.Location = new System.Drawing.Point(169, 375);
+            this.lbRoleEmployee.Name = "lbRoleEmployee";
+            this.lbRoleEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbRoleEmployee.TabIndex = 21;
+            this.lbRoleEmployee.Text = "Unknown";
+            this.lbRoleEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(103, 375);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(37, 13);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Role:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCompanyEmployee
+            // 
+            this.lbCompanyEmployee.AutoSize = true;
+            this.lbCompanyEmployee.Location = new System.Drawing.Point(169, 409);
+            this.lbCompanyEmployee.Name = "lbCompanyEmployee";
+            this.lbCompanyEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbCompanyEmployee.TabIndex = 23;
+            this.lbCompanyEmployee.Text = "Unknown";
+            this.lbCompanyEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(103, 409);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.TabIndex = 22;
+            this.label13.Text = "Company:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbAddressComEmployee
+            // 
+            this.lbAddressComEmployee.AutoSize = true;
+            this.lbAddressComEmployee.Location = new System.Drawing.Point(169, 441);
+            this.lbAddressComEmployee.Name = "lbAddressComEmployee";
+            this.lbAddressComEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbAddressComEmployee.TabIndex = 25;
+            this.lbAddressComEmployee.Text = "Unknown";
+            this.lbAddressComEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(103, 441);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "Address:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cbPortsCompany
+            // 
+            this.cbPortsCompany.FormattingEnabled = true;
+            this.cbPortsCompany.Location = new System.Drawing.Point(172, 263);
+            this.cbPortsCompany.Name = "cbPortsCompany";
+            this.cbPortsCompany.Size = new System.Drawing.Size(106, 21);
+            this.cbPortsCompany.TabIndex = 5;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(103, 266);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Ports:";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainApp
             // 
@@ -711,8 +874,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_vehicle_out)).EndInit();
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabPageInfomation.ResumeLayout(false);
+            this.tabPageInfomation.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -771,6 +937,19 @@
         private System.Windows.Forms.Label lbTimesOutContent;
         private System.Windows.Forms.Label lbTotalOut;
         private System.Windows.Forms.Label lbTotalOutContent;
+        private System.Windows.Forms.PictureBox picEmployee;
+        private System.Windows.Forms.Label lbPhoneEmployee;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbNameEmployee;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbCompanyEmployee;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbRoleEmployee;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbAddressComEmployee;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbPortsCompany;
     }
 }
 

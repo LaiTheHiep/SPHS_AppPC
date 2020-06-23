@@ -22,6 +22,7 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
+            setUp();
         }
 
         #region Define
@@ -64,6 +65,21 @@ namespace SPHS.AppWindow
                 lbRoleOut.Text = _role;
                 lbBalanceOut.Text = _balance;
                 lbTimeIn.Text = _timeIn;
+            }
+        }
+
+        private void setUp()
+        {
+            lbNameEmployee.Text = Parameter_Special.USER_PRESENT.name;
+            lbPhoneEmployee.Text = Parameter_Special.USER_PRESENT.phone;
+            lbRoleEmployee.Text = Parameter_Special.USER_PRESENT.role;
+            List<object> _companies = Utils.getAPI(COLLECTIONS.companies, $"_id={Parameter_Special.USER_PRESENT.companyId}");
+            if(_companies.Count > 0)
+            {
+                Parameter_Special.COMPANY_PRESENT = (companies)_companies[0];
+                lbCompanyEmployee.Text = Parameter_Special.COMPANY_PRESENT.name;
+                lbAddressComEmployee.Text = Parameter_Special.COMPANY_PRESENT.address;
+                cbPortsCompany.DataSource = Parameter_Special.COMPANY_PRESENT.ports;
             }
         }
 

@@ -30,7 +30,7 @@ namespace SPHS.AppWindow
         private void btnLogin_Click(object sender, EventArgs e)
         {
             users user = UserAPI.login(txtAccount.Text, txtPassword.Text);
-            if(user.accessToken != null && user.role != ROLES.user.ToString())
+            if (user.accessToken != null && user.role != ROLES.user.ToString())
             {
                 Parameter_Special.USER_PRESENT = user;
                 MainApp app = new MainApp();
@@ -43,6 +43,7 @@ namespace SPHS.AppWindow
 
         private void App_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Parameter_Special.USER_PRESENT = new users();
             this.Show();
         }
     }
