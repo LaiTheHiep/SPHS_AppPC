@@ -74,7 +74,7 @@ namespace SPHS.AppWindow
             lbPhoneEmployee.Text = Parameter_Special.USER_PRESENT.phone;
             lbRoleEmployee.Text = Parameter_Special.USER_PRESENT.role;
             List<object> _companies = Utils.getAPI(COLLECTIONS.companies, $"_id={Parameter_Special.USER_PRESENT.companyId}");
-            if(_companies.Count > 0)
+            if (_companies.Count > 0)
             {
                 Parameter_Special.COMPANY_PRESENT = (companies)_companies[0];
                 lbCompanyEmployee.Text = Parameter_Special.COMPANY_PRESENT.name;
@@ -500,6 +500,48 @@ namespace SPHS.AppWindow
         private void btnPass_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            string _query = null;
+            if (txtNumberPlateFilter.Text.Length > 0)
+                _query = $"numberPlate={txtNumberPlateFilter.Text}";
+
+            if (txtPhoneFilter.Text.Length > 0)
+            {
+                if (_query != null)
+                    _query += $"&phone={txtPhoneFilter.Text}";
+                else
+                    _query = $"phone={txtPhoneFilter.Text}";
+            }
+
+            List<object> _users = Utils.getAPI(COLLECTIONS.users, _query);
+            if(_users.Count == 1)
+            {
+                users _user = (users)_users[0];
+                grCustomerInfo.Visible = true;
+                grTransaction.Visible = true;
+                lbCustomerAccount.Text = _user.account;
+                lbCustomerName.Text = _user.name;
+                lbCustomerCMT.Text = _user.cmt;
+                lbCustomerPhone.Text = _user.phone;
+                lbCustomerEmail.Text = _user.email;
+                lbCustomerNumber.Text = _user.numberPlate;
+                lbCustomerColor.Text = _user.vehicleColor;
+                lbCustomerBranch.Text = _user.vehicleBranch;
+                lbCustomerType.Text = _user.vehicleType;
+                lbCustomerBalance.Text = _user.balance.ToString();
+                lbCustomerDescription.Text = _user.description;
+            }
+        }
+
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            txtPhoneFilter.Text = null;
+            txtNumberPlateFilter.Text = null;
+            grCustomerInfo.Visible = false;
+            grTransaction.Visible = false;
         }
     }
 }

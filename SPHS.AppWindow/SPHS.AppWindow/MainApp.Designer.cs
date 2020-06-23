@@ -94,6 +94,39 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cbPortsCompany = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtDescriptionOut = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtNumberPlateFilter = new System.Windows.Forms.TextBox();
+            this.txtPhoneFilter = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnClearFilter = new System.Windows.Forms.Button();
+            this.grCustomerInfo = new System.Windows.Forms.GroupBox();
+            this.grTransaction = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lbCustomerAccount = new System.Windows.Forms.Label();
+            this.lbCustomerCMT = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lbCustomerEmail = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lbCustomerColor = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbCustomerType = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.lbCustomerName = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.lbCustomerPhone = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.lbCustomerNumber = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.lbCustomerBranch = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.lbCustomerBalance = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.lbCustomerDescription = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -108,8 +141,11 @@
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageInfomation.SuspendLayout();
+            this.tabPageCustomer.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.grCustomerInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -562,6 +598,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.txtDescriptionOut);
             this.groupBox2.Controls.Add(this.btnPass);
             this.groupBox2.Controls.Add(this.btnLoadImageOut);
             this.groupBox2.Controls.Add(this.picNumberPlate_out);
@@ -671,6 +709,9 @@
             // 
             // tabPageCustomer
             // 
+            this.tabPageCustomer.Controls.Add(this.grTransaction);
+            this.tabPageCustomer.Controls.Add(this.grCustomerInfo);
+            this.tabPageCustomer.Controls.Add(this.groupBox4);
             this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
@@ -841,6 +882,381 @@
             this.label9.Text = "Ports:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // txtDescriptionOut
+            // 
+            this.txtDescriptionOut.Location = new System.Drawing.Point(103, 146);
+            this.txtDescriptionOut.Multiline = true;
+            this.txtDescriptionOut.Name = "txtDescriptionOut";
+            this.txtDescriptionOut.Size = new System.Drawing.Size(155, 31);
+            this.txtDescriptionOut.TabIndex = 5;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(100, 117);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "Note:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnClearFilter);
+            this.groupBox4.Controls.Add(this.btnFilter);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.txtPhoneFilter);
+            this.groupBox4.Controls.Add(this.txtNumberPlateFilter);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(358, 103);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Filter";
+            // 
+            // txtNumberPlateFilter
+            // 
+            this.txtNumberPlateFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumberPlateFilter.Location = new System.Drawing.Point(95, 29);
+            this.txtNumberPlateFilter.Name = "txtNumberPlateFilter";
+            this.txtNumberPlateFilter.Size = new System.Drawing.Size(119, 20);
+            this.txtNumberPlateFilter.TabIndex = 0;
+            // 
+            // txtPhoneFilter
+            // 
+            this.txtPhoneFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneFilter.Location = new System.Drawing.Point(95, 64);
+            this.txtPhoneFilter.Name = "txtPhoneFilter";
+            this.txtPhoneFilter.Size = new System.Drawing.Size(119, 20);
+            this.txtPhoneFilter.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(6, 32);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(83, 13);
+            this.label16.TabIndex = 12;
+            this.label16.Text = "Number Plate";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(6, 67);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 13);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "Phone";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.Location = new System.Drawing.Point(239, 29);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(100, 20);
+            this.btnFilter.TabIndex = 14;
+            this.btnFilter.Text = "==> Filter <==";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearFilter.Location = new System.Drawing.Point(239, 64);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(100, 20);
+            this.btnClearFilter.TabIndex = 15;
+            this.btnClearFilter.Text = "==> Clear <==";
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            // 
+            // grCustomerInfo
+            // 
+            this.grCustomerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grCustomerInfo.Controls.Add(this.lbCustomerDescription);
+            this.grCustomerInfo.Controls.Add(this.label39);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerBalance);
+            this.grCustomerInfo.Controls.Add(this.label37);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerBranch);
+            this.grCustomerInfo.Controls.Add(this.label35);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerNumber);
+            this.grCustomerInfo.Controls.Add(this.label33);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerPhone);
+            this.grCustomerInfo.Controls.Add(this.label31);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerName);
+            this.grCustomerInfo.Controls.Add(this.label29);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerType);
+            this.grCustomerInfo.Controls.Add(this.label27);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerColor);
+            this.grCustomerInfo.Controls.Add(this.label25);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerEmail);
+            this.grCustomerInfo.Controls.Add(this.label23);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerCMT);
+            this.grCustomerInfo.Controls.Add(this.label21);
+            this.grCustomerInfo.Controls.Add(this.lbCustomerAccount);
+            this.grCustomerInfo.Controls.Add(this.label18);
+            this.grCustomerInfo.Location = new System.Drawing.Point(3, 112);
+            this.grCustomerInfo.Name = "grCustomerInfo";
+            this.grCustomerInfo.Size = new System.Drawing.Size(358, 282);
+            this.grCustomerInfo.TabIndex = 1;
+            this.grCustomerInfo.TabStop = false;
+            this.grCustomerInfo.Text = "Information";
+            this.grCustomerInfo.Visible = false;
+            // 
+            // grTransaction
+            // 
+            this.grTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grTransaction.Location = new System.Drawing.Point(3, 400);
+            this.grTransaction.Name = "grTransaction";
+            this.grTransaction.Size = new System.Drawing.Size(358, 122);
+            this.grTransaction.TabIndex = 2;
+            this.grTransaction.TabStop = false;
+            this.grTransaction.Text = "Transaction";
+            this.grTransaction.Visible = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(6, 32);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(58, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Account:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerAccount
+            // 
+            this.lbCustomerAccount.AutoSize = true;
+            this.lbCustomerAccount.Location = new System.Drawing.Point(59, 32);
+            this.lbCustomerAccount.Name = "lbCustomerAccount";
+            this.lbCustomerAccount.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerAccount.TabIndex = 16;
+            this.lbCustomerAccount.Text = "Unknown";
+            this.lbCustomerAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerCMT
+            // 
+            this.lbCustomerCMT.AutoSize = true;
+            this.lbCustomerCMT.Location = new System.Drawing.Point(59, 64);
+            this.lbCustomerCMT.Name = "lbCustomerCMT";
+            this.lbCustomerCMT.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerCMT.TabIndex = 18;
+            this.lbCustomerCMT.Text = "Unknown";
+            this.lbCustomerCMT.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(6, 64);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(37, 13);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "CMT:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerEmail
+            // 
+            this.lbCustomerEmail.AutoSize = true;
+            this.lbCustomerEmail.Location = new System.Drawing.Point(214, 166);
+            this.lbCustomerEmail.Name = "lbCustomerEmail";
+            this.lbCustomerEmail.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerEmail.TabIndex = 20;
+            this.lbCustomerEmail.Text = "Unknown";
+            this.lbCustomerEmail.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(164, 166);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 13);
+            this.label23.TabIndex = 19;
+            this.label23.Text = "Email:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerColor
+            // 
+            this.lbCustomerColor.AutoSize = true;
+            this.lbCustomerColor.Location = new System.Drawing.Point(59, 131);
+            this.lbCustomerColor.Name = "lbCustomerColor";
+            this.lbCustomerColor.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerColor.TabIndex = 22;
+            this.lbCustomerColor.Text = "Unknown";
+            this.lbCustomerColor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(6, 131);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(40, 13);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "Color:";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerType
+            // 
+            this.lbCustomerType.AutoSize = true;
+            this.lbCustomerType.Location = new System.Drawing.Point(59, 166);
+            this.lbCustomerType.Name = "lbCustomerType";
+            this.lbCustomerType.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerType.TabIndex = 24;
+            this.lbCustomerType.Text = "Unknown";
+            this.lbCustomerType.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(6, 166);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(39, 13);
+            this.label27.TabIndex = 23;
+            this.label27.Text = "Type:";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerName
+            // 
+            this.lbCustomerName.AutoSize = true;
+            this.lbCustomerName.Location = new System.Drawing.Point(214, 32);
+            this.lbCustomerName.Name = "lbCustomerName";
+            this.lbCustomerName.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerName.TabIndex = 26;
+            this.lbCustomerName.Text = "Unknown";
+            this.lbCustomerName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(164, 32);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(43, 13);
+            this.label29.TabIndex = 25;
+            this.label29.Text = "Name:";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerPhone
+            // 
+            this.lbCustomerPhone.AutoSize = true;
+            this.lbCustomerPhone.Location = new System.Drawing.Point(214, 64);
+            this.lbCustomerPhone.Name = "lbCustomerPhone";
+            this.lbCustomerPhone.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerPhone.TabIndex = 28;
+            this.lbCustomerPhone.Text = "Unknown";
+            this.lbCustomerPhone.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(164, 64);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(47, 13);
+            this.label31.TabIndex = 27;
+            this.label31.Text = "Phone:";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerNumber
+            // 
+            this.lbCustomerNumber.AutoSize = true;
+            this.lbCustomerNumber.Location = new System.Drawing.Point(214, 96);
+            this.lbCustomerNumber.Name = "lbCustomerNumber";
+            this.lbCustomerNumber.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerNumber.TabIndex = 30;
+            this.lbCustomerNumber.Text = "Unknown";
+            this.lbCustomerNumber.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(164, 96);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(54, 13);
+            this.label33.TabIndex = 29;
+            this.label33.Text = "Number:";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerBranch
+            // 
+            this.lbCustomerBranch.AutoSize = true;
+            this.lbCustomerBranch.Location = new System.Drawing.Point(214, 131);
+            this.lbCustomerBranch.Name = "lbCustomerBranch";
+            this.lbCustomerBranch.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerBranch.TabIndex = 32;
+            this.lbCustomerBranch.Text = "Unknown";
+            this.lbCustomerBranch.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(164, 131);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(51, 13);
+            this.label35.TabIndex = 31;
+            this.label35.Text = "Branch:";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerBalance
+            // 
+            this.lbCustomerBalance.AutoSize = true;
+            this.lbCustomerBalance.Location = new System.Drawing.Point(59, 96);
+            this.lbCustomerBalance.Name = "lbCustomerBalance";
+            this.lbCustomerBalance.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerBalance.TabIndex = 34;
+            this.lbCustomerBalance.Text = "Unknown";
+            this.lbCustomerBalance.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(6, 96);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(53, 13);
+            this.label37.TabIndex = 33;
+            this.label37.Text = "Balance";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerDescription
+            // 
+            this.lbCustomerDescription.AutoSize = true;
+            this.lbCustomerDescription.Location = new System.Drawing.Point(87, 204);
+            this.lbCustomerDescription.Name = "lbCustomerDescription";
+            this.lbCustomerDescription.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerDescription.TabIndex = 36;
+            this.lbCustomerDescription.Text = "Unknown";
+            this.lbCustomerDescription.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(6, 204);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(75, 13);
+            this.label39.TabIndex = 35;
+            this.label39.Text = "Description:";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MainApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -876,9 +1292,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageInfomation.ResumeLayout(false);
             this.tabPageInfomation.PerformLayout();
+            this.tabPageCustomer.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.grCustomerInfo.ResumeLayout(false);
+            this.grCustomerInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -950,6 +1371,39 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cbPortsCompany;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtDescriptionOut;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtPhoneFilter;
+        private System.Windows.Forms.TextBox txtNumberPlateFilter;
+        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnClearFilter;
+        private System.Windows.Forms.GroupBox grCustomerInfo;
+        private System.Windows.Forms.GroupBox grTransaction;
+        private System.Windows.Forms.Label lbCustomerDescription;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label lbCustomerBalance;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label lbCustomerBranch;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label lbCustomerNumber;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label lbCustomerPhone;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label lbCustomerName;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lbCustomerType;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label lbCustomerColor;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lbCustomerEmail;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lbCustomerCMT;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lbCustomerAccount;
+        private System.Windows.Forms.Label label18;
     }
 }
 
