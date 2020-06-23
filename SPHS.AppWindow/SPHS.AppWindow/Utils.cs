@@ -82,6 +82,21 @@ namespace SPHS.AppWindow
             if (_type.ToString() == COLLECTIONS.roles.ToString())
                 return ClassToJsonString<roles>((roles)obj);
 
+            if (_type.ToString() == COLLECTIONS.users.ToString())
+                return ClassToJsonString<users>((users)obj);
+
+            if (_type.ToString() == COLLECTIONS.transactions.ToString())
+                return ClassToJsonString<transactions>((transactions)obj);
+
+            if (_type.ToString() == COLLECTIONS.companies.ToString())
+                return ClassToJsonString<companies>((companies)obj);
+
+            if (_type.ToString() == COLLECTIONS.parkingtickets.ToString())
+                return ClassToJsonString<parkingTickets>((parkingTickets)obj);
+
+            if (_type.ToString() == COLLECTIONS.vehicletypes.ToString())
+                return ClassToJsonString<vehicleTypes>((vehicleTypes)obj);
+
             return "";
         }
 
@@ -95,6 +110,56 @@ namespace SPHS.AppWindow
                 {
                     roles _role = Utils.JsonStringToClass<roles>(stuff[DATARESPONSE.data.ToString()][i].ToString());
                     results.Add(_role);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.users.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    users _user = Utils.JsonStringToClass<users>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_user);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.transactions.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    transactions _transaction = Utils.JsonStringToClass<transactions>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_transaction);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.companies.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    companies _company = Utils.JsonStringToClass<companies>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_company);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.parkingtickets.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    parkingTickets _parkingTicket = Utils.JsonStringToClass<parkingTickets>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_parkingTicket);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.vehicletypes.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    vehicleTypes _vehicleType = Utils.JsonStringToClass<vehicleTypes>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_vehicleType);
                 }
                 return results;
             }
