@@ -1,10 +1,14 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SPHS.AppWindow.models;
 using SPHS.AppWindow.parameters;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +75,136 @@ namespace SPHS.AppWindow
                     obj_out.GetType().GetProperty(item.Name).SetValue(obj_out, value);
                 }
             }
+        }
+
+        private static string ClassToJsonString(object _type, object obj)
+        {
+            if (_type.ToString() == COLLECTIONS.roles.ToString())
+                return ClassToJsonString<roles>((roles)obj);
+
+            return "";
+        }
+
+        private static List<object> getObjectByJObject(object _collection, JObject stuff)
+        {
+            List<object> results = new List<object>();
+            int total = int.Parse(stuff[DATARESPONSE.total.ToString()].ToString());
+            if(_collection.ToString() == COLLECTIONS.roles.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    roles _role = Utils.JsonStringToClass<roles>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_role);
+                }
+                return results;
+            }
+
+            return results;
+        }
+
+        public static List<object> getAPI(object _collection, string _query)
+        {
+            string url = Utils.createLinkAPI(_collection, _query);
+            List<object> results = new List<object>();
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+                var response = httpClient.GetAsync(url);
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        results = getObjectByJObject(_collection, stuff);
+                    }
+                }
+            }
+            return results;
+        }
+
+        public static bool postAPI(object _collection, object obj)
+        {
+            bool result = false;
+            string url = Utils.createLinkAPI(_collection, "");
+            using (var httpClient = new HttpClient())
+            {
+                var _json = ClassToJsonString(_collection, obj);
+                var _data = new StringContent(_json, Encoding.UTF8, "application/json");
+                var response = httpClient.PostAsync(url, _data);
+                response.Wait();
+                var _result = response.Result;
+                if (_result.IsSuccessStatusCode)
+                {
+                    var readTask = _result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static bool putAPI(object _collection, object obj)
+        {
+            bool result = false;
+            string url = Utils.createLinkAPI(_collection, "");
+            using (var httpClient = new HttpClient())
+            {
+                var _json = ClassToJsonString(_collection, obj);
+                var _data = new StringContent(_json, Encoding.UTF8, "application/json");
+                var response = httpClient.PutAsync(url, _data);
+                response.Wait();
+                var _result = response.Result;
+                if (_result.IsSuccessStatusCode)
+                {
+                    var readTask = _result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static bool deteleAPI(object _collection, string _id)
+        {
+            bool result = false;
+            string url = Utils.createLinkAPI(_collection, $"_id={_id}");
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+                var response = httpClient.DeleteAsync(url);
+                response.Wait();
+                var _result = response.Result;
+                if (_result.IsSuccessStatusCode)
+                {
+                    var readTask = _result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
