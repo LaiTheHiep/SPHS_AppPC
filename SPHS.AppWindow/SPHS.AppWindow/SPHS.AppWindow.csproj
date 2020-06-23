@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="actions\RoleAPI.cs" />
+    <Compile Include="actions\UserAPI.cs" />
     <Compile Include="FindContours.cs" />
     <Compile Include="MainApp.cs">
       <SubType>Form</SubType>

@@ -39,10 +39,11 @@ namespace SPHS.AppWindow
 
         public static string createLinkAPI(object _collection, string _query)
         {
-            if(_query != null)
-                return Parameter_Special.ADDRESS_BASE_API + "/" + _collection.ToString() + $"?{_query}";
+            string _base = Parameter_Special.ADDRESS_BASE_API + "/" + _collection.ToString() + $"?accessToken={Parameter_Special.USER_PRESENT.accessToken}";
+            if (_query != null)
+                return _base + $"&{_query}";
 
-            return Parameter_Special.ADDRESS_BASE_API + "/" + _collection.ToString();
+            return _base;
         }
 
         public static string ClassToJsonString<T>(T obj)
@@ -104,7 +105,7 @@ namespace SPHS.AppWindow
         {
             List<object> results = new List<object>();
             int total = int.Parse(stuff[DATARESPONSE.total.ToString()].ToString());
-            if(_collection.ToString() == COLLECTIONS.roles.ToString())
+            if (_collection.ToString() == COLLECTIONS.roles.ToString())
             {
                 for (int i = 0; i < total; i++)
                 {

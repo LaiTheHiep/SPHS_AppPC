@@ -25,5 +25,6 @@ namespace SPHS.AppWindow.models
         public string vehicleType { get; set; }
         public string createdAt { get; set; }
         public string updatedAt { get; set; }
+        public string accessToken { get; set; }
     }
 }

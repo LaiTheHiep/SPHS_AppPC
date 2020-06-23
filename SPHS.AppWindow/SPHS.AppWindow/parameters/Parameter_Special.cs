@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPHS.AppWindow.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace SPHS.AppWindow.parameters
     {
         public static string UNKNOWN_STRING = "Unknown";
         public static string ADDRESS_BASE_API = "http://localhost:8080";
+        public static users USER_PRESENT = new users();
     }
 
     public enum ROLES
@@ -33,7 +35,12 @@ namespace SPHS.AppWindow.parameters
         transactions,
         companies,
         parkingtickets,
-        vehicletypes
+        vehicletypes,
+    }
+
+    public enum LINK_SPECIALS
+    {
+        authentication // authentication, not collections, using to login
     }
 
     public enum DATARESPONSE
