@@ -39,6 +39,9 @@ namespace SPHS.AppWindow
         private string m_path = Application.StartupPath + @"\data\";
         private List<string> lstimages = new List<string>();
         private const string m_lang = "eng";
+        private static users customerFilter = new users();
+        private static users customerGo = new users();
+        private static parkingTickets parkingTicketGo = new parkingTickets();
 
         //int current = 0;
         Capture capture = null;
@@ -47,25 +50,69 @@ namespace SPHS.AppWindow
 
         #region layout
 
-        private void setInfomation(string _name, string _cmt, string _phone, string _role, string _balance, string _timeIn, bool isIn)
+        private void setInfomation(users _user, parkingTickets _parkingTicket, bool isIn)
         {
+            customerGo = _user;
+            parkingTicketGo = _parkingTicket;
             if (isIn)
             {
-                lbNameIn.Text = _name;
-                lbCMTIn.Text = _cmt;
-                lbPhoneIn.Text = _phone;
-                lbRoleIn.Text = _role;
-                lbBalanceIn.Text = _balance;
+                lbNameIn.Text = _user.name;
+                lbCMTIn.Text = _user.cmt;
+                lbPhoneIn.Text = _user.phone;
+                lbRoleIn.Text = _user.role;
+                lbBalanceIn.Text = _user.balance.ToString();
             }
             else
             {
-                lbNameOut.Text = _name;
-                lbCMTOut.Text = _cmt;
-                lbPhoneOut.Text = _phone;
-                lbRoleOut.Text = _role;
-                lbBalanceOut.Text = _balance;
-                lbTimeIn.Text = _timeIn;
+                lbNameOut.Text = _user.name;
+                lbCMTOut.Text = _user.cmt;
+                lbPhoneOut.Text = _user.phone;
+                lbRoleOut.Text = _user.role;
+                lbBalanceOut.Text = _user.balance.ToString();
+                lbTimeIn.Text = DateTime.Parse(_parkingTicket.timeIn).ToString();
+                int _time = (int)Utils.subDateTime(DateTime.Now.ToString(), _parkingTicket.timeIn);
+                lbTimesOut.Text = Utils.convertTimeToString(_time);
+                lbTotalOut.Text = Utils.getMoneyByDate(_time, _user.vehicleType).ToString();
+                if (int.Parse(lbTotalOut.Text) > _user.balance)
+                {
+                    lbNotEnoughOut.Visible = true;
+                }
             }
+        }
+
+        private void clearInformation(bool isIn)
+        {
+            customerGo = new users();
+            parkingTicketGo = new parkingTickets();
+            if (isIn)
+            {
+                lbNameIn.Text = Parameter_Special.UNKNOWN_STRING;
+                lbCMTIn.Text = Parameter_Special.UNKNOWN_STRING;
+                lbPhoneIn.Text = Parameter_Special.UNKNOWN_STRING;
+                lbRoleIn.Text = Parameter_Special.UNKNOWN_STRING;
+                lbBalanceIn.Text = Parameter_Special.UNKNOWN_STRING;
+                txtNumberPlate_in.Text = null;
+                pic_vehicle_in.Image = null;
+                picNumberPlate_in.Image = null;
+            }
+            else
+            {
+                lbNameOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbCMTOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbPhoneOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbRoleOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbBalanceOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbTimeIn.Text = Parameter_Special.UNKNOWN_STRING;
+                lbTotalOut.Text = Parameter_Special.UNKNOWN_STRING;
+                lbTimesOut.Text = Parameter_Special.UNKNOWN_STRING;
+                txtDescriptionOut.Text = null;
+                txtNumberPlate_out.Text = null;
+                picNumberPlate_out.Image = null;
+                pic_vehicle_out.Image = null;
+                picHistory.Image = null;
+                lbNotEnoughOut.Visible = false;
+            }
+
         }
 
         private void setUp()
@@ -81,6 +128,10 @@ namespace SPHS.AppWindow
                 lbAddressComEmployee.Text = Parameter_Special.COMPANY_PRESENT.address;
                 cbPortsCompany.DataSource = Parameter_Special.COMPANY_PRESENT.ports;
             }
+            cbTypeRegister.DataSource = new string[] {
+                VEHICLETYPES.car.ToString(),
+                VEHICLETYPES.motobike.ToString()
+            };
         }
 
         #endregion
@@ -469,6 +520,14 @@ namespace SPHS.AppWindow
                 txtNumberPlate_in.Text = "Cannot recognize license plate !";
             else
                 txtNumberPlate_in.Text = temp3;
+
+            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
+            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            if (_users.Count == 1)
+            {
+                users _user = (users)_users[0];
+                setInfomation(_user, null, true);
+            }
         }
 
         private void btnLoadImageOut_Click(object sender, EventArgs e)
@@ -490,16 +549,70 @@ namespace SPHS.AppWindow
                 txtNumberPlate_out.Text = "Cannot recognize license plate !";
             else
                 txtNumberPlate_out.Text = temp3;
+
+            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_out.Text);
+            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            if (_users.Count == 1)
+            {
+                users _user = (users)_users[0];
+                List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
+                if (_parkingTickets.Count > 0)
+                {
+                    parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+                    if (_parkingTicket.timeOut == null)
+                    {
+                        setInfomation(_user, _parkingTicket, false);
+                        return;
+                    }
+                }
+            }
+            MessageBox.Show("Something error!");
         }
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
-
+            var _post = Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+            {
+                port = cbPortsCompany.Text,
+                timeIn = DateTime.Now.ToString(),
+                author = Parameter_Special.USER_PRESENT._id,
+                userId = customerGo._id
+            });
+            if (_post)
+                clearInformation(true);
+            else
+                MessageBox.Show("Something error!");
         }
 
         private void btnPass_Click(object sender, EventArgs e)
         {
-
+            if (lbNotEnoughOut.Visible)
+            {
+                MessageBox.Show("Balance not enough to pay ticket");
+                return;
+            }
+            var _put = Utils.putAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+            {
+                _id = parkingTicketGo._id,
+                timeOut = DateTime.Now.ToString(),
+                description = txtDescriptionOut.Text
+            });
+            if (_put)
+            {
+                int _money = 0;
+                int.TryParse(lbTotalOut.Text, out _money);
+                var _putBalace = Utils.putAPI(COLLECTIONS.users, new users()
+                {
+                    _id = customerGo._id,
+                    balance = customerGo.balance - _money
+                });
+                if (_putBalace)
+                {
+                    clearInformation(false);
+                    return;
+                }
+            }
+            MessageBox.Show("Something error!");
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -517,22 +630,22 @@ namespace SPHS.AppWindow
             }
 
             List<object> _users = Utils.getAPI(COLLECTIONS.users, _query);
-            if(_users.Count == 1)
+            if (_users.Count == 1)
             {
-                users _user = (users)_users[0];
+                customerFilter = (users)_users[0];
                 grCustomerInfo.Visible = true;
                 grTransaction.Visible = true;
-                lbCustomerAccount.Text = _user.account;
-                lbCustomerName.Text = _user.name;
-                lbCustomerCMT.Text = _user.cmt;
-                lbCustomerPhone.Text = _user.phone;
-                lbCustomerEmail.Text = _user.email;
-                lbCustomerNumber.Text = _user.numberPlate;
-                lbCustomerColor.Text = _user.vehicleColor;
-                lbCustomerBranch.Text = _user.vehicleBranch;
-                lbCustomerType.Text = _user.vehicleType;
-                lbCustomerBalance.Text = _user.balance.ToString();
-                lbCustomerDescription.Text = _user.description;
+                lbCustomerAccount.Text = customerFilter.account;
+                lbCustomerName.Text = customerFilter.name;
+                lbCustomerCMT.Text = customerFilter.cmt;
+                lbCustomerPhone.Text = customerFilter.phone;
+                lbCustomerEmail.Text = customerFilter.email;
+                lbCustomerNumber.Text = customerFilter.numberPlate;
+                lbCustomerColor.Text = customerFilter.vehicleColor;
+                lbCustomerBranch.Text = customerFilter.vehicleBranch;
+                lbCustomerType.Text = customerFilter.vehicleType;
+                lbCustomerBalance.Text = customerFilter.balance.ToString();
+                lbCustomerDescription.Text = customerFilter.description;
             }
         }
 
@@ -542,6 +655,70 @@ namespace SPHS.AppWindow
             txtNumberPlateFilter.Text = null;
             grCustomerInfo.Visible = false;
             grTransaction.Visible = false;
+            customerFilter = new users();
+        }
+
+        private void btnTransaction_Click(object sender, EventArgs e)
+        {
+            int _money = 0;
+            if (int.TryParse(txtCustomerMoney.Text, out _money))
+            {
+                var _post = Utils.postAPI(COLLECTIONS.transactions, new transactions()
+                {
+                    author = Parameter_Special.USER_PRESENT._id,
+                    userId = customerFilter._id,
+                    money = _money,
+                    description = txtCustomerTransaction.Text
+                });
+                if (!_post)
+                {
+                    MessageBox.Show("Error");
+                    return;
+                }
+                var _update = Utils.putAPI(COLLECTIONS.users, new users()
+                {
+                    _id = customerFilter._id,
+                    balance = customerFilter.balance + _money
+                });
+                if (!_update)
+                {
+                    MessageBox.Show("Error");
+                    return;
+                }
+                customerFilter.balance = customerFilter.balance + _money;
+                lbCustomerBalance.Text = customerFilter.balance.ToString();
+                MessageBox.Show("OK");
+            }
+            else
+            {
+                MessageBox.Show("Error Money!");
+            }
+        }
+
+        private void btnRegisterCustomer_Click(object sender, EventArgs e)
+        {
+            int _balance = 0;
+            int.TryParse(txtBalanceRegister.Text, out _balance);
+            var _user = Utils.postAPI(COLLECTIONS.users, new users()
+            {
+                account = txtAccountResgister.Text,
+                password = txtPasswordRegister.Text,
+                name = txtNameRegister.Text,
+                cmt = txtCMTRegister.Text,
+                phone = txtPhoneRegister.Text,
+                email = txtEmailRegister.Text,
+                numberPlate = txtNumberRegister.Text,
+                balance = _balance,
+                vehicleColor = txtColorRegister.Text,
+                vehicleBranch = txtBalanceRegister.Text,
+                vehicleType = cbTypeRegister.Text,
+                role = COLLECTIONS.users.ToString(),
+                companyId = Parameter_Special.USER_PRESENT.companyId
+            });
+            if (_user)
+                MessageBox.Show("OK");
+            else
+                MessageBox.Show("Error");
         }
     }
 }

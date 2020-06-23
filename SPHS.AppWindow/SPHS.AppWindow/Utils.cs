@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SPHS.AppWindow
 {
@@ -35,6 +36,15 @@ namespace SPHS.AppWindow
             {
                 return -1;
             }
+        }
+
+        public static int getMoneyByDate(int _time, object _type)
+        {
+            int _m = (int)(_time / (60 * 60 * 24)) + 1;
+            if (_type.ToString() == VEHICLETYPES.car.ToString())
+                return _m * 50000;
+            else
+                return _m * 5000;
         }
 
         public static string createLinkAPI(object _collection, string _query)
@@ -271,6 +281,38 @@ namespace SPHS.AppWindow
             }
 
             return result;
+        }
+
+        public static string convertNumberPlate(string _numberPlate)
+        {
+            _numberPlate = _numberPlate.Replace("\n", "");
+            _numberPlate = _numberPlate.Replace("\r", "");
+            _numberPlate = _numberPlate.Replace(".", "");
+            _numberPlate = _numberPlate.Replace("-", "");
+
+            return _numberPlate;
+        }
+
+        public static string convertTimeToString(int _second)
+        {
+            string s = "";
+            int _temp = _second;
+            int _day = _second / (24 * 60 * 60);
+            if (_day > 0)
+            {
+                s += $"{_day}d ";
+                _temp = _temp - _day * 24 * 60 * 60;
+            }
+            int _hour = _temp / (60 * 60);
+            if (s.Length > 0 || _hour > 0)
+            {
+                s += $"{_hour}h ";
+                _temp = _temp - 60 * 60;
+            }
+            int _m = _temp / 60;
+            int _s = _temp - _m * 60;
+            s += $"{_m}m {_s}s";
+            return s.Trim();
         }
     }
 }

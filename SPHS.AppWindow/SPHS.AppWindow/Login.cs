@@ -29,15 +29,22 @@ namespace SPHS.AppWindow
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            users user = UserAPI.login(txtAccount.Text, txtPassword.Text);
-            if (user.accessToken != null && user.role != ROLES.user.ToString())
+            try
             {
-                Parameter_Special.USER_PRESENT = user;
-                MainApp app = new MainApp();
-                app.FormClosed += App_FormClosed;
-                app.Show();
-                txtPassword.Text = null;
-                this.Hide();
+                users user = UserAPI.login(txtAccount.Text, txtPassword.Text);
+                if (user.accessToken != null && user.role != ROLES.user.ToString())
+                {
+                    Parameter_Special.USER_PRESENT = user;
+                    MainApp app = new MainApp();
+                    app.FormClosed += App_FormClosed;
+                    app.Show();
+                    txtPassword.Text = null;
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

@@ -69,6 +69,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.picHistory = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtDescriptionOut = new System.Windows.Forms.TextBox();
             this.btnPass = new System.Windows.Forms.Button();
             this.btnLoadImageOut = new System.Windows.Forms.Button();
             this.picNumberPlate_out = new System.Windows.Forms.PictureBox();
@@ -77,56 +79,84 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageInfomation = new System.Windows.Forms.TabPage();
-            this.tabPageCustomer = new System.Windows.Forms.TabPage();
-            this.tabPageRegistration = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.picEmployee = new System.Windows.Forms.PictureBox();
-            this.lbNameEmployee = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lbPhoneEmployee = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lbRoleEmployee = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lbCompanyEmployee = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.lbAddressComEmployee = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.cbPortsCompany = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtDescriptionOut = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtNumberPlateFilter = new System.Windows.Forms.TextBox();
-            this.txtPhoneFilter = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btnFilter = new System.Windows.Forms.Button();
-            this.btnClearFilter = new System.Windows.Forms.Button();
-            this.grCustomerInfo = new System.Windows.Forms.GroupBox();
+            this.lbCompanyEmployee = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lbRoleEmployee = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lbPhoneEmployee = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbNameEmployee = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.picEmployee = new System.Windows.Forms.PictureBox();
+            this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.grTransaction = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lbCustomerAccount = new System.Windows.Forms.Label();
-            this.lbCustomerCMT = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.lbCustomerEmail = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.lbCustomerColor = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lbCustomerType = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.lbCustomerName = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.lbCustomerPhone = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.lbCustomerNumber = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.lbCustomerBranch = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.lbCustomerBalance = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
+            this.btnTransaction = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtCustomerTransaction = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtCustomerMoney = new System.Windows.Forms.TextBox();
+            this.grCustomerInfo = new System.Windows.Forms.GroupBox();
             this.lbCustomerDescription = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
+            this.lbCustomerBalance = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.lbCustomerBranch = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.lbCustomerNumber = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.lbCustomerPhone = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.lbCustomerName = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.lbCustomerType = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.lbCustomerColor = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbCustomerEmail = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lbCustomerCMT = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lbCustomerAccount = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnClearFilter = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtPhoneFilter = new System.Windows.Forms.TextBox();
+            this.txtNumberPlateFilter = new System.Windows.Forms.TextBox();
+            this.tabPageRegistration = new System.Windows.Forms.TabPage();
+            this.btnRegisterCustomer = new System.Windows.Forms.Button();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txtBranchRegister = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.txtColorRegister = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtBalanceRegister = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.txtNumberRegister = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.txtEmailRegister = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txtPhoneRegister = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtCMTRegister = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtNameRegister = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txtPasswordRegister = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txtAccountResgister = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbPortsCompany = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbNotEnoughOut = new System.Windows.Forms.Label();
+            this.cbTypeRegister = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -141,11 +171,13 @@
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageInfomation.SuspendLayout();
-            this.tabPageCustomer.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.tabPageCustomer.SuspendLayout();
+            this.grTransaction.SuspendLayout();
             this.grCustomerInfo.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tabPageRegistration.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -382,6 +414,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.lbNotEnoughOut);
             this.groupBox3.Controls.Add(this.lbTotalOut);
             this.groupBox3.Controls.Add(this.lbTotalOutContent);
             this.groupBox3.Controls.Add(this.lbTimesOut);
@@ -611,6 +644,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Recogize Out";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(100, 117);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(38, 13);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "Note:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtDescriptionOut
+            // 
+            this.txtDescriptionOut.Location = new System.Drawing.Point(103, 146);
+            this.txtDescriptionOut.Multiline = true;
+            this.txtDescriptionOut.Name = "txtDescriptionOut";
+            this.txtDescriptionOut.Size = new System.Drawing.Size(155, 31);
+            this.txtDescriptionOut.TabIndex = 5;
+            // 
             // btnPass
             // 
             this.btnPass.Location = new System.Drawing.Point(0, 146);
@@ -686,8 +738,6 @@
             // 
             // tabPageInfomation
             // 
-            this.tabPageInfomation.Controls.Add(this.label9);
-            this.tabPageInfomation.Controls.Add(this.cbPortsCompany);
             this.tabPageInfomation.Controls.Add(this.lbAddressComEmployee);
             this.tabPageInfomation.Controls.Add(this.label14);
             this.tabPageInfomation.Controls.Add(this.lbCompanyEmployee);
@@ -707,6 +757,123 @@
             this.tabPageInfomation.Text = "Infomation";
             this.tabPageInfomation.UseVisualStyleBackColor = true;
             // 
+            // lbAddressComEmployee
+            // 
+            this.lbAddressComEmployee.AutoSize = true;
+            this.lbAddressComEmployee.Location = new System.Drawing.Point(86, 184);
+            this.lbAddressComEmployee.Name = "lbAddressComEmployee";
+            this.lbAddressComEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbAddressComEmployee.TabIndex = 25;
+            this.lbAddressComEmployee.Text = "Unknown";
+            this.lbAddressComEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(20, 184);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "Address:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCompanyEmployee
+            // 
+            this.lbCompanyEmployee.AutoSize = true;
+            this.lbCompanyEmployee.Location = new System.Drawing.Point(86, 152);
+            this.lbCompanyEmployee.Name = "lbCompanyEmployee";
+            this.lbCompanyEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbCompanyEmployee.TabIndex = 23;
+            this.lbCompanyEmployee.Text = "Unknown";
+            this.lbCompanyEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(20, 152);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.TabIndex = 22;
+            this.label13.Text = "Company:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbRoleEmployee
+            // 
+            this.lbRoleEmployee.AutoSize = true;
+            this.lbRoleEmployee.Location = new System.Drawing.Point(86, 118);
+            this.lbRoleEmployee.Name = "lbRoleEmployee";
+            this.lbRoleEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbRoleEmployee.TabIndex = 21;
+            this.lbRoleEmployee.Text = "Unknown";
+            this.lbRoleEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(20, 118);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(37, 13);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Role:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbPhoneEmployee
+            // 
+            this.lbPhoneEmployee.AutoSize = true;
+            this.lbPhoneEmployee.Location = new System.Drawing.Point(86, 82);
+            this.lbPhoneEmployee.Name = "lbPhoneEmployee";
+            this.lbPhoneEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbPhoneEmployee.TabIndex = 19;
+            this.lbPhoneEmployee.Text = "Unknown";
+            this.lbPhoneEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(20, 82);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Phone:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbNameEmployee
+            // 
+            this.lbNameEmployee.AutoSize = true;
+            this.lbNameEmployee.Location = new System.Drawing.Point(86, 45);
+            this.lbNameEmployee.Name = "lbNameEmployee";
+            this.lbNameEmployee.Size = new System.Drawing.Size(53, 13);
+            this.lbNameEmployee.TabIndex = 17;
+            this.lbNameEmployee.Text = "Unknown";
+            this.lbNameEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(20, 45);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Name:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // picEmployee
+            // 
+            this.picEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picEmployee.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.picEmployee.Image = global::SPHS.AppWindow.Properties.Resources.Logo_Hust;
+            this.picEmployee.Location = new System.Drawing.Point(242, 35);
+            this.picEmployee.Name = "picEmployee";
+            this.picEmployee.Size = new System.Drawing.Size(106, 169);
+            this.picEmployee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEmployee.TabIndex = 0;
+            this.picEmployee.TabStop = false;
+            // 
             // tabPageCustomer
             // 
             this.tabPageCustomer.Controls.Add(this.grTransaction);
@@ -720,264 +887,74 @@
             this.tabPageCustomer.Text = "Customer";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
             // 
-            // tabPageRegistration
+            // grTransaction
             // 
-            this.tabPageRegistration.Location = new System.Drawing.Point(4, 22);
-            this.tabPageRegistration.Name = "tabPageRegistration";
-            this.tabPageRegistration.Size = new System.Drawing.Size(364, 525);
-            this.tabPageRegistration.TabIndex = 2;
-            this.tabPageRegistration.Text = "Registration";
-            this.tabPageRegistration.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(12, 12);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1215, 36);
-            this.panel4.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(455, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(343, 24);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "SMART PARKING HOUSE SYSTEM";
-            // 
-            // picEmployee
-            // 
-            this.picEmployee.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.picEmployee.Image = global::SPHS.AppWindow.Properties.Resources.Logo_Hust;
-            this.picEmployee.Location = new System.Drawing.Point(106, 17);
-            this.picEmployee.Name = "picEmployee";
-            this.picEmployee.Size = new System.Drawing.Size(172, 216);
-            this.picEmployee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picEmployee.TabIndex = 0;
-            this.picEmployee.TabStop = false;
-            // 
-            // lbNameEmployee
-            // 
-            this.lbNameEmployee.AutoSize = true;
-            this.lbNameEmployee.Location = new System.Drawing.Point(169, 302);
-            this.lbNameEmployee.Name = "lbNameEmployee";
-            this.lbNameEmployee.Size = new System.Drawing.Size(53, 13);
-            this.lbNameEmployee.TabIndex = 17;
-            this.lbNameEmployee.Text = "Unknown";
-            this.lbNameEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(103, 302);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Name:";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbPhoneEmployee
-            // 
-            this.lbPhoneEmployee.AutoSize = true;
-            this.lbPhoneEmployee.Location = new System.Drawing.Point(169, 339);
-            this.lbPhoneEmployee.Name = "lbPhoneEmployee";
-            this.lbPhoneEmployee.Size = new System.Drawing.Size(53, 13);
-            this.lbPhoneEmployee.TabIndex = 19;
-            this.lbPhoneEmployee.Text = "Unknown";
-            this.lbPhoneEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(103, 339);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 13);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "Phone:";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbRoleEmployee
-            // 
-            this.lbRoleEmployee.AutoSize = true;
-            this.lbRoleEmployee.Location = new System.Drawing.Point(169, 375);
-            this.lbRoleEmployee.Name = "lbRoleEmployee";
-            this.lbRoleEmployee.Size = new System.Drawing.Size(53, 13);
-            this.lbRoleEmployee.TabIndex = 21;
-            this.lbRoleEmployee.Text = "Unknown";
-            this.lbRoleEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(103, 375);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(37, 13);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "Role:";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCompanyEmployee
-            // 
-            this.lbCompanyEmployee.AutoSize = true;
-            this.lbCompanyEmployee.Location = new System.Drawing.Point(169, 409);
-            this.lbCompanyEmployee.Name = "lbCompanyEmployee";
-            this.lbCompanyEmployee.Size = new System.Drawing.Size(53, 13);
-            this.lbCompanyEmployee.TabIndex = 23;
-            this.lbCompanyEmployee.Text = "Unknown";
-            this.lbCompanyEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(103, 409);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 13);
-            this.label13.TabIndex = 22;
-            this.label13.Text = "Company:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbAddressComEmployee
-            // 
-            this.lbAddressComEmployee.AutoSize = true;
-            this.lbAddressComEmployee.Location = new System.Drawing.Point(169, 441);
-            this.lbAddressComEmployee.Name = "lbAddressComEmployee";
-            this.lbAddressComEmployee.Size = new System.Drawing.Size(53, 13);
-            this.lbAddressComEmployee.TabIndex = 25;
-            this.lbAddressComEmployee.Text = "Unknown";
-            this.lbAddressComEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(103, 441);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(56, 13);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "Address:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // cbPortsCompany
-            // 
-            this.cbPortsCompany.FormattingEnabled = true;
-            this.cbPortsCompany.Location = new System.Drawing.Point(172, 263);
-            this.cbPortsCompany.Name = "cbPortsCompany";
-            this.cbPortsCompany.Size = new System.Drawing.Size(106, 21);
-            this.cbPortsCompany.TabIndex = 5;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(103, 266);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "Ports:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // txtDescriptionOut
-            // 
-            this.txtDescriptionOut.Location = new System.Drawing.Point(103, 146);
-            this.txtDescriptionOut.Multiline = true;
-            this.txtDescriptionOut.Name = "txtDescriptionOut";
-            this.txtDescriptionOut.Size = new System.Drawing.Size(155, 31);
-            this.txtDescriptionOut.TabIndex = 5;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(100, 117);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(38, 13);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "Note:";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.btnClearFilter);
-            this.groupBox4.Controls.Add(this.btnFilter);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.txtPhoneFilter);
-            this.groupBox4.Controls.Add(this.txtNumberPlateFilter);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(358, 103);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Filter";
+            this.grTransaction.Controls.Add(this.btnTransaction);
+            this.grTransaction.Controls.Add(this.label20);
+            this.grTransaction.Controls.Add(this.txtCustomerTransaction);
+            this.grTransaction.Controls.Add(this.label19);
+            this.grTransaction.Controls.Add(this.txtCustomerMoney);
+            this.grTransaction.Location = new System.Drawing.Point(3, 400);
+            this.grTransaction.Name = "grTransaction";
+            this.grTransaction.Size = new System.Drawing.Size(358, 122);
+            this.grTransaction.TabIndex = 2;
+            this.grTransaction.TabStop = false;
+            this.grTransaction.Text = "Transaction";
+            this.grTransaction.Visible = false;
             // 
-            // txtNumberPlateFilter
+            // btnTransaction
             // 
-            this.txtNumberPlateFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnTransaction.Location = new System.Drawing.Point(95, 99);
+            this.btnTransaction.Name = "btnTransaction";
+            this.btnTransaction.Size = new System.Drawing.Size(100, 20);
+            this.btnTransaction.TabIndex = 39;
+            this.btnTransaction.Text = "==> OK <==";
+            this.btnTransaction.UseVisualStyleBackColor = true;
+            this.btnTransaction.Click += new System.EventHandler(this.btnTransaction_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(6, 55);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 13);
+            this.label20.TabIndex = 38;
+            this.label20.Text = "Description:";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtCustomerTransaction
+            // 
+            this.txtCustomerTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNumberPlateFilter.Location = new System.Drawing.Point(95, 29);
-            this.txtNumberPlateFilter.Name = "txtNumberPlateFilter";
-            this.txtNumberPlateFilter.Size = new System.Drawing.Size(119, 20);
-            this.txtNumberPlateFilter.TabIndex = 0;
+            this.txtCustomerTransaction.Location = new System.Drawing.Point(95, 51);
+            this.txtCustomerTransaction.Multiline = true;
+            this.txtCustomerTransaction.Name = "txtCustomerTransaction";
+            this.txtCustomerTransaction.Size = new System.Drawing.Size(257, 42);
+            this.txtCustomerTransaction.TabIndex = 37;
             // 
-            // txtPhoneFilter
+            // label19
             // 
-            this.txtPhoneFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPhoneFilter.Location = new System.Drawing.Point(95, 64);
-            this.txtPhoneFilter.Name = "txtPhoneFilter";
-            this.txtPhoneFilter.Size = new System.Drawing.Size(119, 20);
-            this.txtPhoneFilter.TabIndex = 1;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(6, 28);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 13);
+            this.label19.TabIndex = 36;
+            this.label19.Text = "Enter money:";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label16
+            // txtCustomerMoney
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(6, 32);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(83, 13);
-            this.label16.TabIndex = 12;
-            this.label16.Text = "Number Plate";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(6, 67);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 13);
-            this.label17.TabIndex = 13;
-            this.label17.Text = "Phone";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.Location = new System.Drawing.Point(239, 29);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(100, 20);
-            this.btnFilter.TabIndex = 14;
-            this.btnFilter.Text = "==> Filter <==";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
-            // 
-            // btnClearFilter
-            // 
-            this.btnClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearFilter.Location = new System.Drawing.Point(239, 64);
-            this.btnClearFilter.Name = "btnClearFilter";
-            this.btnClearFilter.Size = new System.Drawing.Size(100, 20);
-            this.btnClearFilter.TabIndex = 15;
-            this.btnClearFilter.Text = "==> Clear <==";
-            this.btnClearFilter.UseVisualStyleBackColor = true;
-            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            this.txtCustomerMoney.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomerMoney.Location = new System.Drawing.Point(95, 24);
+            this.txtCustomerMoney.Name = "txtCustomerMoney";
+            this.txtCustomerMoney.Size = new System.Drawing.Size(257, 20);
+            this.txtCustomerMoney.TabIndex = 0;
             // 
             // grCustomerInfo
             // 
@@ -1013,207 +990,26 @@
             this.grCustomerInfo.Text = "Information";
             this.grCustomerInfo.Visible = false;
             // 
-            // grTransaction
+            // lbCustomerDescription
             // 
-            this.grTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grTransaction.Location = new System.Drawing.Point(3, 400);
-            this.grTransaction.Name = "grTransaction";
-            this.grTransaction.Size = new System.Drawing.Size(358, 122);
-            this.grTransaction.TabIndex = 2;
-            this.grTransaction.TabStop = false;
-            this.grTransaction.Text = "Transaction";
-            this.grTransaction.Visible = false;
+            this.lbCustomerDescription.AutoSize = true;
+            this.lbCustomerDescription.Location = new System.Drawing.Point(87, 204);
+            this.lbCustomerDescription.Name = "lbCustomerDescription";
+            this.lbCustomerDescription.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerDescription.TabIndex = 36;
+            this.lbCustomerDescription.Text = "Unknown";
+            this.lbCustomerDescription.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label18
+            // label39
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(6, 32);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(58, 13);
-            this.label18.TabIndex = 12;
-            this.label18.Text = "Account:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerAccount
-            // 
-            this.lbCustomerAccount.AutoSize = true;
-            this.lbCustomerAccount.Location = new System.Drawing.Point(59, 32);
-            this.lbCustomerAccount.Name = "lbCustomerAccount";
-            this.lbCustomerAccount.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerAccount.TabIndex = 16;
-            this.lbCustomerAccount.Text = "Unknown";
-            this.lbCustomerAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerCMT
-            // 
-            this.lbCustomerCMT.AutoSize = true;
-            this.lbCustomerCMT.Location = new System.Drawing.Point(59, 64);
-            this.lbCustomerCMT.Name = "lbCustomerCMT";
-            this.lbCustomerCMT.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerCMT.TabIndex = 18;
-            this.lbCustomerCMT.Text = "Unknown";
-            this.lbCustomerCMT.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(6, 64);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(37, 13);
-            this.label21.TabIndex = 17;
-            this.label21.Text = "CMT:";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerEmail
-            // 
-            this.lbCustomerEmail.AutoSize = true;
-            this.lbCustomerEmail.Location = new System.Drawing.Point(214, 166);
-            this.lbCustomerEmail.Name = "lbCustomerEmail";
-            this.lbCustomerEmail.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerEmail.TabIndex = 20;
-            this.lbCustomerEmail.Text = "Unknown";
-            this.lbCustomerEmail.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(164, 166);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(41, 13);
-            this.label23.TabIndex = 19;
-            this.label23.Text = "Email:";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerColor
-            // 
-            this.lbCustomerColor.AutoSize = true;
-            this.lbCustomerColor.Location = new System.Drawing.Point(59, 131);
-            this.lbCustomerColor.Name = "lbCustomerColor";
-            this.lbCustomerColor.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerColor.TabIndex = 22;
-            this.lbCustomerColor.Text = "Unknown";
-            this.lbCustomerColor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(6, 131);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(40, 13);
-            this.label25.TabIndex = 21;
-            this.label25.Text = "Color:";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerType
-            // 
-            this.lbCustomerType.AutoSize = true;
-            this.lbCustomerType.Location = new System.Drawing.Point(59, 166);
-            this.lbCustomerType.Name = "lbCustomerType";
-            this.lbCustomerType.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerType.TabIndex = 24;
-            this.lbCustomerType.Text = "Unknown";
-            this.lbCustomerType.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(6, 166);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(39, 13);
-            this.label27.TabIndex = 23;
-            this.label27.Text = "Type:";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerName
-            // 
-            this.lbCustomerName.AutoSize = true;
-            this.lbCustomerName.Location = new System.Drawing.Point(214, 32);
-            this.lbCustomerName.Name = "lbCustomerName";
-            this.lbCustomerName.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerName.TabIndex = 26;
-            this.lbCustomerName.Text = "Unknown";
-            this.lbCustomerName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(164, 32);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(43, 13);
-            this.label29.TabIndex = 25;
-            this.label29.Text = "Name:";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerPhone
-            // 
-            this.lbCustomerPhone.AutoSize = true;
-            this.lbCustomerPhone.Location = new System.Drawing.Point(214, 64);
-            this.lbCustomerPhone.Name = "lbCustomerPhone";
-            this.lbCustomerPhone.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerPhone.TabIndex = 28;
-            this.lbCustomerPhone.Text = "Unknown";
-            this.lbCustomerPhone.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(164, 64);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(47, 13);
-            this.label31.TabIndex = 27;
-            this.label31.Text = "Phone:";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerNumber
-            // 
-            this.lbCustomerNumber.AutoSize = true;
-            this.lbCustomerNumber.Location = new System.Drawing.Point(214, 96);
-            this.lbCustomerNumber.Name = "lbCustomerNumber";
-            this.lbCustomerNumber.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerNumber.TabIndex = 30;
-            this.lbCustomerNumber.Text = "Unknown";
-            this.lbCustomerNumber.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(164, 96);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(54, 13);
-            this.label33.TabIndex = 29;
-            this.label33.Text = "Number:";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbCustomerBranch
-            // 
-            this.lbCustomerBranch.AutoSize = true;
-            this.lbCustomerBranch.Location = new System.Drawing.Point(214, 131);
-            this.lbCustomerBranch.Name = "lbCustomerBranch";
-            this.lbCustomerBranch.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerBranch.TabIndex = 32;
-            this.lbCustomerBranch.Text = "Unknown";
-            this.lbCustomerBranch.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(164, 131);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(51, 13);
-            this.label35.TabIndex = 31;
-            this.label35.Text = "Branch:";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(6, 204);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(75, 13);
+            this.label39.TabIndex = 35;
+            this.label39.Text = "Description:";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lbCustomerBalance
             // 
@@ -1236,26 +1032,600 @@
             this.label37.Text = "Balance";
             this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lbCustomerDescription
+            // lbCustomerBranch
             // 
-            this.lbCustomerDescription.AutoSize = true;
-            this.lbCustomerDescription.Location = new System.Drawing.Point(87, 204);
-            this.lbCustomerDescription.Name = "lbCustomerDescription";
-            this.lbCustomerDescription.Size = new System.Drawing.Size(53, 13);
-            this.lbCustomerDescription.TabIndex = 36;
-            this.lbCustomerDescription.Text = "Unknown";
-            this.lbCustomerDescription.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbCustomerBranch.AutoSize = true;
+            this.lbCustomerBranch.Location = new System.Drawing.Point(214, 131);
+            this.lbCustomerBranch.Name = "lbCustomerBranch";
+            this.lbCustomerBranch.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerBranch.TabIndex = 32;
+            this.lbCustomerBranch.Text = "Unknown";
+            this.lbCustomerBranch.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label39
+            // label35
             // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(6, 204);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(75, 13);
-            this.label39.TabIndex = 35;
-            this.label39.Text = "Description:";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(164, 131);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(51, 13);
+            this.label35.TabIndex = 31;
+            this.label35.Text = "Branch:";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerNumber
+            // 
+            this.lbCustomerNumber.AutoSize = true;
+            this.lbCustomerNumber.Location = new System.Drawing.Point(214, 96);
+            this.lbCustomerNumber.Name = "lbCustomerNumber";
+            this.lbCustomerNumber.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerNumber.TabIndex = 30;
+            this.lbCustomerNumber.Text = "Unknown";
+            this.lbCustomerNumber.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(164, 96);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(54, 13);
+            this.label33.TabIndex = 29;
+            this.label33.Text = "Number:";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerPhone
+            // 
+            this.lbCustomerPhone.AutoSize = true;
+            this.lbCustomerPhone.Location = new System.Drawing.Point(214, 64);
+            this.lbCustomerPhone.Name = "lbCustomerPhone";
+            this.lbCustomerPhone.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerPhone.TabIndex = 28;
+            this.lbCustomerPhone.Text = "Unknown";
+            this.lbCustomerPhone.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(164, 64);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(47, 13);
+            this.label31.TabIndex = 27;
+            this.label31.Text = "Phone:";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerName
+            // 
+            this.lbCustomerName.AutoSize = true;
+            this.lbCustomerName.Location = new System.Drawing.Point(214, 32);
+            this.lbCustomerName.Name = "lbCustomerName";
+            this.lbCustomerName.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerName.TabIndex = 26;
+            this.lbCustomerName.Text = "Unknown";
+            this.lbCustomerName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(164, 32);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(43, 13);
+            this.label29.TabIndex = 25;
+            this.label29.Text = "Name:";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerType
+            // 
+            this.lbCustomerType.AutoSize = true;
+            this.lbCustomerType.Location = new System.Drawing.Point(59, 166);
+            this.lbCustomerType.Name = "lbCustomerType";
+            this.lbCustomerType.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerType.TabIndex = 24;
+            this.lbCustomerType.Text = "Unknown";
+            this.lbCustomerType.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(6, 166);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(39, 13);
+            this.label27.TabIndex = 23;
+            this.label27.Text = "Type:";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerColor
+            // 
+            this.lbCustomerColor.AutoSize = true;
+            this.lbCustomerColor.Location = new System.Drawing.Point(59, 131);
+            this.lbCustomerColor.Name = "lbCustomerColor";
+            this.lbCustomerColor.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerColor.TabIndex = 22;
+            this.lbCustomerColor.Text = "Unknown";
+            this.lbCustomerColor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(6, 131);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(40, 13);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "Color:";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerEmail
+            // 
+            this.lbCustomerEmail.AutoSize = true;
+            this.lbCustomerEmail.Location = new System.Drawing.Point(214, 166);
+            this.lbCustomerEmail.Name = "lbCustomerEmail";
+            this.lbCustomerEmail.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerEmail.TabIndex = 20;
+            this.lbCustomerEmail.Text = "Unknown";
+            this.lbCustomerEmail.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(164, 166);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 13);
+            this.label23.TabIndex = 19;
+            this.label23.Text = "Email:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerCMT
+            // 
+            this.lbCustomerCMT.AutoSize = true;
+            this.lbCustomerCMT.Location = new System.Drawing.Point(59, 64);
+            this.lbCustomerCMT.Name = "lbCustomerCMT";
+            this.lbCustomerCMT.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerCMT.TabIndex = 18;
+            this.lbCustomerCMT.Text = "Unknown";
+            this.lbCustomerCMT.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(6, 64);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(37, 13);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "CMT:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbCustomerAccount
+            // 
+            this.lbCustomerAccount.AutoSize = true;
+            this.lbCustomerAccount.Location = new System.Drawing.Point(59, 32);
+            this.lbCustomerAccount.Name = "lbCustomerAccount";
+            this.lbCustomerAccount.Size = new System.Drawing.Size(53, 13);
+            this.lbCustomerAccount.TabIndex = 16;
+            this.lbCustomerAccount.Text = "Unknown";
+            this.lbCustomerAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(6, 32);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(58, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Account:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnClearFilter);
+            this.groupBox4.Controls.Add(this.btnFilter);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.txtPhoneFilter);
+            this.groupBox4.Controls.Add(this.txtNumberPlateFilter);
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(358, 103);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Filter";
+            // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearFilter.Location = new System.Drawing.Point(239, 64);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(100, 20);
+            this.btnClearFilter.TabIndex = 15;
+            this.btnClearFilter.Text = "==> Clear <==";
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.Location = new System.Drawing.Point(239, 29);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(100, 20);
+            this.btnFilter.TabIndex = 14;
+            this.btnFilter.Text = "==> Filter <==";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(6, 67);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 13);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "Phone";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(6, 32);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(83, 13);
+            this.label16.TabIndex = 12;
+            this.label16.Text = "Number Plate";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtPhoneFilter
+            // 
+            this.txtPhoneFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneFilter.Location = new System.Drawing.Point(95, 64);
+            this.txtPhoneFilter.Name = "txtPhoneFilter";
+            this.txtPhoneFilter.Size = new System.Drawing.Size(119, 20);
+            this.txtPhoneFilter.TabIndex = 1;
+            // 
+            // txtNumberPlateFilter
+            // 
+            this.txtNumberPlateFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumberPlateFilter.Location = new System.Drawing.Point(95, 29);
+            this.txtNumberPlateFilter.Name = "txtNumberPlateFilter";
+            this.txtNumberPlateFilter.Size = new System.Drawing.Size(119, 20);
+            this.txtNumberPlateFilter.TabIndex = 0;
+            // 
+            // tabPageRegistration
+            // 
+            this.tabPageRegistration.Controls.Add(this.cbTypeRegister);
+            this.tabPageRegistration.Controls.Add(this.btnRegisterCustomer);
+            this.tabPageRegistration.Controls.Add(this.label42);
+            this.tabPageRegistration.Controls.Add(this.txtBranchRegister);
+            this.tabPageRegistration.Controls.Add(this.label41);
+            this.tabPageRegistration.Controls.Add(this.txtColorRegister);
+            this.tabPageRegistration.Controls.Add(this.label40);
+            this.tabPageRegistration.Controls.Add(this.txtBalanceRegister);
+            this.tabPageRegistration.Controls.Add(this.label38);
+            this.tabPageRegistration.Controls.Add(this.txtNumberRegister);
+            this.tabPageRegistration.Controls.Add(this.label36);
+            this.tabPageRegistration.Controls.Add(this.txtEmailRegister);
+            this.tabPageRegistration.Controls.Add(this.label34);
+            this.tabPageRegistration.Controls.Add(this.txtPhoneRegister);
+            this.tabPageRegistration.Controls.Add(this.label32);
+            this.tabPageRegistration.Controls.Add(this.txtCMTRegister);
+            this.tabPageRegistration.Controls.Add(this.label30);
+            this.tabPageRegistration.Controls.Add(this.txtNameRegister);
+            this.tabPageRegistration.Controls.Add(this.label28);
+            this.tabPageRegistration.Controls.Add(this.txtPasswordRegister);
+            this.tabPageRegistration.Controls.Add(this.label26);
+            this.tabPageRegistration.Controls.Add(this.txtAccountResgister);
+            this.tabPageRegistration.Controls.Add(this.label24);
+            this.tabPageRegistration.Controls.Add(this.label22);
+            this.tabPageRegistration.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRegistration.Name = "tabPageRegistration";
+            this.tabPageRegistration.Size = new System.Drawing.Size(364, 525);
+            this.tabPageRegistration.TabIndex = 2;
+            this.tabPageRegistration.Text = "Registration";
+            this.tabPageRegistration.UseVisualStyleBackColor = true;
+            // 
+            // btnRegisterCustomer
+            // 
+            this.btnRegisterCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegisterCustomer.Location = new System.Drawing.Point(89, 480);
+            this.btnRegisterCustomer.Name = "btnRegisterCustomer";
+            this.btnRegisterCustomer.Size = new System.Drawing.Size(112, 35);
+            this.btnRegisterCustomer.TabIndex = 34;
+            this.btnRegisterCustomer.Text = "==> Register <==";
+            this.btnRegisterCustomer.UseVisualStyleBackColor = true;
+            this.btnRegisterCustomer.Click += new System.EventHandler(this.btnRegisterCustomer_Click);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(19, 448);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(39, 13);
+            this.label42.TabIndex = 32;
+            this.label42.Text = "Type:";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtBranchRegister
+            // 
+            this.txtBranchRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBranchRegister.Location = new System.Drawing.Point(89, 406);
+            this.txtBranchRegister.Name = "txtBranchRegister";
+            this.txtBranchRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtBranchRegister.TabIndex = 31;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(19, 409);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(51, 13);
+            this.label41.TabIndex = 30;
+            this.label41.Text = "Branch:";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtColorRegister
+            // 
+            this.txtColorRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtColorRegister.Location = new System.Drawing.Point(89, 368);
+            this.txtColorRegister.Name = "txtColorRegister";
+            this.txtColorRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtColorRegister.TabIndex = 29;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(19, 371);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(40, 13);
+            this.label40.TabIndex = 28;
+            this.label40.Text = "Color:";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtBalanceRegister
+            // 
+            this.txtBalanceRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBalanceRegister.Location = new System.Drawing.Point(89, 327);
+            this.txtBalanceRegister.Name = "txtBalanceRegister";
+            this.txtBalanceRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtBalanceRegister.TabIndex = 27;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(19, 330);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(57, 13);
+            this.label38.TabIndex = 26;
+            this.label38.Text = "Balance:";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtNumberRegister
+            // 
+            this.txtNumberRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumberRegister.Location = new System.Drawing.Point(89, 284);
+            this.txtNumberRegister.Name = "txtNumberRegister";
+            this.txtNumberRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtNumberRegister.TabIndex = 25;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(19, 287);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(54, 13);
+            this.label36.TabIndex = 24;
+            this.label36.Text = "Number:";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtEmailRegister
+            // 
+            this.txtEmailRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmailRegister.Location = new System.Drawing.Point(89, 241);
+            this.txtEmailRegister.Name = "txtEmailRegister";
+            this.txtEmailRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtEmailRegister.TabIndex = 23;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(19, 244);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(41, 13);
+            this.label34.TabIndex = 22;
+            this.label34.Text = "Email:";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtPhoneRegister
+            // 
+            this.txtPhoneRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneRegister.Location = new System.Drawing.Point(89, 200);
+            this.txtPhoneRegister.Name = "txtPhoneRegister";
+            this.txtPhoneRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtPhoneRegister.TabIndex = 21;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(19, 203);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(47, 13);
+            this.label32.TabIndex = 20;
+            this.label32.Text = "Phone:";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtCMTRegister
+            // 
+            this.txtCMTRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCMTRegister.Location = new System.Drawing.Point(89, 160);
+            this.txtCMTRegister.Name = "txtCMTRegister";
+            this.txtCMTRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtCMTRegister.TabIndex = 19;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(19, 163);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(37, 13);
+            this.label30.TabIndex = 18;
+            this.label30.Text = "CMT:";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtNameRegister
+            // 
+            this.txtNameRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNameRegister.Location = new System.Drawing.Point(89, 120);
+            this.txtNameRegister.Name = "txtNameRegister";
+            this.txtNameRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtNameRegister.TabIndex = 17;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(19, 123);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(43, 13);
+            this.label28.TabIndex = 16;
+            this.label28.Text = "Name:";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtPasswordRegister
+            // 
+            this.txtPasswordRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPasswordRegister.Location = new System.Drawing.Point(89, 82);
+            this.txtPasswordRegister.Name = "txtPasswordRegister";
+            this.txtPasswordRegister.Size = new System.Drawing.Size(258, 20);
+            this.txtPasswordRegister.TabIndex = 15;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(19, 85);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(65, 13);
+            this.label26.TabIndex = 14;
+            this.label26.Text = "Password:";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtAccountResgister
+            // 
+            this.txtAccountResgister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAccountResgister.Location = new System.Drawing.Point(89, 47);
+            this.txtAccountResgister.Name = "txtAccountResgister";
+            this.txtAccountResgister.Size = new System.Drawing.Size(258, 20);
+            this.txtAccountResgister.TabIndex = 13;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(19, 50);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(58, 13);
+            this.label24.TabIndex = 12;
+            this.label24.Text = "Account:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(100, 17);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(191, 17);
+            this.label22.TabIndex = 5;
+            this.label22.Text = "REGISTER AN ACCOUNT";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Ports:";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cbPortsCompany
+            // 
+            this.cbPortsCompany.FormattingEnabled = true;
+            this.cbPortsCompany.Location = new System.Drawing.Point(72, 9);
+            this.cbPortsCompany.Name = "cbPortsCompany";
+            this.cbPortsCompany.Size = new System.Drawing.Size(106, 21);
+            this.cbPortsCompany.TabIndex = 5;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.cbPortsCompany);
+            this.panel4.Location = new System.Drawing.Point(12, 12);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1215, 36);
+            this.panel4.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(455, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(343, 24);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "SMART PARKING HOUSE SYSTEM";
+            // 
+            // lbNotEnoughOut
+            // 
+            this.lbNotEnoughOut.AutoSize = true;
+            this.lbNotEnoughOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNotEnoughOut.ForeColor = System.Drawing.Color.Red;
+            this.lbNotEnoughOut.Location = new System.Drawing.Point(5, 226);
+            this.lbNotEnoughOut.Name = "lbNotEnoughOut";
+            this.lbNotEnoughOut.Size = new System.Drawing.Size(196, 13);
+            this.lbNotEnoughOut.TabIndex = 27;
+            this.lbNotEnoughOut.Text = "Balance not enough to pay ticket";
+            this.lbNotEnoughOut.Visible = false;
+            // 
+            // cbTypeRegister
+            // 
+            this.cbTypeRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTypeRegister.FormattingEnabled = true;
+            this.cbTypeRegister.Location = new System.Drawing.Point(89, 444);
+            this.cbTypeRegister.Name = "cbTypeRegister";
+            this.cbTypeRegister.Size = new System.Drawing.Size(258, 21);
+            this.cbTypeRegister.TabIndex = 35;
             // 
             // MainApp
             // 
@@ -1292,14 +1662,18 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageInfomation.ResumeLayout(false);
             this.tabPageInfomation.PerformLayout();
-            this.tabPageCustomer.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployee)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tabPageCustomer.ResumeLayout(false);
+            this.grTransaction.ResumeLayout(false);
+            this.grTransaction.PerformLayout();
             this.grCustomerInfo.ResumeLayout(false);
             this.grCustomerInfo.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.tabPageRegistration.ResumeLayout(false);
+            this.tabPageRegistration.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1404,6 +1778,36 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label lbCustomerAccount;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnTransaction;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtCustomerTransaction;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtCustomerMoney;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnRegisterCustomer;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TextBox txtBranchRegister;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox txtColorRegister;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox txtBalanceRegister;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox txtNumberRegister;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox txtEmailRegister;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox txtPhoneRegister;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtCMTRegister;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox txtNameRegister;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox txtPasswordRegister;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox txtAccountResgister;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lbNotEnoughOut;
+        private System.Windows.Forms.ComboBox cbTypeRegister;
     }
 }
 
