@@ -26,7 +26,7 @@ namespace SPHS.AppWindow.parameters
     public enum VEHICLETYPES
     {
         car,
-        motobike
+        motorbike
     }
 
     public enum COLLECTIONS
