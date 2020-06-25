@@ -32,7 +32,7 @@ namespace SPHS.AppWindow
             try
             {
                 users user = UserAPI.login(txtAccount.Text, txtPassword.Text);
-                if (user.accessToken != null && user.role != ROLES.user.ToString())
+                if (user.accessToken != null && user.role != ROLES.user.ToString() && user.role != ROLES.manager.ToString())
                 {
                     Parameter_Special.USER_PRESENT = user;
                     MainApp app = new MainApp();

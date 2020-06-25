@@ -18,8 +18,8 @@ namespace SPHS.AppWindow.parameters
     public enum ROLES
     {
         admin,
+        security,
         manager,
-        employee,
         user
     }
 
