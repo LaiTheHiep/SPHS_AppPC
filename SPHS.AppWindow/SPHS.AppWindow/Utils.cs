@@ -314,5 +314,14 @@ namespace SPHS.AppWindow
             s += $"{_m}m {_s}s";
             return s.Trim();
         }
+
+        public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                return ms.ToArray();
+            }
+        }
     }
 }

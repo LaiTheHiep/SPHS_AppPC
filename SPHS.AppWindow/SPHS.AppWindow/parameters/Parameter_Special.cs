@@ -41,7 +41,8 @@ namespace SPHS.AppWindow.parameters
 
     public enum LINK_SPECIALS
     {
-        authentication // authentication, not collections, using to login
+        authentication, // authentication, not collections, using to login
+        uploads
     }
 
     public enum DATARESPONSE

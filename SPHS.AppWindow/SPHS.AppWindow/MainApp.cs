@@ -13,6 +13,10 @@ using System.Threading;
 using SPHS.AppWindow.parameters;
 using SPHS.AppWindow.actions;
 using SPHS.AppWindow.models;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace SPHS.AppWindow
 {
@@ -73,6 +77,7 @@ namespace SPHS.AppWindow
                 int _time = (int)Utils.subDateTime(DateTime.Now.ToString(), _parkingTicket.timeIn);
                 lbTimesOut.Text = Utils.convertTimeToString(_time);
                 lbTotalOut.Text = Utils.getMoneyByDate(_time, _user.vehicleType).ToString();
+                picHistory.Image = Image.FromFile(_parkingTicket.imageIn);
                 if (int.Parse(lbTotalOut.Text) > _user.balance)
                 {
                     lbNotEnoughOut.Visible = true;
@@ -130,7 +135,7 @@ namespace SPHS.AppWindow
             }
             cbTypeRegister.DataSource = new string[] {
                 VEHICLETYPES.car.ToString(),
-                VEHICLETYPES.motobike.ToString()
+                VEHICLETYPES.motorbike.ToString()
             };
         }
 
@@ -571,17 +576,26 @@ namespace SPHS.AppWindow
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
-            var _post = Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+            var _post = ParkingTicketAPI.post(new parkingTickets()
             {
                 port = cbPortsCompany.Text,
                 timeIn = DateTime.Now.ToString(),
                 author = Parameter_Special.USER_PRESENT._id,
                 userId = customerGo._id
             });
-            if (_post)
-                clearInformation(true);
+
+            if (_post._id != null)
+            {
+                var _uploadFile = ParkingTicketAPI.upload(_post, Utils.ImageToByteArray(pic_vehicle_in.Image), true);
+                if (_uploadFile)
+                    clearInformation(true);
+                else
+                    MessageBox.Show("Something error!");
+            }
             else
+            {
                 MessageBox.Show("Something error!");
+            }
         }
 
         private void btnPass_Click(object sender, EventArgs e)
@@ -608,8 +622,12 @@ namespace SPHS.AppWindow
                 });
                 if (_putBalace)
                 {
-                    clearInformation(false);
-                    return;
+                    var _uploadFile = ParkingTicketAPI.upload(parkingTicketGo, Utils.ImageToByteArray(pic_vehicle_out.Image), false);
+                    if (_uploadFile)
+                    {
+                        clearInformation(false);
+                        return;
+                    }
                 }
             }
             MessageBox.Show("Something error!");
