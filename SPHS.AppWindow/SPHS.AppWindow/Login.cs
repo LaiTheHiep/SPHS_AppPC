@@ -19,6 +19,7 @@ namespace SPHS.AppWindow
         public Login()
         {
             InitializeComponent();
+            Utils.setupFolder();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -323,5 +323,13 @@ namespace SPHS.AppWindow
                 return ms.ToArray();
             }
         }
+
+        public static void setupFolder()
+        {
+            if (!Directory.Exists(Parameter_Special.FOLDER_IMAGE))
+            {
+                Directory.CreateDirectory(Parameter_Special.FOLDER_IMAGE);
+            }
+        }
     }
 }
