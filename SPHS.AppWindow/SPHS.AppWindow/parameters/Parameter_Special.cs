@@ -12,6 +12,7 @@ namespace SPHS.AppWindow.parameters
         public static string UNKNOWN_STRING = "Unknown";
         //public static string ADDRESS_BASE_API = "http://localhost:8080";
         public static string ADDRESS_BASE_API = "https://sphs-lth.herokuapp.com";
+        public static string ADDRESS_URL_IMAGE = "https://api.imgbb.com/1/upload?key=bbda9cabea0a8e3852cbe26df54d959c";
         public static users USER_PRESENT = new users();
         public static companies COMPANY_PRESENT = new companies();
     }

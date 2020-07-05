@@ -77,7 +77,7 @@ namespace SPHS.AppWindow
                 int _time = (int)Utils.subDateTime(DateTime.Now.ToString(), _parkingTicket.timeIn);
                 lbTimesOut.Text = Utils.convertTimeToString(_time);
                 lbTotalOut.Text = Utils.getMoneyByDate(_time, _user.vehicleType).ToString();
-                picHistory.Image = Image.FromFile(_parkingTicket.imageIn);
+                picHistory.Image = Image.FromFile(ParkingTicketAPI.DownLoadFile(_parkingTicket.imageIn));
                 if (int.Parse(lbTotalOut.Text) > _user.balance)
                 {
                     lbNotEnoughOut.Visible = true;
@@ -576,25 +576,18 @@ namespace SPHS.AppWindow
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
-            var _post = ParkingTicketAPI.post(new parkingTickets()
+            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
+            if (_urlImage != null)
             {
-                port = cbPortsCompany.Text,
-                timeIn = DateTime.Now.ToString(),
-                author = Parameter_Special.USER_PRESENT._id,
-                userId = customerGo._id
-            });
-
-            if (_post._id != null)
-            {
-                var _uploadFile = ParkingTicketAPI.upload(_post, Utils.ImageToByteArray(pic_vehicle_in.Image), true);
-                if (_uploadFile)
-                    clearInformation(true);
-                else
-                    MessageBox.Show("Something error!");
-            }
-            else
-            {
-                MessageBox.Show("Something error!");
+                var _post = ParkingTicketAPI.post(new parkingTickets()
+                {
+                    port = cbPortsCompany.Text,
+                    timeIn = DateTime.Now.ToString(),
+                    author = Parameter_Special.USER_PRESENT._id,
+                    userId = customerGo._id,
+                    imageIn = _urlImage
+                });
+                clearInformation(true);
             }
         }
 
@@ -605,11 +598,18 @@ namespace SPHS.AppWindow
                 MessageBox.Show("Balance not enough to pay ticket");
                 return;
             }
+            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_out.Image), false);
+            if (_urlImage == null)
+            {
+                MessageBox.Show("Something error!");
+                return;
+            }
             var _put = Utils.putAPI(COLLECTIONS.parkingtickets, new parkingTickets()
             {
                 _id = parkingTicketGo._id,
                 timeOut = DateTime.Now.ToString(),
-                description = txtDescriptionOut.Text
+                description = txtDescriptionOut.Text,
+                imageOut = _urlImage
             });
             if (_put)
             {
@@ -620,17 +620,17 @@ namespace SPHS.AppWindow
                     _id = customerGo._id,
                     balance = customerGo.balance - _money
                 });
-                if (_putBalace)
-                {
-                    var _uploadFile = ParkingTicketAPI.upload(parkingTicketGo, Utils.ImageToByteArray(pic_vehicle_out.Image), false);
-                    if (_uploadFile)
-                    {
-                        clearInformation(false);
-                        return;
-                    }
-                }
+                clearInformation(false);
+                //if (_putBalace)
+                //{
+                //    var _uploadFile = ParkingTicketAPI.upload(parkingTicketGo, Utils.ImageToByteArray(pic_vehicle_out.Image), false);
+                //    if (_uploadFile)
+                //    {
+                //        clearInformation(false);
+                //        return;
+                //    }
+                //}
             }
-            MessageBox.Show("Something error!");
         }
 
         private void btnFilter_Click(object sender, EventArgs e)

@@ -70,5 +70,41 @@ namespace SPHS.AppWindow.actions
 
             return result;
         }
+
+        public static string UploadFile(byte[] image, bool isIn)
+        {
+            string url = Parameter_Special.ADDRESS_URL_IMAGE;
+            using (var client = new HttpClient())
+            {
+                using (var content = new MultipartFormDataContent("image"))
+                {
+                    string _file = isIn ? "in" : "out";
+                    string _name = DateTime.Now.ToString() + _file;
+                    content.Add(new StreamContent(new MemoryStream(image)), "image", _name);
+
+                    var response = client.PostAsync(url, content);
+                    response.Wait();
+                    var _result = response.Result;
+                    var readTask = _result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff["data"] != null && stuff["data"]["url"] != null)
+                        return stuff["data"]["url"].ToString();
+                }
+            }
+            return null;
+        }
+
+        public static string DownLoadFile(string url_in)
+        {
+            using (System.Net.WebClient client = new System.Net.WebClient())
+            {
+                string[] arr_urls = url_in.Split('/');
+                string new_path = @"C:\SPHS_images\" + arr_urls[arr_urls.Length - 1] + ".png";
+                client.DownloadFile(new Uri(url_in), new_path);
+                return new_path;
+            }
+        }
     }
 }
