@@ -101,7 +101,7 @@ namespace SPHS.AppWindow.actions
             using (System.Net.WebClient client = new System.Net.WebClient())
             {
                 string[] arr_urls = url_in.Split('/');
-                string new_path = @"C:\SPHS_images\" + arr_urls[arr_urls.Length - 1] + ".png";
+                string new_path = $"{Parameter_Special.FOLDER_IMAGE}\\" + arr_urls[arr_urls.Length - 1] + ".png";
                 client.DownloadFile(new Uri(url_in), new_path);
                 return new_path;
             }
