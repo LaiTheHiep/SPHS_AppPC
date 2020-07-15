@@ -15,7 +15,7 @@ namespace SPHS.AppWindow.actions
         public static users login(string _account, string _password)
         {
             users result = new users();
-            string url = Utils.createLinkAPI(LINK_SPECIALS.authentication, null);
+            string url = Parameter_Special.ADDRESS_BASE_API + "/" + LINK_SPECIALS.authentication.ToString();
             using (var httpClient = new HttpClient())
             {
                 var _json = Utils.ClassToJsonString<users>(new users() { account = _account, password = _password });
