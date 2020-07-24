@@ -582,6 +582,7 @@ namespace SPHS.AppWindow
                 var _post = ParkingTicketAPI.post(new parkingTickets()
                 {
                     port = cbPortsCompany.Text,
+                    companyId = Parameter_Special.USER_PRESENT.companyId,
                     timeIn = DateTime.Now.ToString(),
                     author = Parameter_Special.USER_PRESENT._id,
                     userId = customerGo._id,

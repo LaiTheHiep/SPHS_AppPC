@@ -10,6 +10,7 @@ namespace SPHS.AppWindow.models
     {
         public string _id { get; set; }
         public string port { get; set; }
+        public string companyId { get; set; }
         public string description { get; set; }
         public string timeIn { get; set; }
         public string timeOut { get; set; }
