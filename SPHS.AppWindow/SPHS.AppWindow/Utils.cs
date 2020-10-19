@@ -30,7 +30,7 @@ namespace SPHS.AppWindow
             try
             {
                 TimeSpan result = DateTime.Parse(dt1) - DateTime.Parse(dt2);
-                return result.TotalSeconds;
+                return result.TotalSeconds + 7 * 3600;
             }
             catch
             {
