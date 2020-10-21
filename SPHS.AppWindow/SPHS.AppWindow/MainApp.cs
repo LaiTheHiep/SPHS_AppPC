@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using ZXing;
 
 namespace SPHS.AppWindow
 {
@@ -738,6 +739,29 @@ namespace SPHS.AppWindow
                 MessageBox.Show("OK");
             else
                 MessageBox.Show("Error");
+        }
+
+        private void btnImageQR_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            Bitmap bm = new Bitmap(dlg.FileName);
+            picQRCode.Image = bm;
+
+            string qr_code = Utils.ScanQRCodeByBitMap(bm);
+            if (qr_code != null)
+                txtQRCode.Text = qr_code;
+        }
+
+        private void btnPassQR_Click(object sender, EventArgs e)
+        {
+            picQRCode.Image = null;
+            txtQRCode.Text = "";
         }
     }
 }

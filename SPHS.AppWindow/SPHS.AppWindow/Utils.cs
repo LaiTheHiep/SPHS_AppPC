@@ -4,6 +4,7 @@ using SPHS.AppWindow.models;
 using SPHS.AppWindow.parameters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -13,6 +14,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZXing;
 
 namespace SPHS.AppWindow
 {
@@ -322,6 +324,18 @@ namespace SPHS.AppWindow
                 imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
                 return ms.ToArray();
             }
+        }
+
+        public static string ScanQRCodeByBitMap(Bitmap bm)
+        {
+            IBarcodeReader reader = new BarcodeReader();
+            var result = reader.Decode(bm);
+            if (result != null)
+            {
+                return result.Text;
+            }
+
+            return null;
         }
 
         public static void setupFolder()

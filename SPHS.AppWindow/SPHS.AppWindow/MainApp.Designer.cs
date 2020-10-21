@@ -50,6 +50,7 @@
             this.pic_vehicle_in = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbNotEnoughOut = new System.Windows.Forms.Label();
             this.lbTotalOut = new System.Windows.Forms.Label();
             this.lbTotalOutContent = new System.Windows.Forms.Label();
             this.lbTimesOut = new System.Windows.Forms.Label();
@@ -128,6 +129,7 @@
             this.txtPhoneFilter = new System.Windows.Forms.TextBox();
             this.txtNumberPlateFilter = new System.Windows.Forms.TextBox();
             this.tabPageRegistration = new System.Windows.Forms.TabPage();
+            this.cbTypeRegister = new System.Windows.Forms.ComboBox();
             this.btnRegisterCustomer = new System.Windows.Forms.Button();
             this.label42 = new System.Windows.Forms.Label();
             this.txtBranchRegister = new System.Windows.Forms.TextBox();
@@ -155,8 +157,11 @@
             this.cbPortsCompany = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.lbNotEnoughOut = new System.Windows.Forms.Label();
-            this.cbTypeRegister = new System.Windows.Forms.ComboBox();
+            this.tabPageQRScan = new System.Windows.Forms.TabPage();
+            this.picQRCode = new System.Windows.Forms.PictureBox();
+            this.btnImageQR = new System.Windows.Forms.Button();
+            this.txtQRCode = new System.Windows.Forms.TextBox();
+            this.btnPassQR = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -178,6 +183,8 @@
             this.groupBox4.SuspendLayout();
             this.tabPageRegistration.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tabPageQRScan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -437,6 +444,18 @@
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Information Vehicle";
+            // 
+            // lbNotEnoughOut
+            // 
+            this.lbNotEnoughOut.AutoSize = true;
+            this.lbNotEnoughOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNotEnoughOut.ForeColor = System.Drawing.Color.Red;
+            this.lbNotEnoughOut.Location = new System.Drawing.Point(5, 226);
+            this.lbNotEnoughOut.Name = "lbNotEnoughOut";
+            this.lbNotEnoughOut.Size = new System.Drawing.Size(196, 13);
+            this.lbNotEnoughOut.TabIndex = 27;
+            this.lbNotEnoughOut.Text = "Balance not enough to pay ticket";
+            this.lbNotEnoughOut.Visible = false;
             // 
             // lbTotalOut
             // 
@@ -730,6 +749,7 @@
             this.tabControl1.Controls.Add(this.tabPageInfomation);
             this.tabControl1.Controls.Add(this.tabPageCustomer);
             this.tabControl1.Controls.Add(this.tabPageRegistration);
+            this.tabControl1.Controls.Add(this.tabPageQRScan);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1332,6 +1352,16 @@
             this.tabPageRegistration.Text = "Registration";
             this.tabPageRegistration.UseVisualStyleBackColor = true;
             // 
+            // cbTypeRegister
+            // 
+            this.cbTypeRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTypeRegister.FormattingEnabled = true;
+            this.cbTypeRegister.Location = new System.Drawing.Point(89, 444);
+            this.cbTypeRegister.Name = "cbTypeRegister";
+            this.cbTypeRegister.Size = new System.Drawing.Size(258, 21);
+            this.cbTypeRegister.TabIndex = 35;
+            // 
             // btnRegisterCustomer
             // 
             this.btnRegisterCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1605,27 +1635,58 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "SMART PARKING HOUSE SYSTEM";
             // 
-            // lbNotEnoughOut
+            // tabPageQRScan
             // 
-            this.lbNotEnoughOut.AutoSize = true;
-            this.lbNotEnoughOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNotEnoughOut.ForeColor = System.Drawing.Color.Red;
-            this.lbNotEnoughOut.Location = new System.Drawing.Point(5, 226);
-            this.lbNotEnoughOut.Name = "lbNotEnoughOut";
-            this.lbNotEnoughOut.Size = new System.Drawing.Size(196, 13);
-            this.lbNotEnoughOut.TabIndex = 27;
-            this.lbNotEnoughOut.Text = "Balance not enough to pay ticket";
-            this.lbNotEnoughOut.Visible = false;
+            this.tabPageQRScan.Controls.Add(this.btnPassQR);
+            this.tabPageQRScan.Controls.Add(this.txtQRCode);
+            this.tabPageQRScan.Controls.Add(this.btnImageQR);
+            this.tabPageQRScan.Controls.Add(this.picQRCode);
+            this.tabPageQRScan.Location = new System.Drawing.Point(4, 22);
+            this.tabPageQRScan.Name = "tabPageQRScan";
+            this.tabPageQRScan.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageQRScan.Size = new System.Drawing.Size(364, 525);
+            this.tabPageQRScan.TabIndex = 3;
+            this.tabPageQRScan.Text = "Scan QR";
+            this.tabPageQRScan.UseVisualStyleBackColor = true;
             // 
-            // cbTypeRegister
+            // picQRCode
             // 
-            this.cbTypeRegister.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbTypeRegister.FormattingEnabled = true;
-            this.cbTypeRegister.Location = new System.Drawing.Point(89, 444);
-            this.cbTypeRegister.Name = "cbTypeRegister";
-            this.cbTypeRegister.Size = new System.Drawing.Size(258, 21);
-            this.cbTypeRegister.TabIndex = 35;
+            this.picQRCode.BackColor = System.Drawing.Color.White;
+            this.picQRCode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picQRCode.Location = new System.Drawing.Point(17, 6);
+            this.picQRCode.Name = "picQRCode";
+            this.picQRCode.Size = new System.Drawing.Size(341, 296);
+            this.picQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picQRCode.TabIndex = 1;
+            this.picQRCode.TabStop = false;
+            // 
+            // btnImageQR
+            // 
+            this.btnImageQR.Location = new System.Drawing.Point(283, 316);
+            this.btnImageQR.Name = "btnImageQR";
+            this.btnImageQR.Size = new System.Drawing.Size(75, 23);
+            this.btnImageQR.TabIndex = 2;
+            this.btnImageQR.Text = "load qrcode";
+            this.btnImageQR.UseVisualStyleBackColor = true;
+            this.btnImageQR.Click += new System.EventHandler(this.btnImageQR_Click);
+            // 
+            // txtQRCode
+            // 
+            this.txtQRCode.Location = new System.Drawing.Point(17, 316);
+            this.txtQRCode.Multiline = true;
+            this.txtQRCode.Name = "txtQRCode";
+            this.txtQRCode.Size = new System.Drawing.Size(260, 119);
+            this.txtQRCode.TabIndex = 3;
+            // 
+            // btnPassQR
+            // 
+            this.btnPassQR.Location = new System.Drawing.Point(283, 345);
+            this.btnPassQR.Name = "btnPassQR";
+            this.btnPassQR.Size = new System.Drawing.Size(75, 23);
+            this.btnPassQR.TabIndex = 4;
+            this.btnPassQR.Text = "Clear";
+            this.btnPassQR.UseVisualStyleBackColor = true;
+            this.btnPassQR.Click += new System.EventHandler(this.btnPassQR_Click);
             // 
             // MainApp
             // 
@@ -1674,6 +1735,9 @@
             this.tabPageRegistration.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tabPageQRScan.ResumeLayout(false);
+            this.tabPageQRScan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1808,6 +1872,11 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label lbNotEnoughOut;
         private System.Windows.Forms.ComboBox cbTypeRegister;
+        private System.Windows.Forms.TabPage tabPageQRScan;
+        private System.Windows.Forms.Button btnImageQR;
+        private System.Windows.Forms.PictureBox picQRCode;
+        private System.Windows.Forms.TextBox txtQRCode;
+        private System.Windows.Forms.Button btnPassQR;
     }
 }
 
