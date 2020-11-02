@@ -785,15 +785,34 @@ namespace SPHS.AppWindow
             //string qr_code = Utils.ScanQRCodeByBitMap(bm);
             //if (qr_code != null)
             //    txtQRCode.Text = qr_code;
-            SPHScameraSwitch = (int)CAMERASWITCH.CameraQRCode;
-            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+
+            //SPHScameraSwitch = (int)CAMERASWITCH.CameraQRCode;
+            //videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            //videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
+            //videoCaptureDevice.Start();
+
+            SetupCameraCapture((int)CAMERASWITCH.CameraQRCode, 0);
+        }
+
+        private void btnPassQR_Click(object sender, EventArgs e)
+        {
+            SPHSqrCode = "";
+            picQRCode.Image = null;
+            txtQRCode.Text = "";
+            videoCaptureDevice.Stop();
+        }
+
+        private void SetupCameraCapture(int _switchCamera, int _index)
+        {
+            SPHScameraSwitch = _switchCamera;
+            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[_index].MonikerString);
             videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
             videoCaptureDevice.Start();
         }
 
         private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            if(SPHScameraSwitch == (int)CAMERASWITCH.CameraQRCode)
+            if (SPHScameraSwitch == (int)CAMERASWITCH.CameraQRCode)
             {
                 picQRCode.Image = (Bitmap)eventArgs.Frame.Clone();
                 string qr_code = Utils.ScanQRCodeByBitMap((Bitmap)eventArgs.Frame.Clone());
@@ -805,14 +824,6 @@ namespace SPHS.AppWindow
                 }
             }
 
-        }
-
-        private void btnPassQR_Click(object sender, EventArgs e)
-        {
-            SPHSqrCode = "";
-            picQRCode.Image = null;
-            txtQRCode.Text = "";
-            videoCaptureDevice.Stop();
         }
 
         private void MainApp_FormClosing(object sender, FormClosingEventArgs e)
