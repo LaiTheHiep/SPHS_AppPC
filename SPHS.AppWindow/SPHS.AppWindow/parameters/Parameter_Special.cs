@@ -55,4 +55,11 @@ namespace SPHS.AppWindow.parameters
         errorName,
         errorMessage
     }
+
+    public enum CAMERASWITCH
+    {
+        CameraQRCode,
+        CameraVehicleIn,
+        CameraVehicleOut
+    }
 }

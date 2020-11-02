@@ -18,6 +18,8 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
 using ZXing;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace SPHS.AppWindow
 {
@@ -28,6 +30,16 @@ namespace SPHS.AppWindow
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
             setUp();
+            CheckForIllegalCrossThreadCalls = false;
+            new Thread(
+                () =>
+                {
+                    while (true)
+                    {
+                        txtQRCode.Text = SPHSqrCode;
+                    }
+                })
+            { IsBackground = true }.Start();
         }
 
         #region Define
@@ -50,6 +62,15 @@ namespace SPHS.AppWindow
 
         //int current = 0;
         Capture capture = null;
+
+        // camera
+        FilterInfoCollection filterInfoCollection;
+        VideoCaptureDevice videoCaptureDevice;
+        private List<string> textCameras = new List<string>();
+
+        // variable static load
+        private static string SPHSqrCode = "";
+        private static int SPHScameraSwitch = 0; 
 
         #endregion
 
@@ -504,6 +525,14 @@ namespace SPHS.AppWindow
             {
                 box[i] = new PictureBox();
             }
+
+            // init load camera
+            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo filterInfo in filterInfoCollection)
+            {
+                textCameras.Add(filterInfo.Name);
+            }
+            videoCaptureDevice = new VideoCaptureDevice();
         }
 
         private void btnLoadImageIn_Click(object sender, EventArgs e)
@@ -743,25 +772,55 @@ namespace SPHS.AppWindow
 
         private void btnImageQR_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
-            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            {
-                return;
-            }
-            Bitmap bm = new Bitmap(dlg.FileName);
-            picQRCode.Image = bm;
+            //OpenFileDialog dlg = new OpenFileDialog();
+            //dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            //dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            //if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    return;
+            //}
+            //Bitmap bm = new Bitmap(dlg.FileName);
+            //picQRCode.Image = bm;
 
-            string qr_code = Utils.ScanQRCodeByBitMap(bm);
-            if (qr_code != null)
-                txtQRCode.Text = qr_code;
+            //string qr_code = Utils.ScanQRCodeByBitMap(bm);
+            //if (qr_code != null)
+            //    txtQRCode.Text = qr_code;
+            SPHScameraSwitch = (int)CAMERASWITCH.CameraQRCode;
+            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
+            videoCaptureDevice.Start();
+        }
+
+        private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            if(SPHScameraSwitch == (int)CAMERASWITCH.CameraQRCode)
+            {
+                picQRCode.Image = (Bitmap)eventArgs.Frame.Clone();
+                string qr_code = Utils.ScanQRCodeByBitMap((Bitmap)eventArgs.Frame.Clone());
+                if (qr_code != null && string.IsNullOrEmpty(SPHSqrCode))
+                {
+                    SPHSqrCode = qr_code;
+                    //var video = sender as VideoCaptureDevice;
+                    //video.Stop();
+                }
+            }
+
         }
 
         private void btnPassQR_Click(object sender, EventArgs e)
         {
+            SPHSqrCode = "";
             picQRCode.Image = null;
             txtQRCode.Text = "";
+            videoCaptureDevice.Stop();
+        }
+
+        private void MainApp_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (videoCaptureDevice.IsRunning)
+            {
+                videoCaptureDevice.Stop();
+            }
         }
     }
 }
