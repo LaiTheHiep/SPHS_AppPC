@@ -150,8 +150,10 @@
     <Compile Include="MainApp.Designer.cs">
       <DependentUpon>MainApp.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\cards.cs" />
     <Compile Include="models\companies.cs" />
     <Compile Include="models\dataResponse.cs" />
+    <Compile Include="models\devices.cs" />
     <Compile Include="models\parkingTickets.cs" />
     <Compile Include="models\roles.cs" />
     <Compile Include="models\transactions.cs" />
@@ -183,6 +185,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SimulinkDevice.resx">
+      <DependentUpon>SimulinkDevice.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -16,6 +16,9 @@ namespace SPHS.AppWindow.parameters
         public static string FOLDER_IMAGE = @"C:\SPHS_images";
         public static users USER_PRESENT = new users();
         public static companies COMPANY_PRESENT = new companies();
+
+        public static string ACCOUNT_DEFAULT = "admin";
+        public static string PASSWORD_DEFAULT = "123456a@";
     }
 
     public enum ROLES
@@ -40,6 +43,8 @@ namespace SPHS.AppWindow.parameters
         companies,
         parkingtickets,
         vehicletypes,
+        devices,
+        cards
     }
 
     public enum LINK_SPECIALS

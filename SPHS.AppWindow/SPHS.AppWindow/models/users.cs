@@ -23,8 +23,17 @@ namespace SPHS.AppWindow.models
         public string vehicleColor { get; set; }
         public string vehicleBranch { get; set; }
         public string vehicleType { get; set; }
+        public List<string> cardIds { get; set; }
+        public List<deviceAccess> devicesAccess { get; set; }
         public string createdAt { get; set; }
         public string updatedAt { get; set; }
         public string accessToken { get; set; }
+    }
+
+    public class deviceAccess
+    {
+        public string deviceId { get; set; }
+        public DateTime dateTimeFrom { get; set; }
+        public DateTime dateTimeTo { get; set; }
     }
 }

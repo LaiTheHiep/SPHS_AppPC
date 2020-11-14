@@ -177,6 +177,26 @@ namespace SPHS.AppWindow
                 return results;
             }
 
+            if(_collection.ToString() == COLLECTIONS.devices.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    devices _device = Utils.JsonStringToClass<devices>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_device);
+                }
+                return results;
+            }
+
+            if (_collection.ToString() == COLLECTIONS.cards.ToString())
+            {
+                for (int i = 0; i < total; i++)
+                {
+                    cards _card = Utils.JsonStringToClass<cards>(stuff[DATARESPONSE.data.ToString()][i].ToString());
+                    results.Add(_card);
+                }
+                return results;
+            }
+
             return results;
         }
 
