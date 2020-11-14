@@ -177,7 +177,7 @@ namespace SPHS.AppWindow
                 return results;
             }
 
-            if(_collection.ToString() == COLLECTIONS.devices.ToString())
+            if (_collection.ToString() == COLLECTIONS.devices.ToString())
             {
                 for (int i = 0; i < total; i++)
                 {
@@ -364,6 +364,61 @@ namespace SPHS.AppWindow
             {
                 Directory.CreateDirectory(Parameter_Special.FOLDER_IMAGE);
             }
+        }
+
+        public static int verifyQRCode(string qrCode, string deviceId)
+        {
+            int resultVerify = 1;
+            JObject stuffQRCode = JObject.Parse(qrCode);
+            if (stuffQRCode["_id"] == null) return resultVerify;
+
+            string _id = stuffQRCode["_id"].ToString();
+            string url = Utils.createLinkAPI(COLLECTIONS.users, $"_id={_id}");
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+                var response = httpClient.GetAsync(url);
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        try
+                        {
+                            if(stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
+                            {
+                                DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                                DateTime now = start.AddMilliseconds(long.Parse(stuffQRCode["createdTime"].ToString())).ToLocalTime();
+                                string dataDeviceAccess = stuff["data"][0]["devicesAccess"][deviceId][(int)now.DayOfWeek].ToString();
+                                var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
+                                string[] froms = deviceAccess.dateTimeFrom.Split('/');
+                                string[] tos = deviceAccess.dateTimeTo.Split('/');
+                                if(int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
+                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
+                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                {
+                                    resultVerify = 3;
+                                }
+                                else
+                                {
+                                    resultVerify = 2;
+                                }
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            return resultVerify;
+                        }
+                    }
+                }
+            }
+
+            return resultVerify;
         }
     }
 }

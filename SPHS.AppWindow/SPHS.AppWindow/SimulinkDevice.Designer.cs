@@ -64,6 +64,7 @@
             this.cbDevices.Name = "cbDevices";
             this.cbDevices.Size = new System.Drawing.Size(188, 21);
             this.cbDevices.TabIndex = 7;
+            this.cbDevices.SelectedIndexChanged += new System.EventHandler(this.cbDevices_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -103,6 +104,7 @@
             this.label4.Size = new System.Drawing.Size(150, 15);
             this.label4.TabIndex = 11;
             this.label4.Text = "Status Connect Device";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // lbStatusAction
             // 

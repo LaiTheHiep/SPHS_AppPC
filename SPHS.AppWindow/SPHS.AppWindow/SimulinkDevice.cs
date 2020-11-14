@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +19,8 @@ namespace SPHS.AppWindow
     {
         private List<companies> _companies = new List<companies>();
         private List<devices> _devices = new List<devices>();
+        private static int indexDevice = 0;
+        private static int indexStatus = 0;
         FilterInfoCollection filterInfoCollection;
         VideoCaptureDevice videoCaptureDevice;
         public SimulinkDevice()
@@ -30,6 +33,34 @@ namespace SPHS.AppWindow
             filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             videoCaptureDevice = new VideoCaptureDevice();
             SetupCameraCapture();
+            CheckForIllegalCrossThreadCalls = false;
+            new Thread(
+                () =>
+                {
+                    while (true)
+                    {
+                        switch (indexStatus)
+                        {
+                            case 1:
+                                lbStatusAction.ForeColor = Color.Red;
+                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[1];
+                                break;
+                            case 2:
+                                lbStatusAction.ForeColor = Color.Yellow;
+                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[2];
+                                break;
+                            case 3:
+                                lbStatusAction.ForeColor = Color.Green;
+                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[3];
+                                break;
+                            default:
+                                lbStatusAction.ForeColor = Color.Black;
+                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[0];
+                                break;
+                        }
+                    }
+                })
+            { IsBackground = true }.Start();
         }
 
         private void getToken()
@@ -74,6 +105,7 @@ namespace SPHS.AppWindow
                     cbDevices.DataSource = _devices;
                     cbDevices.DisplayMember = "name";
                     cbDevices.SelectedIndex = 0;
+                    indexDevice = 0;
                 }
             }
         }
@@ -94,15 +126,33 @@ namespace SPHS.AppWindow
         {
             picCameraDevice.Image = (Bitmap)eventArgs.Frame.Clone();
             string qr_code = Utils.ScanQRCodeByBitMap((Bitmap)eventArgs.Frame.Clone());
-            if (qr_code != null)
+            if (qr_code != null && _devices.Count > 0)
             {
-
+                try
+                {
+                    int status = Utils.verifyQRCode(qr_code, _devices[indexDevice]._id);
+                    indexStatus = status;
+                }
+                catch
+                {
+                    indexStatus = 0;
+                }
             }
         }
 
         private void SimulinkDevice_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbDevices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            indexDevice = cbDevices.SelectedIndex;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            indexStatus = 0;
         }
     }
 }

@@ -17,6 +17,13 @@ namespace SPHS.AppWindow.parameters
         public static users USER_PRESENT = new users();
         public static companies COMPANY_PRESENT = new companies();
 
+        public static List<string> STATUS_ACCESS_VERIFY = new List<string>() 
+        { 
+            "NO ACCESS",
+            "NOT PERMISSION",
+            "NOT ROLE ACCESS",
+            "ACCESS SUCCESS"
+        };
         public static string ACCOUNT_DEFAULT = "admin";
         public static string PASSWORD_DEFAULT = "123456a@";
     }
@@ -46,7 +53,6 @@ namespace SPHS.AppWindow.parameters
         devices,
         cards
     }
-
     public enum LINK_SPECIALS
     {
         authentication, // authentication, not collections, using to login

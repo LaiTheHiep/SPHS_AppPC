@@ -33,7 +33,7 @@ namespace SPHS.AppWindow.models
     public class deviceAccess
     {
         public string deviceId { get; set; }
-        public DateTime dateTimeFrom { get; set; }
-        public DateTime dateTimeTo { get; set; }
+        public string dateTimeFrom { get; set; }
+        public string dateTimeTo { get; set; }
     }
 }
