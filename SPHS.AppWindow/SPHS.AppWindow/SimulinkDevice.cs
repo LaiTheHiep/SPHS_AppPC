@@ -26,6 +26,7 @@ namespace SPHS.AppWindow
         public SimulinkDevice()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
             getToken();
             getCompanies();
 

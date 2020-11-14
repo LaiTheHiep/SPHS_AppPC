@@ -390,7 +390,7 @@ namespace SPHS.AppWindow
                     {
                         try
                         {
-                            if(stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
+                            if (stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
                             {
                                 DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                                 DateTime now = start.AddMilliseconds(long.Parse(stuffQRCode["createdTime"].ToString())).ToLocalTime();
@@ -398,11 +398,21 @@ namespace SPHS.AppWindow
                                 var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
                                 string[] froms = deviceAccess.dateTimeFrom.Split('/');
                                 string[] tos = deviceAccess.dateTimeTo.Split('/');
-                                if(int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
+                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
                                     && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
                                     && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
                                 {
                                     resultVerify = 3;
+                                    Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+                                    {
+                                        author = _id,
+                                        userId = _id,
+                                        companyId = deviceId,
+                                        port = "event",
+                                        description = "event",
+                                        timeIn = stuffQRCode["createdTime"].ToString(),
+                                        timeOut = stuffQRCode["createdTime"].ToString()
+                                    });
                                 }
                                 else
                                 {
@@ -410,7 +420,7 @@ namespace SPHS.AppWindow
                                 }
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             return resultVerify;
                         }
