@@ -1,4 +1,5 @@
-﻿using SPHS.AppWindow.actions;
+﻿using AForge.Video.DirectShow;
+using SPHS.AppWindow.actions;
 using SPHS.AppWindow.models;
 using SPHS.AppWindow.parameters;
 using System;
@@ -17,11 +18,18 @@ namespace SPHS.AppWindow
     {
         private List<companies> _companies = new List<companies>();
         private List<devices> _devices = new List<devices>();
+        FilterInfoCollection filterInfoCollection;
+        VideoCaptureDevice videoCaptureDevice;
         public SimulinkDevice()
         {
             InitializeComponent();
             getToken();
             getCompanies();
+
+            // init load camera
+            filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            videoCaptureDevice = new VideoCaptureDevice();
+            SetupCameraCapture();
         }
 
         private void getToken()
@@ -37,7 +45,7 @@ namespace SPHS.AppWindow
         {
             if (!string.IsNullOrEmpty(Parameter_Special.USER_PRESENT.accessToken))
             {
-                
+
                 var companies = Utils.getAPI(COLLECTIONS.companies, null);
                 foreach (var company in companies)
                 {
@@ -53,7 +61,7 @@ namespace SPHS.AppWindow
         private void getDevices()
         {
             int index = cbCompanies.SelectedIndex;
-            if(index >= 0)
+            if (index >= 0)
             {
                 _devices = new List<devices>();
                 var devices = Utils.getAPI(COLLECTIONS.devices, $"companyId={_companies[index]._id}");
@@ -61,7 +69,7 @@ namespace SPHS.AppWindow
                 {
                     _devices.Add((devices)device);
                 }
-                if(_devices.Count > 0)
+                if (_devices.Count > 0)
                 {
                     cbDevices.DataSource = _devices;
                     cbDevices.DisplayMember = "name";
@@ -73,6 +81,28 @@ namespace SPHS.AppWindow
         private void cbCompanies_SelectedIndexChanged(object sender, EventArgs e)
         {
             getDevices();
+        }
+
+        private void SetupCameraCapture()
+        {
+            videoCaptureDevice = new VideoCaptureDevice(filterInfoCollection[0].MonikerString);
+            videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame; ;
+            videoCaptureDevice.Start();
+        }
+
+        private void VideoCaptureDevice_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            picCameraDevice.Image = (Bitmap)eventArgs.Frame.Clone();
+            string qr_code = Utils.ScanQRCodeByBitMap((Bitmap)eventArgs.Frame.Clone());
+            if (qr_code != null)
+            {
+
+            }
+        }
+
+        private void SimulinkDevice_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

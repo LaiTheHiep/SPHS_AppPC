@@ -129,6 +129,7 @@
             this.Controls.Add(this.picCameraDevice);
             this.Name = "SimulinkDevice";
             this.Text = "SimulinkDevice";
+            this.Load += new System.EventHandler(this.SimulinkDevice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCameraDevice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
