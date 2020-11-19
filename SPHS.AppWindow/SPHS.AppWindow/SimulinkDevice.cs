@@ -155,5 +155,26 @@ namespace SPHS.AppWindow
         {
             indexStatus = 0;
         }
+
+        private void txtCardId_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int status = Utils.verifyCard(txtCardId.Text, _devices[indexDevice]._id);
+                indexStatus = status;
+            }
+            catch
+            {
+                indexStatus = 0;
+            }
+        }
+
+        private void SimulinkDevice_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (videoCaptureDevice.IsRunning)
+            {
+                videoCaptureDevice.Stop();
+            }
+        }
     }
 }

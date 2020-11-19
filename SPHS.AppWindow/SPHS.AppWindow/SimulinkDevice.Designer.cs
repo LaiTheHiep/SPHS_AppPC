@@ -36,6 +36,8 @@
             this.cbCompanies = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lbStatusAction = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCardId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picCameraDevice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +62,7 @@
             // cbDevices
             // 
             this.cbDevices.FormattingEnabled = true;
-            this.cbDevices.Location = new System.Drawing.Point(181, 418);
+            this.cbDevices.Location = new System.Drawing.Point(181, 450);
             this.cbDevices.Name = "cbDevices";
             this.cbDevices.Size = new System.Drawing.Size(188, 21);
             this.cbDevices.TabIndex = 7;
@@ -70,7 +72,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 421);
+            this.label1.Location = new System.Drawing.Point(9, 453);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 15);
             this.label1.TabIndex = 8;
@@ -80,7 +82,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 384);
+            this.label2.Location = new System.Drawing.Point(9, 416);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(166, 15);
             this.label2.TabIndex = 10;
@@ -89,7 +91,7 @@
             // cbCompanies
             // 
             this.cbCompanies.FormattingEnabled = true;
-            this.cbCompanies.Location = new System.Drawing.Point(181, 381);
+            this.cbCompanies.Location = new System.Drawing.Point(181, 413);
             this.cbCompanies.Name = "cbCompanies";
             this.cbCompanies.Size = new System.Drawing.Size(188, 21);
             this.cbCompanies.TabIndex = 9;
@@ -99,7 +101,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 455);
+            this.label4.Location = new System.Drawing.Point(9, 487);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 15);
             this.label4.TabIndex = 11;
@@ -110,17 +112,37 @@
             // 
             this.lbStatusAction.AutoSize = true;
             this.lbStatusAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStatusAction.Location = new System.Drawing.Point(178, 455);
+            this.lbStatusAction.Location = new System.Drawing.Point(178, 487);
             this.lbStatusAction.Name = "lbStatusAction";
             this.lbStatusAction.Size = new System.Drawing.Size(71, 15);
             this.lbStatusAction.TabIndex = 12;
             this.lbStatusAction.Text = "NO ACTION";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 382);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 15);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Card Id simulink";
+            // 
+            // txtCardId
+            // 
+            this.txtCardId.Location = new System.Drawing.Point(181, 377);
+            this.txtCardId.Name = "txtCardId";
+            this.txtCardId.Size = new System.Drawing.Size(187, 20);
+            this.txtCardId.TabIndex = 14;
+            this.txtCardId.TextChanged += new System.EventHandler(this.txtCardId_TextChanged);
+            // 
             // SimulinkDevice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 490);
+            this.ClientSize = new System.Drawing.Size(380, 516);
+            this.Controls.Add(this.txtCardId);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lbStatusAction);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -131,6 +153,7 @@
             this.Controls.Add(this.picCameraDevice);
             this.Name = "SimulinkDevice";
             this.Text = "SimulinkDevice";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SimulinkDevice_FormClosed);
             this.Load += new System.EventHandler(this.SimulinkDevice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCameraDevice)).EndInit();
             this.ResumeLayout(false);
@@ -148,5 +171,7 @@
         private System.Windows.Forms.ComboBox cbCompanies;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbStatusAction;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCardId;
     }
 }

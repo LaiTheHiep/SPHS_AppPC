@@ -37,6 +37,7 @@ namespace SPHS.AppWindow
                     while (true)
                     {
                         txtQRCode.Text = SPHSqrCode;
+                        txtNumberPlate_in.Text = SPHSnumberPlateIn;
                     }
                 })
             { IsBackground = true }.Start();
@@ -70,7 +71,8 @@ namespace SPHS.AppWindow
 
         // variable static load
         private static string SPHSqrCode = "";
-        private static int SPHScameraSwitch = 0; 
+        private static int SPHScameraSwitch = 0;
+        private static string SPHSnumberPlateIn = "";
 
         #endregion
 
@@ -172,6 +174,14 @@ namespace SPHS.AppWindow
             Bitmap image = new Bitmap(img);
             //IF.pictureBox2.Image = image;
             fs.Close();
+
+            FindLicensePlate4(image, out Plate_Draw);
+        }
+
+        public void ProcessImage(Bitmap image)
+        {
+            PlateImagesList.Clear();
+            PlateTextList.Clear();
 
             FindLicensePlate4(image, out Plate_Draw);
         }
@@ -484,6 +494,185 @@ namespace SPHS.AppWindow
             }
         }
 
+        private void Reconize(bool picInorOut, Bitmap imageInput, out Image hinhbienso, out string bienso, out string bienso_text)
+        {
+            for (int i = 0; i < box.Length; i++)
+            {
+                this.Controls.Remove(box[i]);
+            }
+
+            hinhbienso = null;
+            bienso = "";
+            bienso_text = "";
+            ProcessImage(imageInput);
+            if (PlateImagesList.Count != 0)
+            {
+                Image<Bgr, byte> src = new Image<Bgr, byte>(PlateImagesList[0].ToBitmap());
+                Bitmap grayframe;
+                FindContours con = new FindContours();
+                Bitmap color;
+                int c = con.IdentifyContours(src.ToBitmap(), 50, false, out grayframe, out color, out listRect);  // find contour
+                if (picInorOut)
+                    picNumberPlate_in.Image = color;
+                else
+                    picNumberPlate_out.Image = color;
+                //IF.pictureBox1.Image = color;
+                hinhbienso = Plate_Draw;
+                //picNumberPlate_out.Image = grayframe;
+                //IF.pictureBox3.Image = grayframe;
+                Image<Gray, byte> dst = new Image<Gray, byte>(grayframe);
+                grayframe = dst.ToBitmap();
+                string zz = "";
+
+                // filter and sort number
+                List<Bitmap> bmp = new List<Bitmap>();
+                List<int> erode = new List<int>();
+                List<Rectangle> up = new List<Rectangle>();
+                List<Rectangle> dow = new List<Rectangle>();
+                int up_y = 0, dow_y = 0;
+                bool flag_up = false;
+
+                int di = 0;
+
+                if (listRect == null) return;
+
+                for (int i = 0; i < listRect.Count; i++)
+                {
+                    Bitmap ch = grayframe.Clone(listRect[i], grayframe.PixelFormat);
+                    int cou = 0;
+                    full_tesseract.Clear();
+                    full_tesseract.ClearAdaptiveClassifier();
+                    string temp = full_tesseract.Apply(ch);
+                    while (temp.Length > 3)
+                    {
+                        Image<Gray, byte> temp2 = new Image<Gray, byte>(ch);
+                        temp2 = temp2.Erode(2);
+                        ch = temp2.ToBitmap();
+                        full_tesseract.Clear();
+                        full_tesseract.ClearAdaptiveClassifier();
+                        temp = full_tesseract.Apply(ch);
+                        cou++;
+                        if (cou > 10)
+                        {
+                            listRect.RemoveAt(i);
+                            i--;
+                            di = 0;
+                            break;
+                        }
+                        di = cou;
+                    }
+                }
+
+                for (int i = 0; i < listRect.Count; i++)
+                {
+                    for (int j = i; j < listRect.Count; j++)
+                    {
+                        if (listRect[i].Y > listRect[j].Y + 100)
+                        {
+                            flag_up = true;
+                            up_y = listRect[j].Y;
+                            dow_y = listRect[i].Y;
+                            break;
+                        }
+                        else if (listRect[j].Y > listRect[i].Y + 100)
+                        {
+                            flag_up = true;
+                            up_y = listRect[i].Y;
+                            dow_y = listRect[j].Y;
+                            break;
+                        }
+                        if (flag_up == true) break;
+                    }
+                }
+
+                for (int i = 0; i < listRect.Count; i++)
+                {
+                    if (listRect[i].Y < up_y + 50 && listRect[i].Y > up_y - 50)
+                    {
+                        up.Add(listRect[i]);
+                    }
+                    else if (listRect[i].Y < dow_y + 50 && listRect[i].Y > dow_y - 50)
+                    {
+                        dow.Add(listRect[i]);
+                    }
+                }
+
+                if (flag_up == false) dow = listRect;
+
+                for (int i = 0; i < up.Count; i++)
+                {
+                    for (int j = i; j < up.Count; j++)
+                    {
+                        if (up[i].X > up[j].X)
+                        {
+                            Rectangle w = up[i];
+                            up[i] = up[j];
+                            up[j] = w;
+                        }
+                    }
+                }
+                for (int i = 0; i < dow.Count; i++)
+                {
+                    for (int j = i; j < dow.Count; j++)
+                    {
+                        if (dow[i].X > dow[j].X)
+                        {
+                            Rectangle w = dow[i];
+                            dow[i] = dow[j];
+                            dow[j] = w;
+                        }
+                    }
+                }
+
+                int x = 12;
+                int c_x = 0;
+
+                for (int i = 0; i < up.Count; i++)
+                {
+                    Bitmap ch = grayframe.Clone(up[i], grayframe.PixelFormat);
+                    Bitmap o = ch;
+                    string temp;
+                    if (i < 2)
+                    {
+                        temp = Ocr(ch, false, true); // nhan dien so
+                    }
+                    else
+                    {
+                        temp = Ocr(ch, false, false);// nhan dien chu
+                    }
+
+                    zz += temp;
+                    box[i].Location = new Point(x + i * 50, 290);
+                    box[i].Size = new Size(50, 100);
+                    box[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                    box[i].Image = ch;
+                    box[i].Update();
+                    //IF.Controls.Add(box[i]);
+                    c_x++;
+                }
+                zz += "\r\n";
+                for (int i = 0; i < dow.Count; i++)
+                {
+                    Bitmap ch = grayframe.Clone(dow[i], grayframe.PixelFormat);
+                    //ch = con.Erodetion(ch);
+                    string temp = Ocr(ch, false, true); // nhan dien so
+                    zz += temp;
+                    box[i + c_x].Location = new Point(x + i * 50, 390);
+                    box[i + c_x].Size = new Size(50, 100);
+                    box[i + c_x].SizeMode = PictureBoxSizeMode.StretchImage;
+                    box[i + c_x].Image = ch;
+                    box[i + c_x].Update();
+                    //IF.Controls.Add(box[i + c_x]);
+                }
+                bienso = zz.Replace("\n", "");
+                bienso = bienso.Replace("\r", "");
+                //IF.textBox6.Text = zz;
+                bienso_text = zz;
+
+            }
+        }
+
+
         private void MainApp_Load(object sender, EventArgs e)
         {
             //capture = new Emgu.CV.Capture();
@@ -537,32 +726,39 @@ namespace SPHS.AppWindow
 
         private void btnLoadImageIn_Click(object sender, EventArgs e)
         {
-            //while (true) ;
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
-            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            {
-                return;
-            }
-            string startupPath = dlg.FileName;
+            //OpenFileDialog dlg = new OpenFileDialog();
+            //dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            //dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            //if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            //{
+            //    return;
+            //}
+            //string startupPath = dlg.FileName;
+            SetupCameraCapture((int)CAMERASWITCH.CameraVehicleIn, 0);
+            //Image temp1;
+            //string temp2, temp3;
+            //while (true)
+            //{
+            //    if (pic_vehicle_in.Image == null) continue;
 
-            Image temp1;
-            string temp2, temp3;
-            Reconize(true, startupPath, out temp1, out temp2, out temp3);
-            pic_vehicle_in.Image = temp1;
-            if (temp3 == "")
-                txtNumberPlate_in.Text = "Cannot recognize license plate !";
-            else
-                txtNumberPlate_in.Text = temp3;
+            //    Reconize(true, (Bitmap)pic_vehicle_in.Image, out temp1, out temp2, out temp3);
+            //    pic_vehicle_in.Image = temp1;
+            //    if (temp3 == "")
+            //        continue;
+            //    //txtNumberPlate_in.Text = "Cannot recognize license plate !";
+            //    else
+            //        txtNumberPlate_in.Text = temp3;
 
-            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
-            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
-            if (_users.Count == 1)
-            {
-                users _user = (users)_users[0];
-                setInfomation(_user, null, true);
-            }
+            //    string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
+            //    List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            //    if (_users.Count == 1)
+            //    {
+            //        users _user = (users)_users[0];
+            //        setInfomation(_user, null, true);
+            //    }
+            //    //if (!string.IsNullOrEmpty(Utils.convertNumberPlate(temp3)))
+            //    //    break;
+            //}
         }
 
         private void btnLoadImageOut_Click(object sender, EventArgs e)
@@ -823,7 +1019,31 @@ namespace SPHS.AppWindow
                     //video.Stop();
                 }
             }
+            if (SPHScameraSwitch == (int)CAMERASWITCH.CameraVehicleIn)
+            {
+                try
+                {
 
+                    pic_vehicle_in.Image = (Bitmap)eventArgs.Frame.Clone();
+                    Image temp1;
+                    string temp2, temp3;
+                    Reconize(true, (Bitmap)pic_vehicle_in.Image, out temp1, out temp2, out temp3);
+                    pic_vehicle_in.Image = temp1;
+
+                    string _numberPlate = Utils.convertNumberPlate(temp3);
+                    //List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+                    //if (_users.Count == 1)
+                    //{
+                    //    users _user = (users)_users[0];
+                    //    setInfomation(_user, null, true);
+                    //}
+                    if (!string.IsNullOrEmpty(_numberPlate))
+                    {
+                        SPHSnumberPlateIn = temp3;
+                    }
+                }
+                catch { }
+            }
         }
 
         private void MainApp_FormClosing(object sender, FormClosingEventArgs e)

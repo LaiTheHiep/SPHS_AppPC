@@ -430,5 +430,66 @@ namespace SPHS.AppWindow
 
             return resultVerify;
         }
+
+        public static int verifyCard(string cardId, string deviceId)
+        {
+            int resultVerify = 1;
+
+            string url = Utils.createLinkAPI(COLLECTIONS.users, $"cardIds={cardId}");
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+                var response = httpClient.GetAsync(url);
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        try
+                        {
+                            if (stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
+                            {
+                                DateTime now = DateTime.Now;
+                                string dataDeviceAccess = stuff["data"][0]["devicesAccess"][deviceId][(int)now.DayOfWeek].ToString();
+                                var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
+                                string[] froms = deviceAccess.dateTimeFrom.Split('/');
+                                string[] tos = deviceAccess.dateTimeTo.Split('/');
+                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
+                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
+                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                {
+                                    resultVerify = 3;
+                                    Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+                                    {
+                                        author = stuff["data"][0]["_id"].ToString(),
+                                        userId = stuff["data"][0]["_id"].ToString(),
+                                        companyId = deviceId,
+                                        port = "event",
+                                        description = "event",
+                                        timeIn = now.ToString(),
+                                        timeOut = now.ToString()
+                                    });
+                                }
+                                else
+                                {
+                                    resultVerify = 2;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return resultVerify;
+                        }
+                    }
+                }
+            }
+
+            return resultVerify;
+        }
     }
 }
