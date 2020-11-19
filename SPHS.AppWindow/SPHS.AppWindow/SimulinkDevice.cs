@@ -40,25 +40,33 @@ namespace SPHS.AppWindow
                 {
                     while (true)
                     {
-                        switch (indexStatus)
+                        try
                         {
-                            case 1:
-                                lbStatusAction.ForeColor = Color.Red;
-                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[1];
-                                break;
-                            case 2:
-                                lbStatusAction.ForeColor = Color.Yellow;
-                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[2];
-                                break;
-                            case 3:
-                                lbStatusAction.ForeColor = Color.Green;
-                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[3];
-                                break;
-                            default:
-                                lbStatusAction.ForeColor = Color.Black;
-                                lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[0];
-                                break;
+                            switch (indexStatus)
+                            {
+                                case 1:
+                                    lbStatusAction.ForeColor = Color.Red;
+                                    lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[1];
+                                    break;
+                                case 2:
+                                    lbStatusAction.ForeColor = Color.Yellow;
+                                    lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[2];
+                                    break;
+                                case 3:
+                                    lbStatusAction.ForeColor = Color.Green;
+                                    lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[3];
+                                    break;
+                                default:
+                                    lbStatusAction.ForeColor = Color.Black;
+                                    lbStatusAction.Text = Parameter_Special.STATUS_ACCESS_VERIFY[0];
+                                    break;
+                            }
                         }
+                        catch (Exception)
+                        {
+                            // ignore
+                        }
+
                     }
                 })
             { IsBackground = true }.Start();

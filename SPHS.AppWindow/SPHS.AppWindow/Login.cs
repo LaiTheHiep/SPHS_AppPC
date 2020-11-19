@@ -24,9 +24,18 @@ namespace SPHS.AppWindow
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            var confim = MessageBox.Show("Do you want exit?", "Confirm", MessageBoxButtons.YesNo);
-            if (confim == DialogResult.Yes)
-                this.Close();
+            //var confim = MessageBox.Show("Do you want exit?", "Confirm", MessageBoxButtons.YesNo);
+            //if (confim == DialogResult.Yes)
+            //    this.Close();
+            SimulinkDevice device = new SimulinkDevice();
+            device.FormClosing += Device_FormClosing;
+            device.Show();
+            this.Hide();
+        }
+
+        private void Device_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Show();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
