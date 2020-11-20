@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SPHS.AppWindow.actions;
 using SPHS.AppWindow.models;
 using SPHS.AppWindow.parameters;
 using System;
@@ -364,6 +365,10 @@ namespace SPHS.AppWindow
             {
                 Directory.CreateDirectory(Parameter_Special.FOLDER_IMAGE);
             }
+            if (!Directory.Exists(Parameter_Special.FOLDER_DATA))
+            {
+                Directory.CreateDirectory(Parameter_Special.FOLDER_DATA);
+            }
         }
 
         public static int verifyQRCode(string qrCode, string deviceId)
@@ -490,6 +495,135 @@ namespace SPHS.AppWindow
             }
 
             return resultVerify;
+        }
+
+        public static string get(object _collection, string _query)
+        {
+            string url = Utils.createLinkAPI(_collection, _query);
+            List<object> results = new List<object>();
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+                var response = httpClient.GetAsync(url);
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        return data;
+                    }
+                }
+            }
+            return null;
+        }
+
+
+        public static void AsyncDataDevice()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Parameter_Special.USER_PRESENT.accessToken))
+                {
+                    Parameter_Special.USER_PRESENT = UserAPI.login(Parameter_Special.ACCOUNT_DEFAULT, Parameter_Special.PASSWORD_DEFAULT);
+                }
+                // get all device
+                var devices = getAPI(COLLECTIONS.devices, "");
+                foreach (devices device in devices)
+                {
+                    // data device
+                    if (!File.Exists($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json"))
+                    {
+                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            using (StreamWriter sw = new StreamWriter(fileStream))
+                            {
+                                sw.WriteLine(ClassToJsonString<devices>(device));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            byte[] bytes = new byte[fileStream.Length];
+                            int numBytesToRead = (int)fileStream.Length;
+                            int numBytesRead = 0;
+                            while (numBytesToRead > 0)
+                            {
+                                int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
+                                if (n == 0)
+                                    break;
+
+                                numBytesRead += n;
+                                numBytesToRead -= n;
+                            }
+
+                            string textJson = Encoding.UTF8.GetString(bytes);
+                            textJson = textJson.Trim();
+                            if (textJson != ClassToJsonString<devices>(device))
+                            {
+                                using (StreamWriter sw = new StreamWriter(fileStream))
+                                {
+                                    sw.WriteLine(ClassToJsonString<devices>(device));
+                                }
+                            }
+                        }
+                    }
+
+                    // data user by company
+                    string userCompany = get(COLLECTIONS.users, $"companyId={device.companyId}");
+                    dataResponse responseUser = JsonStringToClass<dataResponse>(userCompany);
+                    if (!string.IsNullOrEmpty(responseUser.errorMessage))
+                        continue;
+                    if (!File.Exists($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json"))
+                    {
+                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            using (StreamWriter sw = new StreamWriter(fileStream))
+                            {
+                                sw.WriteLine(userCompany);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            byte[] bytes = new byte[fileStream.Length];
+                            int numBytesToRead = (int)fileStream.Length;
+                            int numBytesRead = 0;
+                            while (numBytesToRead > 0)
+                            {
+                                int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
+                                if (n == 0)
+                                    break;
+
+                                numBytesRead += n;
+                                numBytesToRead -= n;
+                            }
+
+                            string textJson = Encoding.UTF8.GetString(bytes);
+                            textJson = textJson.Trim();
+                            if (textJson != userCompany)
+                            {
+                                using (StreamWriter sw = new StreamWriter(fileStream))
+                                {
+                                    sw.WriteLine(userCompany);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Parameter_Special.USER_PRESENT = UserAPI.login(Parameter_Special.ACCOUNT_DEFAULT, Parameter_Special.PASSWORD_DEFAULT);
+            }
         }
     }
 }
