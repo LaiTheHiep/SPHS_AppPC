@@ -16,11 +16,22 @@ namespace SPHS.AppWindow
         [STAThread]
         static void Main()
         {
+            // async data
             new Thread(() =>
             {
                 while (true)
                 {
                     Utils.AsyncDataDevice();
+                    Thread.Sleep(Parameter_Special.TIME_ASYNC_DEVICE);
+                }
+            })
+            { IsBackground = true }.Start();
+            // send event log
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    Utils.SendEventLog();
                     Thread.Sleep(Parameter_Special.TIME_ASYNC_DEVICE);
                 }
             })

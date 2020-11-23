@@ -626,6 +626,23 @@ namespace SPHS.AppWindow
             }
         }
 
+        public static void SendEventLog()
+        {
+            var listTemp = new List<parkingTickets>();
+            if(Parameter_Special.LIST_QUEUE_EVENT.Count > 0)
+            {
+                foreach (var item in Parameter_Special.LIST_QUEUE_EVENT)
+                {
+                    var _post = ParkingTicketAPI.post(item);
+                    if (string.IsNullOrEmpty(_post._id))
+                    {
+                        listTemp.Add(item);
+                    }
+                }
+            }
+            Parameter_Special.LIST_QUEUE_EVENT = listTemp;
+        }
+
         // string json
         // format: {total: number, data: []}
         public static string readDataInFile(string pathFile)
@@ -690,16 +707,16 @@ namespace SPHS.AppWindow
                                     && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
                                 {
                                     resultVerify = 3;
-                                    //Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
-                                    //{
-                                    //    author = _id,
-                                    //    userId = _id,
-                                    //    companyId = deviceId,
-                                    //    port = "event",
-                                    //    description = "event",
-                                    //    timeIn = stuffQRCode["createdTime"].ToString(),
-                                    //    timeOut = stuffQRCode["createdTime"].ToString()
-                                    //});
+                                    Parameter_Special.LIST_QUEUE_EVENT.Add(new parkingTickets()
+                                    {
+                                        author = _id,
+                                        userId = _id,
+                                        companyId = deviceId,
+                                        port = "event",
+                                        description = "event",
+                                        timeIn = stuffQRCode["createdTime"].ToString(),
+                                        timeOut = stuffQRCode["createdTime"].ToString()
+                                    });
                                 }
                                 else
                                 {
@@ -742,16 +759,16 @@ namespace SPHS.AppWindow
                                 && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
                             {
                                 resultVerify = 3;
-                                //Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
-                                //{
-                                //    author = stuff["data"][0]["_id"].ToString(),
-                                //    userId = stuff["data"][0]["_id"].ToString(),
-                                //    companyId = deviceId,
-                                //    port = "event",
-                                //    description = "event",
-                                //    timeIn = now.ToString(),
-                                //    timeOut = now.ToString()
-                                //});
+                                Parameter_Special.LIST_QUEUE_EVENT.Add(new parkingTickets()
+                                {
+                                    author = stuff["data"][0]["_id"].ToString(),
+                                    userId = stuff["data"][0]["_id"].ToString(),
+                                    companyId = deviceId,
+                                    port = "event",
+                                    description = "event",
+                                    timeIn = now.ToString(),
+                                    timeOut = now.ToString()
+                                });
                             }
                             else
                             {
