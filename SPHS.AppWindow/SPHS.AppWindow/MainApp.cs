@@ -741,7 +741,7 @@ namespace SPHS.AppWindow
             string temp2, temp3;
             Reconize(true, startupPath, out temp1, out temp2, out temp3);
             pic_vehicle_in.Image = temp1;
-            if (temp3 == "")
+            if (string.IsNullOrEmpty(temp3))
                 txtNumberPlate_in.Text = "Cannot recognize license plate !";
             else
                 txtNumberPlate_in.Text = temp3;
@@ -752,6 +752,7 @@ namespace SPHS.AppWindow
             {
                 users _user = (users)_users[0];
                 setInfomation(_user, null, true);
+                txtNumberPlate_in.Text = temp3;
             }
         }
 
@@ -802,13 +803,26 @@ namespace SPHS.AppWindow
             if (txtQRCode.Text.Contains(customerGo.companyId) && txtQRCode.Text.Contains(customerGo.account) && txtQRCode.Text.Contains(customerGo.numberPlate))
                 verify = true;
 
+            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
             if (!verify)
             {
-                MessageBox.Show("Verify error");
+                if (_urlImage != null)
+                {
+                    var _post = ParkingTicketAPI.post(new parkingTickets()
+                    {
+                        port = cbPortsCompany.Text,
+                        companyId = Parameter_Special.USER_PRESENT.companyId,
+                        timeIn = DateTime.Now.ToString(),
+                        author = Parameter_Special.USER_PRESENT._id,
+                        userId = customerGo._id,
+                        imageIn = _urlImage,
+                        description = txtCardIdScan.Text
+                    });
+                    clearInformation(true);
+                }
                 return;
             }
 
-            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
             if (_urlImage != null)
             {
                 var _post = ParkingTicketAPI.post(new parkingTickets()
@@ -826,6 +840,11 @@ namespace SPHS.AppWindow
 
         private void btnPass_Click(object sender, EventArgs e)
         {
+            if(!string.IsNullOrEmpty(parkingTicketGo.description) && parkingTicketGo.description == txtCardIdScan.Text)
+            {
+                MessageBox.Show("OK");
+                return;
+            }
             if (lbNotEnoughOut.Visible)
             {
                 MessageBox.Show("Balance not enough to pay ticket");

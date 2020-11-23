@@ -46,7 +46,6 @@
             this.btnSaveIn = new System.Windows.Forms.Button();
             this.btnLoadImageIn = new System.Windows.Forms.Button();
             this.picNumberPlate_in = new System.Windows.Forms.PictureBox();
-            this.txtNumberPlate_in = new System.Windows.Forms.TextBox();
             this.pic_vehicle_in = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -163,6 +162,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCardIdScan = new System.Windows.Forms.TextBox();
+            this.txtNumberPlate_in = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -216,11 +216,11 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.txtNumberPlate_in);
             this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.btnSaveIn);
             this.groupBox1.Controls.Add(this.btnLoadImageIn);
             this.groupBox1.Controls.Add(this.picNumberPlate_in);
-            this.groupBox1.Controls.Add(this.txtNumberPlate_in);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 301);
             this.groupBox1.Name = "groupBox1";
@@ -383,14 +383,6 @@
             this.picNumberPlate_in.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picNumberPlate_in.TabIndex = 1;
             this.picNumberPlate_in.TabStop = false;
-            // 
-            // txtNumberPlate_in
-            // 
-            this.txtNumberPlate_in.Location = new System.Drawing.Point(6, 19);
-            this.txtNumberPlate_in.Multiline = true;
-            this.txtNumberPlate_in.Name = "txtNumberPlate_in";
-            this.txtNumberPlate_in.Size = new System.Drawing.Size(86, 84);
-            this.txtNumberPlate_in.TabIndex = 0;
             // 
             // pic_vehicle_in
             // 
@@ -1703,6 +1695,14 @@
             this.txtCardIdScan.Size = new System.Drawing.Size(260, 20);
             this.txtCardIdScan.TabIndex = 5;
             // 
+            // txtNumberPlate_in
+            // 
+            this.txtNumberPlate_in.Location = new System.Drawing.Point(0, 19);
+            this.txtNumberPlate_in.Multiline = true;
+            this.txtNumberPlate_in.Name = "txtNumberPlate_in";
+            this.txtNumberPlate_in.Size = new System.Drawing.Size(97, 84);
+            this.txtNumberPlate_in.TabIndex = 5;
+            // 
             // MainApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1766,7 +1766,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox picNumberPlate_in;
-        private System.Windows.Forms.TextBox txtNumberPlate_in;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox picNumberPlate_out;
         private System.Windows.Forms.TextBox txtNumberPlate_out;
@@ -1894,6 +1893,7 @@
         private System.Windows.Forms.TextBox txtQRCode;
         private System.Windows.Forms.Button btnPassQR;
         private System.Windows.Forms.TextBox txtCardIdScan;
+        private System.Windows.Forms.TextBox txtNumberPlate_in;
     }
 }
 
