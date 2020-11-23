@@ -625,5 +625,150 @@ namespace SPHS.AppWindow
                 Parameter_Special.USER_PRESENT = UserAPI.login(Parameter_Special.ACCOUNT_DEFAULT, Parameter_Special.PASSWORD_DEFAULT);
             }
         }
+
+        // string json
+        // format: {total: number, data: []}
+        public static string readDataInFile(string pathFile)
+        {
+            if (pathFile.IndexOf(Parameter_Special.FOLDER_DATA) < 0)
+                pathFile = $"{Parameter_Special.FOLDER_DATA}\\{pathFile}";
+            if (File.Exists(pathFile))
+            {
+                using (var fileStream = new FileStream(pathFile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    byte[] bytes = new byte[fileStream.Length];
+                    int numBytesToRead = (int)fileStream.Length;
+                    int numBytesRead = 0;
+                    while (numBytesToRead > 0)
+                    {
+                        int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
+                        if (n == 0)
+                            break;
+
+                        numBytesRead += n;
+                        numBytesToRead -= n;
+                    }
+
+                    string textJson = Encoding.UTF8.GetString(bytes);
+                    return textJson;
+                }
+            }
+
+            return null;
+        }
+
+        #region Excute local
+
+        public static int verfyQRCodeInLocal(string qrCode, devices device)
+        {
+            int resultVerify = 1;
+            JObject stuffQRCode = JObject.Parse(qrCode);
+            if (stuffQRCode["_id"] == null) return resultVerify;
+            var deviceId = device._id;
+
+            string _id = stuffQRCode["_id"].ToString();
+            using (var httpClient = new HttpClient())
+            {
+                string data = readDataInFile($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json");
+                if (!string.IsNullOrEmpty(data))
+                {
+                    JObject stuff = JObject.Parse(data);
+                    if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                    {
+                        try
+                        {
+                            if (stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
+                            {
+                                DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                                DateTime now = start.AddMilliseconds(long.Parse(stuffQRCode["createdTime"].ToString())).ToLocalTime();
+                                string dataDeviceAccess = stuff["data"][0]["devicesAccess"][deviceId][(int)now.DayOfWeek].ToString();
+                                var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
+                                string[] froms = deviceAccess.dateTimeFrom.Split('/');
+                                string[] tos = deviceAccess.dateTimeTo.Split('/');
+                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
+                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
+                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                {
+                                    resultVerify = 3;
+                                    //Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+                                    //{
+                                    //    author = _id,
+                                    //    userId = _id,
+                                    //    companyId = deviceId,
+                                    //    port = "event",
+                                    //    description = "event",
+                                    //    timeIn = stuffQRCode["createdTime"].ToString(),
+                                    //    timeOut = stuffQRCode["createdTime"].ToString()
+                                    //});
+                                }
+                                else
+                                {
+                                    resultVerify = 2;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return resultVerify;
+                        }
+                    }
+                }
+            }
+
+            return resultVerify;
+        }
+
+        public static int verifyCardInLocal(string cardId, devices device)
+        {
+            int resultVerify = 1;
+            var deviceId = device._id;
+            var data = readDataInFile($"user.{device.companyId}.json");
+            if (!string.IsNullOrEmpty(data) && data.IndexOf($"\"{cardId}\"") > 0)
+            {
+                JObject stuff = JObject.Parse(data);
+                if (stuff[DATARESPONSE.errorMessage.ToString()] == null)
+                {
+                    try
+                    {
+                        if (stuff["data"][0]["devicesAccess"] != null && stuff["data"][0]["devicesAccess"][deviceId] != null)
+                        {
+                            DateTime now = DateTime.Now;
+                            string dataDeviceAccess = stuff["data"][0]["devicesAccess"][deviceId][(int)now.DayOfWeek].ToString();
+                            var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
+                            string[] froms = deviceAccess.dateTimeFrom.Split('/');
+                            string[] tos = deviceAccess.dateTimeTo.Split('/');
+                            if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
+                                && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
+                                && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                            {
+                                resultVerify = 3;
+                                //Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+                                //{
+                                //    author = stuff["data"][0]["_id"].ToString(),
+                                //    userId = stuff["data"][0]["_id"].ToString(),
+                                //    companyId = deviceId,
+                                //    port = "event",
+                                //    description = "event",
+                                //    timeIn = now.ToString(),
+                                //    timeOut = now.ToString()
+                                //});
+                            }
+                            else
+                            {
+                                resultVerify = 2;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return resultVerify;
+                    }
+                }
+            }
+
+            return resultVerify;
+        }
+
+        #endregion
     }
 }
