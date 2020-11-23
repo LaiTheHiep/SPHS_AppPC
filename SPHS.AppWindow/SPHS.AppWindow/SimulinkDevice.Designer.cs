@@ -45,7 +45,7 @@
             // 
             this.picCameraDevice.Location = new System.Drawing.Point(12, 57);
             this.picCameraDevice.Name = "picCameraDevice";
-            this.picCameraDevice.Size = new System.Drawing.Size(357, 307);
+            this.picCameraDevice.Size = new System.Drawing.Size(625, 307);
             this.picCameraDevice.TabIndex = 0;
             this.picCameraDevice.TabStop = false;
             // 
@@ -53,7 +53,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(41, 18);
+            this.label3.Location = new System.Drawing.Point(177, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(298, 24);
             this.label3.TabIndex = 6;
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 516);
+            this.ClientSize = new System.Drawing.Size(649, 516);
             this.Controls.Add(this.txtCardId);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lbStatusAction);

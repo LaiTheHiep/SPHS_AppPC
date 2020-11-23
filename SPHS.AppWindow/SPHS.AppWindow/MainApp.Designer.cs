@@ -162,6 +162,7 @@
             this.cbPortsCompany = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtCardIdScan = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -1598,6 +1599,7 @@
             // 
             // tabPageQRScan
             // 
+            this.tabPageQRScan.Controls.Add(this.txtCardIdScan);
             this.tabPageQRScan.Controls.Add(this.btnPassQR);
             this.tabPageQRScan.Controls.Add(this.txtQRCode);
             this.tabPageQRScan.Controls.Add(this.btnImageQR);
@@ -1693,6 +1695,13 @@
             this.label3.Size = new System.Drawing.Size(343, 24);
             this.label3.TabIndex = 5;
             this.label3.Text = "SMART PARKING HOUSE SYSTEM";
+            // 
+            // txtCardIdScan
+            // 
+            this.txtCardIdScan.Location = new System.Drawing.Point(17, 445);
+            this.txtCardIdScan.Name = "txtCardIdScan";
+            this.txtCardIdScan.Size = new System.Drawing.Size(260, 20);
+            this.txtCardIdScan.TabIndex = 5;
             // 
             // MainApp
             // 
@@ -1884,6 +1893,7 @@
         private System.Windows.Forms.PictureBox picQRCode;
         private System.Windows.Forms.TextBox txtQRCode;
         private System.Windows.Forms.Button btnPassQR;
+        private System.Windows.Forms.TextBox txtCardIdScan;
     }
 }
 

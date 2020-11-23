@@ -726,39 +726,33 @@ namespace SPHS.AppWindow
 
         private void btnLoadImageIn_Click(object sender, EventArgs e)
         {
-            //OpenFileDialog dlg = new OpenFileDialog();
-            //dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
-            //dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
-            //if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-            //{
-            //    return;
-            //}
-            //string startupPath = dlg.FileName;
-            SetupCameraCapture((int)CAMERASWITCH.CameraVehicleIn, 0);
-            //Image temp1;
-            //string temp2, temp3;
-            //while (true)
-            //{
-            //    if (pic_vehicle_in.Image == null) continue;
+            // SetupCameraCapture((int)CAMERASWITCH.CameraVehicleIn, 0);
 
-            //    Reconize(true, (Bitmap)pic_vehicle_in.Image, out temp1, out temp2, out temp3);
-            //    pic_vehicle_in.Image = temp1;
-            //    if (temp3 == "")
-            //        continue;
-            //    //txtNumberPlate_in.Text = "Cannot recognize license plate !";
-            //    else
-            //        txtNumberPlate_in.Text = temp3;
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Image (*.bmp; *.jpg; *.jpeg; *.png) |*.bmp; *.jpg; *.jpeg; *.png|All files (*.*)|*.*||";
+            dlg.InitialDirectory = Application.StartupPath + "\\ImageTest";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            string startupPath = dlg.FileName;
 
-            //    string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
-            //    List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
-            //    if (_users.Count == 1)
-            //    {
-            //        users _user = (users)_users[0];
-            //        setInfomation(_user, null, true);
-            //    }
-            //    //if (!string.IsNullOrEmpty(Utils.convertNumberPlate(temp3)))
-            //    //    break;
-            //}
+            Image temp1;
+            string temp2, temp3;
+            Reconize(true, startupPath, out temp1, out temp2, out temp3);
+            pic_vehicle_in.Image = temp1;
+            if (temp3 == "")
+                txtNumberPlate_in.Text = "Cannot recognize license plate !";
+            else
+                txtNumberPlate_in.Text = temp3;
+
+            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
+            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            if (_users.Count == 1)
+            {
+                users _user = (users)_users[0];
+                setInfomation(_user, null, true);
+            }
         }
 
         private void btnLoadImageOut_Click(object sender, EventArgs e)
@@ -802,6 +796,18 @@ namespace SPHS.AppWindow
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
+            bool verify = false;
+            if (customerGo.cardIds.Contains(txtCardIdScan.Text))
+                verify = true;
+            if (txtQRCode.Text.Contains(customerGo.companyId) && txtQRCode.Text.Contains(customerGo.account) && txtQRCode.Text.Contains(customerGo.numberPlate))
+                verify = true;
+
+            if (!verify)
+            {
+                MessageBox.Show("Verify error");
+                return;
+            }
+
             string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
             if (_urlImage != null)
             {
