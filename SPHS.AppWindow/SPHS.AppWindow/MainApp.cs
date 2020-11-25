@@ -870,6 +870,7 @@ namespace SPHS.AppWindow
                     description = txtDescriptionOut.Text,
                     imageOut = _urlImage1
                 });
+                clearInformation(false);
                 return;
             }
             else
