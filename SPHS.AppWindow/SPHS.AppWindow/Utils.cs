@@ -44,6 +44,8 @@ namespace SPHS.AppWindow
         public static int getMoneyByDate(int _time, object _type)
         {
             int _m = (int)(_time / (60 * 60 * 24)) + 1;
+            if (_type == null)
+                return _m;
             if (_type.ToString() == VEHICLETYPES.car.ToString())
                 return _m * 50000;
             else
@@ -629,7 +631,7 @@ namespace SPHS.AppWindow
         public static void SendEventLog()
         {
             var listTemp = new List<parkingTickets>();
-            if(Parameter_Special.LIST_QUEUE_EVENT.Count > 0)
+            if (Parameter_Special.LIST_QUEUE_EVENT.Count > 0)
             {
                 foreach (var item in Parameter_Special.LIST_QUEUE_EVENT)
                 {

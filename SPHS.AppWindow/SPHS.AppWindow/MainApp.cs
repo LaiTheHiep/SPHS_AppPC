@@ -37,7 +37,7 @@ namespace SPHS.AppWindow
                     while (true)
                     {
                         txtQRCode.Text = SPHSqrCode;
-                        txtNumberPlate_in.Text = SPHSnumberPlateIn;
+                        //txtNumberPlate_in.Text = SPHSnumberPlateIn;
                     }
                 })
             { IsBackground = true }.Start();
@@ -792,20 +792,39 @@ namespace SPHS.AppWindow
                     }
                 }
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(txtCardIdScan.Text))
+                {
+                    List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={txtCardIdScan.Text}&" + @"$sort={timeIn: -1}");
+                    if (_parkingTickets.Count > 0)
+                    {
+                        parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+                        if (_parkingTicket.timeOut == null)
+                        {
+                            setInfomation(new users(), _parkingTicket, false);
+                            return;
+                        }
+                    }
+                }
+            }
             MessageBox.Show("Something error!");
         }
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
             bool verify = false;
-            if (customerGo.cardIds.Contains(txtCardIdScan.Text))
+            if (string.IsNullOrEmpty(customerGo._id))
+                verify = false;
+            else if (customerGo.cardIds != null && customerGo.cardIds.Contains(txtCardIdScan.Text))
                 verify = true;
-            if (txtQRCode.Text.Contains(customerGo.companyId) && txtQRCode.Text.Contains(customerGo.account) && txtQRCode.Text.Contains(customerGo.numberPlate))
+            else if (txtQRCode.Text.Contains(customerGo.companyId) && txtQRCode.Text.Contains(customerGo.account) && txtQRCode.Text.Contains(customerGo.numberPlate))
                 verify = true;
 
             string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
             if (!verify)
             {
+                if (string.IsNullOrEmpty(txtCardIdScan.Text)) return;
                 if (_urlImage != null)
                 {
                     var _post = ParkingTicketAPI.post(new parkingTickets()
@@ -814,7 +833,7 @@ namespace SPHS.AppWindow
                         companyId = Parameter_Special.USER_PRESENT.companyId,
                         timeIn = DateTime.Now.ToString(),
                         author = Parameter_Special.USER_PRESENT._id,
-                        userId = customerGo._id,
+                        userId = txtCardIdScan.Text,
                         imageIn = _urlImage,
                         description = txtCardIdScan.Text
                     });
@@ -840,15 +859,26 @@ namespace SPHS.AppWindow
 
         private void btnPass_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(parkingTicketGo.description) && parkingTicketGo.description == txtCardIdScan.Text)
+            if (!string.IsNullOrEmpty(parkingTicketGo.description) && parkingTicketGo.description == txtCardIdScan.Text)
             {
                 MessageBox.Show("OK");
+                string _urlImage1 = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_out.Image), false);
+                var _put1 = Utils.putAPI(COLLECTIONS.parkingtickets, new parkingTickets()
+                {
+                    _id = parkingTicketGo._id,
+                    timeOut = DateTime.Now.ToString(),
+                    description = txtDescriptionOut.Text,
+                    imageOut = _urlImage1
+                });
                 return;
             }
-            if (lbNotEnoughOut.Visible)
+            else
             {
-                MessageBox.Show("Balance not enough to pay ticket");
-                return;
+                if (lbNotEnoughOut.Visible)
+                {
+                    MessageBox.Show("Balance not enough to pay ticket");
+                    return;
+                }
             }
             string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_out.Image), false);
             if (_urlImage == null)
