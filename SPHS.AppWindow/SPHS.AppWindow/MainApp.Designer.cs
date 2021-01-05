@@ -32,6 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtNumberPlate_in = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lbRoleIn = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -153,6 +154,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.tabPageQRScan = new System.Windows.Forms.TabPage();
+            this.txtCardIdScan = new System.Windows.Forms.TextBox();
             this.btnPassQR = new System.Windows.Forms.Button();
             this.txtQRCode = new System.Windows.Forms.TextBox();
             this.btnImageQR = new System.Windows.Forms.Button();
@@ -161,8 +163,6 @@
             this.cbPortsCompany = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCardIdScan = new System.Windows.Forms.TextBox();
-            this.txtNumberPlate_in = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -229,6 +229,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recogize In";
             // 
+            // txtNumberPlate_in
+            // 
+            this.txtNumberPlate_in.Location = new System.Drawing.Point(0, 96);
+            this.txtNumberPlate_in.Multiline = true;
+            this.txtNumberPlate_in.Name = "txtNumberPlate_in";
+            this.txtNumberPlate_in.Size = new System.Drawing.Size(97, 84);
+            this.txtNumberPlate_in.TabIndex = 5;
+            this.txtNumberPlate_in.Visible = false;
+            // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -243,9 +252,9 @@
             this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(98, 109);
+            this.panel5.Location = new System.Drawing.Point(98, 19);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(187, 140);
+            this.panel5.Size = new System.Drawing.Size(187, 230);
             this.panel5.TabIndex = 4;
             // 
             // lbRoleIn
@@ -355,7 +364,7 @@
             // 
             // btnSaveIn
             // 
-            this.btnSaveIn.Location = new System.Drawing.Point(6, 146);
+            this.btnSaveIn.Location = new System.Drawing.Point(6, 59);
             this.btnSaveIn.Name = "btnSaveIn";
             this.btnSaveIn.Size = new System.Drawing.Size(86, 31);
             this.btnSaveIn.TabIndex = 3;
@@ -365,7 +374,7 @@
             // 
             // btnLoadImageIn
             // 
-            this.btnLoadImageIn.Location = new System.Drawing.Point(6, 109);
+            this.btnLoadImageIn.Location = new System.Drawing.Point(6, 22);
             this.btnLoadImageIn.Name = "btnLoadImageIn";
             this.btnLoadImageIn.Size = new System.Drawing.Size(86, 31);
             this.btnLoadImageIn.TabIndex = 2;
@@ -383,6 +392,7 @@
             this.picNumberPlate_in.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picNumberPlate_in.TabIndex = 1;
             this.picNumberPlate_in.TabStop = false;
+            this.picNumberPlate_in.Visible = false;
             // 
             // pic_vehicle_in
             // 
@@ -660,7 +670,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(100, 117);
+            this.label15.Location = new System.Drawing.Point(100, 27);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(38, 13);
             this.label15.TabIndex = 14;
@@ -669,7 +679,7 @@
             // 
             // txtDescriptionOut
             // 
-            this.txtDescriptionOut.Location = new System.Drawing.Point(103, 146);
+            this.txtDescriptionOut.Location = new System.Drawing.Point(103, 56);
             this.txtDescriptionOut.Multiline = true;
             this.txtDescriptionOut.Name = "txtDescriptionOut";
             this.txtDescriptionOut.Size = new System.Drawing.Size(155, 31);
@@ -677,7 +687,7 @@
             // 
             // btnPass
             // 
-            this.btnPass.Location = new System.Drawing.Point(0, 146);
+            this.btnPass.Location = new System.Drawing.Point(0, 56);
             this.btnPass.Name = "btnPass";
             this.btnPass.Size = new System.Drawing.Size(97, 31);
             this.btnPass.TabIndex = 4;
@@ -687,7 +697,7 @@
             // 
             // btnLoadImageOut
             // 
-            this.btnLoadImageOut.Location = new System.Drawing.Point(0, 109);
+            this.btnLoadImageOut.Location = new System.Drawing.Point(0, 19);
             this.btnLoadImageOut.Name = "btnLoadImageOut";
             this.btnLoadImageOut.Size = new System.Drawing.Size(97, 31);
             this.btnLoadImageOut.TabIndex = 3;
@@ -705,6 +715,7 @@
             this.picNumberPlate_out.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picNumberPlate_out.TabIndex = 1;
             this.picNumberPlate_out.TabStop = false;
+            this.picNumberPlate_out.Visible = false;
             // 
             // txtNumberPlate_out
             // 
@@ -713,6 +724,7 @@
             this.txtNumberPlate_out.Name = "txtNumberPlate_out";
             this.txtNumberPlate_out.Size = new System.Drawing.Size(97, 84);
             this.txtNumberPlate_out.TabIndex = 0;
+            this.txtNumberPlate_out.Visible = false;
             // 
             // pic_vehicle_out
             // 
@@ -739,10 +751,10 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPageQRScan);
             this.tabControl1.Controls.Add(this.tabPageInfomation);
             this.tabControl1.Controls.Add(this.tabPageCustomer);
             this.tabControl1.Controls.Add(this.tabPageRegistration);
-            this.tabControl1.Controls.Add(this.tabPageQRScan);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1604,6 +1616,13 @@
             this.tabPageQRScan.Text = "Scan QR";
             this.tabPageQRScan.UseVisualStyleBackColor = true;
             // 
+            // txtCardIdScan
+            // 
+            this.txtCardIdScan.Location = new System.Drawing.Point(17, 445);
+            this.txtCardIdScan.Name = "txtCardIdScan";
+            this.txtCardIdScan.Size = new System.Drawing.Size(260, 20);
+            this.txtCardIdScan.TabIndex = 5;
+            // 
             // btnPassQR
             // 
             this.btnPassQR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1687,21 +1706,6 @@
             this.label3.Size = new System.Drawing.Size(343, 24);
             this.label3.TabIndex = 5;
             this.label3.Text = "SMART PARKING HOUSE SYSTEM";
-            // 
-            // txtCardIdScan
-            // 
-            this.txtCardIdScan.Location = new System.Drawing.Point(17, 445);
-            this.txtCardIdScan.Name = "txtCardIdScan";
-            this.txtCardIdScan.Size = new System.Drawing.Size(260, 20);
-            this.txtCardIdScan.TabIndex = 5;
-            // 
-            // txtNumberPlate_in
-            // 
-            this.txtNumberPlate_in.Location = new System.Drawing.Point(0, 19);
-            this.txtNumberPlate_in.Multiline = true;
-            this.txtNumberPlate_in.Name = "txtNumberPlate_in";
-            this.txtNumberPlate_in.Size = new System.Drawing.Size(97, 84);
-            this.txtNumberPlate_in.TabIndex = 5;
             // 
             // MainApp
             // 

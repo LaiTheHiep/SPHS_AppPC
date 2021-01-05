@@ -789,5 +789,20 @@ namespace SPHS.AppWindow
         }
 
         #endregion
+
+        public static Image ReadFileImage(string urlImage)
+        {
+            FileStream fs = new FileStream(urlImage, FileMode.Open, FileAccess.Read);
+            Image img = Image.FromStream(fs);
+            return img;
+        }
+
+        public static DateTime ConvertTimeWithLong(long time)
+        {
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime now = start.AddMilliseconds(time).ToLocalTime();
+
+            return now;
+        }
     }
 }

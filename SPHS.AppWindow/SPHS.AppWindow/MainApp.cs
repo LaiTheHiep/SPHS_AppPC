@@ -29,7 +29,7 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
-            setUp();
+            //setUp();
             CheckForIllegalCrossThreadCalls = false;
             new Thread(
                 () =>
@@ -736,24 +736,25 @@ namespace SPHS.AppWindow
                 return;
             }
             string startupPath = dlg.FileName;
+            pic_vehicle_in.Image = Utils.ReadFileImage(startupPath);
 
-            Image temp1;
-            string temp2, temp3;
-            Reconize(true, startupPath, out temp1, out temp2, out temp3);
-            pic_vehicle_in.Image = temp1;
-            if (string.IsNullOrEmpty(temp3))
-                txtNumberPlate_in.Text = "Cannot recognize license plate !";
-            else
-                txtNumberPlate_in.Text = temp3;
+            //Image temp1;
+            //string temp2, temp3;
+            //Reconize(true, startupPath, out temp1, out temp2, out temp3);
+            //pic_vehicle_in.Image = temp1;
+            //if (string.IsNullOrEmpty(temp3))
+            //    txtNumberPlate_in.Text = "Cannot recognize license plate !";
+            //else
+            //    txtNumberPlate_in.Text = temp3;
 
-            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
-            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
-            if (_users.Count == 1)
-            {
-                users _user = (users)_users[0];
-                setInfomation(_user, null, true);
-                txtNumberPlate_in.Text = temp3;
-            }
+            //string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_in.Text);
+            //List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            //if (_users.Count == 1)
+            //{
+            //    users _user = (users)_users[0];
+            //    setInfomation(_user, null, true);
+            //    txtNumberPlate_in.Text = temp3;
+            //}
         }
 
         private void btnLoadImageOut_Click(object sender, EventArgs e)
@@ -766,59 +767,56 @@ namespace SPHS.AppWindow
                 return;
             }
             string startupPath = dlg.FileName;
+            pic_vehicle_out.Image = Utils.ReadFileImage(startupPath);
 
-            Image temp1;
-            string temp2, temp3;
-            Reconize(false, startupPath, out temp1, out temp2, out temp3);
-            pic_vehicle_out.Image = temp1;
-            if (temp3 == "")
-                txtNumberPlate_out.Text = "Cannot recognize license plate !";
-            else
-                txtNumberPlate_out.Text = temp3;
+            //Image temp1;
+            //string temp2, temp3;
+            //Reconize(false, startupPath, out temp1, out temp2, out temp3);
+            //pic_vehicle_out.Image = temp1;
+            //if (temp3 == "")
+            //    txtNumberPlate_out.Text = "Cannot recognize license plate !";
+            //else
+            //    txtNumberPlate_out.Text = temp3;
 
-            string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_out.Text);
-            List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
-            if (_users.Count == 1)
-            {
-                users _user = (users)_users[0];
-                List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
-                if (_parkingTickets.Count > 0)
-                {
-                    parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
-                    if (_parkingTicket.timeOut == null)
-                    {
-                        setInfomation(_user, _parkingTicket, false);
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(txtCardIdScan.Text))
-                {
-                    List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={txtCardIdScan.Text}&" + @"$sort={timeIn: -1}");
-                    if (_parkingTickets.Count > 0)
-                    {
-                        parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
-                        if (_parkingTicket.timeOut == null)
-                        {
-                            setInfomation(new users(), _parkingTicket, false);
-                            return;
-                        }
-                    }
-                }
-            }
-            MessageBox.Show("Something error!");
+            //string _numberPlate = Utils.convertNumberPlate(txtNumberPlate_out.Text);
+            //List<object> _users = Utils.getAPI(COLLECTIONS.users, $"numberPlate={_numberPlate}");
+            //if (_users.Count == 1)
+            //{
+            //    users _user = (users)_users[0];
+            //    List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
+            //    if (_parkingTickets.Count > 0)
+            //    {
+            //        parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+            //        if (_parkingTicket.timeOut == null)
+            //        {
+            //            setInfomation(_user, _parkingTicket, false);
+            //            return;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (!string.IsNullOrEmpty(txtCardIdScan.Text))
+            //    {
+            //        List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={txtCardIdScan.Text}&" + @"$sort={timeIn: -1}");
+            //        if (_parkingTickets.Count > 0)
+            //        {
+            //            parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+            //            if (_parkingTicket.timeOut == null)
+            //            {
+            //                setInfomation(new users(), _parkingTicket, false);
+            //                return;
+            //            }
+            //        }
+            //    }
+            //}
+            //MessageBox.Show("Something error!");
         }
 
         private void btnSaveIn_Click(object sender, EventArgs e)
         {
             bool verify = false;
-            if (string.IsNullOrEmpty(customerGo._id))
-                verify = false;
-            else if (customerGo.cardIds != null && customerGo.cardIds.Contains(txtCardIdScan.Text))
-                verify = true;
-            else if (txtQRCode.Text.Contains(customerGo.companyId) && txtQRCode.Text.Contains(customerGo.account) && txtQRCode.Text.Contains(customerGo.numberPlate))
+            if (!string.IsNullOrEmpty(customerGo._id))
                 verify = true;
 
             string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
@@ -829,7 +827,7 @@ namespace SPHS.AppWindow
                 {
                     var _post = ParkingTicketAPI.post(new parkingTickets()
                     {
-                        port = cbPortsCompany.Text,
+                        port = string.IsNullOrEmpty(cbPortsCompany.Text) ? "port" : cbPortsCompany.Text,
                         companyId = Parameter_Special.USER_PRESENT.companyId,
                         timeIn = DateTime.Now.ToString(),
                         author = Parameter_Special.USER_PRESENT._id,
@@ -846,7 +844,7 @@ namespace SPHS.AppWindow
             {
                 var _post = ParkingTicketAPI.post(new parkingTickets()
                 {
-                    port = cbPortsCompany.Text,
+                    port = string.IsNullOrEmpty(cbPortsCompany.Text) ? "port" : cbPortsCompany.Text,
                     companyId = Parameter_Special.USER_PRESENT.companyId,
                     timeIn = DateTime.Now.ToString(),
                     author = Parameter_Special.USER_PRESENT._id,
@@ -1048,9 +1046,91 @@ namespace SPHS.AppWindow
 
         private void btnPassQR_Click(object sender, EventArgs e)
         {
+            // get information
+            if (!string.IsNullOrEmpty(txtQRCode.Text)) // qr code
+            {
+                string qrCode = txtQRCode.Text;
+                var qrInfo = Utils.JsonStringToClass<InfoQRCode>(qrCode);
+                var timeCheck = (DateTime.Now - Utils.ConvertTimeWithLong(qrInfo.createdTime)).Minutes < 2;
+                if (timeCheck)
+                {
+                    List<object> _users = Utils.getAPI(COLLECTIONS.users, $"_id={qrInfo._id}");
+                    if (_users.Count == 1)
+                    {
+                        users _user = (users)_users[0];
+                        if (pic_vehicle_out.Image == null)
+                        {
+                            setInfomation(_user, null, true);
+                        }
+                        else
+                        {
+                            List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
+                            if (_parkingTickets.Count > 0)
+                            {
+                                parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+                                if (_parkingTicket.timeOut == null)
+                                {
+                                    setInfomation(_user, _parkingTicket, false);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            else if (!string.IsNullOrEmpty(txtCardIdScan.Text))// card id
+            {
+                string cardId = txtCardIdScan.Text;
+                List<object> _users = Utils.getAPI(COLLECTIONS.users, $"cardIds={cardId}");
+                if (_users.Count == 1)
+                {
+                    users _user = (users)_users[0];
+                    if (pic_vehicle_out.Image == null)
+                    {
+                        setInfomation(_user, null, true);
+                    }
+                    else
+                    {
+                        List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
+                        if (_parkingTickets.Count > 0)
+                        {
+                            parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+                            if (_parkingTicket.timeOut == null)
+                            {
+                                setInfomation(_user, _parkingTicket, false);
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (pic_vehicle_out.Image != null)
+                    {
+                        List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={txtCardIdScan.Text}&" + @"$sort={timeIn: -1}");
+                        if (_parkingTickets.Count > 0)
+                        {
+                            parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
+                            if (_parkingTicket.timeOut == null)
+                            {
+                                setInfomation(new users(), _parkingTicket, false);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Something wrong!");
+            }
+
+            // clear information
             SPHSqrCode = "";
             picQRCode.Image = null;
             txtQRCode.Text = "";
+            txtCardIdScan.Text = "";
             videoCaptureDevice.Stop();
         }
 

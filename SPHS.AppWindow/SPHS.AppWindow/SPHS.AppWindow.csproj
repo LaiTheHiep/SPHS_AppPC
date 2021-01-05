@@ -154,6 +154,7 @@
     <Compile Include="models\companies.cs" />
     <Compile Include="models\dataResponse.cs" />
     <Compile Include="models\devices.cs" />
+    <Compile Include="models\InfoQRCode.cs" />
     <Compile Include="models\parkingTickets.cs" />
     <Compile Include="models\roles.cs" />
     <Compile Include="models\transactions.cs" />

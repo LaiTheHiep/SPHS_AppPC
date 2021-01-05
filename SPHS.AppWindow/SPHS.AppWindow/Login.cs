@@ -20,6 +20,8 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             Utils.setupFolder();
+            txtAccount.Text = "security";
+            txtPassword.Text = "123456a@";
         }
 
         private void btnExit_Click(object sender, EventArgs e)
