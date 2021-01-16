@@ -85,8 +85,7 @@ namespace SPHS.AppWindow
         {
             if (!string.IsNullOrEmpty(Parameter_Special.USER_PRESENT.accessToken))
             {
-
-                var companies = Utils.getAPI(COLLECTIONS.companies, null);
+                var companies = CompanyAPI.Gets();
                 foreach (var company in companies)
                 {
                     _companies.Add((companies)company);
@@ -104,7 +103,7 @@ namespace SPHS.AppWindow
             if (index >= 0)
             {
                 _devices = new List<devices>();
-                var devices = Utils.getAPI(COLLECTIONS.devices, $"companyId={_companies[index]._id}");
+                var devices = CompanyAPI.GetDevicesByCompanyId(_companies[index]._id);
                 foreach (var device in devices)
                 {
                     _devices.Add((devices)device);
@@ -114,6 +113,11 @@ namespace SPHS.AppWindow
                     cbDevices.DataSource = _devices;
                     cbDevices.DisplayMember = "name";
                     cbDevices.SelectedIndex = 0;
+                    indexDevice = 0;
+                }
+                else
+                {
+                    cbDevices.DataSource = null;
                     indexDevice = 0;
                 }
             }

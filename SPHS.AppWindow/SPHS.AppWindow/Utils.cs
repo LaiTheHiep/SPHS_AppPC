@@ -558,6 +558,26 @@ namespace SPHS.AppWindow
             {
                 var jWTService = new JWTService();
                 Parameter_Special.USER_PRESENT.accessToken = jWTService.GenerateToken();
+
+                // get all companies
+                var resCompanies = getAPI(COLLECTIONS.companies, "");
+                if (!File.Exists($"{Parameter_Special.FOLDER_DATA}\\companies.json"))
+                {
+                    using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\companies.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fileStream))
+                        {
+                            sw.WriteLine(JsonConvert.SerializeObject(resCompanies));
+                        }
+                    }
+                }
+                else
+                {
+                    var textJson = JsonConvert.SerializeObject(resCompanies);
+                    if (File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\companies.json") != textJson)
+                        File.WriteAllText($"{Parameter_Special.FOLDER_DATA}\\companies.json", textJson);
+                }
+
                 // get all device
                 var devices = getAPI(COLLECTIONS.devices, "");
                 foreach (devices device in devices)
@@ -803,7 +823,7 @@ namespace SPHS.AppWindow
                 : JsonConvert.DeserializeObject<List<parkingTickets>>(textJson);
 
             var data1 = data.FirstOrDefault(d => d.port != "event" && d.userId == ticket.userId && string.IsNullOrEmpty(d.imageOut));
-            if(data1 != null)
+            if (data1 != null)
             {
                 data.Remove(data1);
                 data.Add(ticket);
@@ -832,11 +852,11 @@ namespace SPHS.AppWindow
             // send checkin
             var dataCheckin = data.Where(d => d.port == "event");
             var resPostEvent = ParkingTicketAPI.PostEvent(dataCheckin.ToList());
-            if(resPostEvent != null)
+            if (resPostEvent != null)
             {
-                if(resPostEvent["errorName"] == null)
+                if (resPostEvent["errorName"] == null)
                 {
-                    if(resPostEvent["data"] != null)
+                    if (resPostEvent["data"] != null)
                     {
                         dataSave.AddRange(JsonConvert.DeserializeObject<List<parkingTickets>>(resPostEvent["data"].ToString()));
                     }

@@ -146,6 +146,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actions\CompanyAPI.cs" />
     <Compile Include="actions\ParkingTicketAPI.cs" />
     <Compile Include="actions\RoleAPI.cs" />
     <Compile Include="actions\UserAPI.cs" />
