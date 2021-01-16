@@ -14,6 +14,7 @@ namespace SPHS.AppWindow.parameters
         //public static string ADDRESS_BASE_API = "https://sphs-lth.herokuapp.com";
         public static string ADDRESS_URL_IMAGE = "https://api.imgbb.com/1/upload?key=bbda9cabea0a8e3852cbe26df54d959c";
         public static string LINK_UPDATE_EVENT = "update-event-async";
+        public static string LINK_UPDATE_TICKET = "update-ticket-async";
         public static string FOLDER_IMAGE = @"C:\SPHS_images";
         public static string FOLDER_DATA = @"C:\SPHS_data";
         public static List<parkingTickets> LIST_QUEUE_EVENT = new List<parkingTickets>();

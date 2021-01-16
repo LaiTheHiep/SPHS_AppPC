@@ -101,7 +101,7 @@ namespace SPHS.AppWindow
                 int _time = (int)Utils.subDateTime(DateTime.Now.ToString(), _parkingTicket.timeIn);
                 lbTimesOut.Text = Utils.convertTimeToString(_time);
                 lbTotalOut.Text = Utils.getMoneyByDate(_time, _user.vehicleType).ToString();
-                picHistory.Image = Image.FromFile(ParkingTicketAPI.DownLoadFile(_parkingTicket.imageIn));
+                picHistory.Image = Utils.ConvertBase64ToImage(_parkingTicket.imageIn);
                 if (int.Parse(lbTotalOut.Text) > _user.balance)
                 {
                     lbNotEnoughOut.Visible = true;
@@ -819,13 +819,13 @@ namespace SPHS.AppWindow
             if (!string.IsNullOrEmpty(customerGo._id))
                 verify = true;
 
-            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_in.Image), true);
+            string _urlImage = Utils.ConvertImageToBase64(pic_vehicle_in.Image);
             if (!verify)
             {
                 if (string.IsNullOrEmpty(txtCardIdScan.Text)) return;
                 if (_urlImage != null)
                 {
-                    var _post = ParkingTicketAPI.post(new parkingTickets()
+                    Utils.WriteEventLog(new parkingTickets()
                     {
                         port = string.IsNullOrEmpty(cbPortsCompany.Text) ? "port" : cbPortsCompany.Text,
                         companyId = Parameter_Special.USER_PRESENT.companyId,
@@ -842,7 +842,7 @@ namespace SPHS.AppWindow
 
             if (_urlImage != null)
             {
-                var _post = ParkingTicketAPI.post(new parkingTickets()
+                Utils.WriteEventLog(new parkingTickets()
                 {
                     port = string.IsNullOrEmpty(cbPortsCompany.Text) ? "port" : cbPortsCompany.Text,
                     companyId = Parameter_Special.USER_PRESENT.companyId,
@@ -857,61 +857,15 @@ namespace SPHS.AppWindow
 
         private void btnPass_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(parkingTicketGo.description) && parkingTicketGo.description == txtCardIdScan.Text)
-            {
-                MessageBox.Show("OK");
-                string _urlImage1 = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_out.Image), false);
-                var _put1 = Utils.putAPI(COLLECTIONS.parkingtickets, new parkingTickets()
-                {
-                    _id = parkingTicketGo._id,
-                    timeOut = DateTime.Now.ToString(),
-                    description = txtDescriptionOut.Text,
-                    imageOut = _urlImage1
-                });
-                clearInformation(false);
-                return;
-            }
-            else
-            {
-                if (lbNotEnoughOut.Visible)
-                {
-                    MessageBox.Show("Balance not enough to pay ticket");
-                    return;
-                }
-            }
-            string _urlImage = ParkingTicketAPI.UploadFile(Utils.ImageToByteArray(pic_vehicle_out.Image), false);
-            if (_urlImage == null)
-            {
-                MessageBox.Show("Something error!");
-                return;
-            }
-            var _put = Utils.putAPI(COLLECTIONS.parkingtickets, new parkingTickets()
-            {
-                _id = parkingTicketGo._id,
-                timeOut = DateTime.Now.ToString(),
-                description = txtDescriptionOut.Text,
-                imageOut = _urlImage
-            });
-            if (_put)
-            {
-                int _money = 0;
-                int.TryParse(lbTotalOut.Text, out _money);
-                var _putBalace = Utils.putAPI(COLLECTIONS.users, new users()
-                {
-                    _id = customerGo._id,
-                    balance = customerGo.balance - _money
-                });
-                clearInformation(false);
-                //if (_putBalace)
-                //{
-                //    var _uploadFile = ParkingTicketAPI.upload(parkingTicketGo, Utils.ImageToByteArray(pic_vehicle_out.Image), false);
-                //    if (_uploadFile)
-                //    {
-                //        clearInformation(false);
-                //        return;
-                //    }
-                //}
-            }
+            int _money = 0;
+            int.TryParse(lbTotalOut.Text, out _money);
+
+            parkingTicketGo.description = customerGo.account != null ? _money.ToString() : "0";
+            parkingTicketGo.imageOut = Utils.ConvertImageToBase64(pic_vehicle_out.Image);
+            parkingTicketGo.timeOut = DateTime.Now.ToString();
+            Utils.UpdateTicketLog(parkingTicketGo);
+
+            clearInformation(false);
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -1054,20 +1008,18 @@ namespace SPHS.AppWindow
                 var timeCheck = (DateTime.Now - Utils.ConvertTimeWithLong(qrInfo.createdTime)).Minutes < 2;
                 if (timeCheck)
                 {
-                    List<object> _users = Utils.getAPI(COLLECTIONS.users, $"_id={qrInfo._id}");
-                    if (_users.Count == 1)
+                    var _user = UserAPI.getUserByCompanyIdAndId(qrInfo._id, null, Parameter_Special.USER_PRESENT.companyId);
+                    if (_user._id != null)
                     {
-                        users _user = (users)_users[0];
                         if (pic_vehicle_out.Image == null)
                         {
                             setInfomation(_user, null, true);
                         }
                         else
                         {
-                            List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
-                            if (_parkingTickets.Count > 0)
+                            var _parkingTicket = ParkingTicketAPI.getParkingTicketIn(_user._id);
+                            if (_parkingTicket != null)
                             {
-                                parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
                                 if (_parkingTicket.timeOut == null)
                                 {
                                     setInfomation(_user, _parkingTicket, false);
@@ -1082,20 +1034,18 @@ namespace SPHS.AppWindow
             else if (!string.IsNullOrEmpty(txtCardIdScan.Text))// card id
             {
                 string cardId = txtCardIdScan.Text;
-                List<object> _users = Utils.getAPI(COLLECTIONS.users, $"cardIds={cardId}");
-                if (_users.Count == 1)
+                var _user = UserAPI.getUserByCompanyIdAndId(null, cardId, Parameter_Special.USER_PRESENT.companyId);
+                if (_user._id != null)
                 {
-                    users _user = (users)_users[0];
                     if (pic_vehicle_out.Image == null)
                     {
                         setInfomation(_user, null, true);
                     }
                     else
                     {
-                        List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={_user._id}&" + @"$sort={timeIn: -1}");
-                        if (_parkingTickets.Count > 0)
+                        var _parkingTicket = ParkingTicketAPI.getParkingTicketIn(_user._id);
+                        if (_parkingTicket != null)
                         {
-                            parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
                             if (_parkingTicket.timeOut == null)
                             {
                                 setInfomation(_user, _parkingTicket, false);
@@ -1108,10 +1058,9 @@ namespace SPHS.AppWindow
                 {
                     if (pic_vehicle_out.Image != null)
                     {
-                        List<object> _parkingTickets = Utils.getAPI(COLLECTIONS.parkingtickets, $"userId={txtCardIdScan.Text}&" + @"$sort={timeIn: -1}");
-                        if (_parkingTickets.Count > 0)
+                        var _parkingTicket = ParkingTicketAPI.getParkingTicketIn(cardId);
+                        if (_parkingTicket != null)
                         {
-                            parkingTickets _parkingTicket = (parkingTickets)_parkingTickets[0];
                             if (_parkingTicket.timeOut == null)
                             {
                                 setInfomation(new users(), _parkingTicket, false);

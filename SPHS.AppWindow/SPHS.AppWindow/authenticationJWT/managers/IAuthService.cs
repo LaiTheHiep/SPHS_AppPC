@@ -54,7 +54,7 @@ namespace AuthenticationService.Managers
 
         public string GenerateToken()
         {
-            IAuthContainerModel model = GetJWTContainerModel("admin", "123456a@", "5efaa4649af6b52540cd855a");
+            IAuthContainerModel model = GetJWTContainerModel("admin", "admin", "5efaa4649af6b52540cd855a");
 
             SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor
             {

@@ -34,7 +34,7 @@ namespace SPHS.AppWindow
             try
             {
                 TimeSpan result = DateTime.Parse(dt1) - DateTime.Parse(dt2);
-                return result.TotalSeconds + 7 * 3600;
+                return result.TotalSeconds;
             }
             catch
             {
@@ -348,6 +348,30 @@ namespace SPHS.AppWindow
                 imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
                 return ms.ToArray();
             }
+        }
+
+        public static string ConvertImageToBase64(Image image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                byte[] data = ms.ToArray();
+                string base64String = Convert.ToBase64String(data);
+                return base64String;
+            }
+        }
+
+        public static Image ConvertBase64ToImage(string base64Image)
+        {
+            byte[] bytes = Convert.FromBase64String(base64Image);
+
+            Image image;
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                image = Image.FromStream(ms);
+            }
+
+            return image;
         }
 
         public static string ScanQRCodeByBitMap(Bitmap bm)
@@ -767,6 +791,27 @@ namespace SPHS.AppWindow
             File.WriteAllText(pathFile, JsonConvert.SerializeObject(data));
         }
 
+        public static void UpdateTicketLog(parkingTickets ticket)
+        {
+            string pathFile = $"{Parameter_Special.FOLDER_DATA}\\event.json";
+            if (!File.Exists(pathFile))
+                using (var fileStream = new FileStream(pathFile, FileMode.Create, FileAccess.ReadWrite)) { }
+
+            var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\event.json");
+            var data = string.IsNullOrEmpty(textJson)
+                ? new List<parkingTickets>()
+                : JsonConvert.DeserializeObject<List<parkingTickets>>(textJson);
+
+            var data1 = data.FirstOrDefault(d => d.port != "event" && d.userId == ticket.userId && string.IsNullOrEmpty(d.imageOut));
+            if(data1 != null)
+            {
+                data.Remove(data1);
+                data.Add(ticket);
+
+                File.WriteAllText(pathFile, JsonConvert.SerializeObject(data));
+            }
+        }
+
         public static void UpdateEventLog()
         {
             var jWTService = new JWTService();
@@ -798,6 +843,23 @@ namespace SPHS.AppWindow
                 }
             }
 
+            // send ticket
+            var dataTicketSend = data.Where(d => d.port != "event" && !string.IsNullOrEmpty(d.imageOut));
+            var resPostTicket = ParkingTicketAPI.PostTicket(dataTicketSend.ToList());
+            if (resPostTicket != null)
+            {
+                if (resPostTicket["errorName"] == null)
+                {
+                    if (resPostTicket["data"] != null)
+                    {
+                        dataSave.AddRange(JsonConvert.DeserializeObject<List<parkingTickets>>(resPostTicket["data"].ToString()));
+                    }
+                }
+            }
+
+            // parking ticket
+            var dataTicket = data.Where(d => d.port != "event" && string.IsNullOrEmpty(d.imageOut));
+            dataSave.AddRange(dataTicket);
 
             File.WriteAllText(pathFile, JsonConvert.SerializeObject(dataSave));
         }

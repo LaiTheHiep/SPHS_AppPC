@@ -108,25 +108,75 @@ namespace SPHS.AppWindow.actions
             }
         }
 
+        public static parkingTickets getParkingTicketIn(string userId)
+        {
+            string pathFile = $"{Parameter_Special.FOLDER_DATA}\\event.json";
+            if (!File.Exists(pathFile))
+                using (var fileStream = new FileStream(pathFile, FileMode.Create, FileAccess.ReadWrite)) { }
+
+            var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\event.json");
+            var data = string.IsNullOrEmpty(textJson)
+                ? new List<parkingTickets>()
+                : JsonConvert.DeserializeObject<List<parkingTickets>>(textJson);
+
+            var ticket = data.FirstOrDefault(d => d.userId == userId && string.IsNullOrEmpty(d.imageOut));
+            return ticket;
+        }
+
         public static JObject PostEvent(List<parkingTickets> eventLogs)
         {
-            string url = Parameter_Special.ADDRESS_BASE_API + "/" + Parameter_Special.LINK_UPDATE_EVENT + $"?accessToken={Parameter_Special.USER_PRESENT.accessToken}";
-            using (var httpClient = new HttpClient())
+            try
             {
-                var _data = new StringContent(JsonConvert.SerializeObject(eventLogs), Encoding.UTF8, "application/json");
-                var response = httpClient.PostAsync(url, _data);
-                response.Wait();
-                var _result = response.Result;
-                if (_result.IsSuccessStatusCode)
+                string url = Parameter_Special.ADDRESS_BASE_API + "/" + Parameter_Special.LINK_UPDATE_EVENT + $"?accessToken={Parameter_Special.USER_PRESENT.accessToken}";
+                using (var httpClient = new HttpClient())
                 {
-                    var readTask = _result.Content.ReadAsStringAsync();
-                    readTask.Wait();
-                    var data = readTask.Result;
-                    JObject stuff = JObject.Parse(data);
-                    return stuff;
+                    var _data = new StringContent(JsonConvert.SerializeObject(eventLogs), Encoding.UTF8, "application/json");
+                    var response = httpClient.PostAsync(url, _data);
+                    response.Wait();
+                    var _result = response.Result;
+                    if (_result.IsSuccessStatusCode)
+                    {
+                        var readTask = _result.Content.ReadAsStringAsync();
+                        readTask.Wait();
+                        var data = readTask.Result;
+                        JObject stuff = JObject.Parse(data);
+                        return stuff;
+                    }
                 }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static JObject PostTicket(List<parkingTickets> tickets)
+        {
+            try
+            {
+                string url = Parameter_Special.ADDRESS_BASE_API + "/" + Parameter_Special.LINK_UPDATE_TICKET + $"?accessToken={Parameter_Special.USER_PRESENT.accessToken}";
+                using (var httpClient = new HttpClient())
+                {
+                    var _data = new StringContent(JsonConvert.SerializeObject(tickets), Encoding.UTF8, "application/json");
+                    var response = httpClient.PostAsync(url, _data);
+                    response.Wait();
+                    var _result = response.Result;
+                    if (_result.IsSuccessStatusCode)
+                    {
+                        var readTask = _result.Content.ReadAsStringAsync();
+                        readTask.Wait();
+                        var data = readTask.Result;
+                        JObject stuff = JObject.Parse(data);
+                        return stuff;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
