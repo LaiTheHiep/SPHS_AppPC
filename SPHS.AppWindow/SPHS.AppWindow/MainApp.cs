@@ -29,7 +29,7 @@ namespace SPHS.AppWindow
         {
             InitializeComponent();
             tabControl1.Anchor = (AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom);
-            //setUp();
+            setUp();
             CheckForIllegalCrossThreadCalls = false;
             new Thread(
                 () =>
