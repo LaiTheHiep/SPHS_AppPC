@@ -31,7 +31,8 @@ namespace SPHS.AppWindow
             {
                 while (true)
                 {
-                    Utils.SendEventLog();
+                    //Utils.SendEventLog();
+                    Utils.UpdateEventLog();
                     Thread.Sleep(Parameter_Special.TIME_ASYNC_DEVICE);
                 }
             })

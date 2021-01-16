@@ -139,8 +139,8 @@ namespace SPHS.AppWindow
             {
                 try
                 {
-                    //int status = Utils.verfyQRCodeInLocal(qr_code, _devices[indexDevice]);
-                    int status = Utils.verifyQRCode(qr_code, _devices[indexDevice]._id);
+                    int status = Utils.verfyQRCodeInLocal(qr_code, _devices[indexDevice]);
+                    //int status = Utils.verifyQRCode(qr_code, _devices[indexDevice]._id);
                     indexStatus = status;
                 }
                 catch
@@ -169,8 +169,8 @@ namespace SPHS.AppWindow
         {
             try
             {
-                //int status = Utils.verifyCardInLocal(txtCardId.Text, _devices[indexDevice]);
-                int status = Utils.verifyCard(txtCardId.Text, _devices[indexDevice]._id);
+                int status = Utils.verifyCardInLocal(txtCardId.Text, _devices[indexDevice]);
+                //int status = Utils.verifyCard(txtCardId.Text, _devices[indexDevice]._id);
                 indexStatus = status;
             }
             catch

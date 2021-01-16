@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AuthenticationService.Managers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SPHS.AppWindow.actions;
 using SPHS.AppWindow.models;
@@ -405,9 +406,10 @@ namespace SPHS.AppWindow
                                 var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
                                 string[] froms = deviceAccess.dateTimeFrom.Split('/');
                                 string[] tos = deviceAccess.dateTimeTo.Split('/');
-                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
-                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
-                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                var secondFrom = int.Parse(froms[0]) * 3600 + int.Parse(froms[1]) * 60 + int.Parse(froms[2]);
+                                var secondTo = int.Parse(tos[0]) * 3600 + int.Parse(tos[1]) * 60 + int.Parse(tos[2]);
+                                var secondNow = now.Hour * 3600 + now.Minute * 60 + now.Second;
+                                if (secondFrom <= secondNow && secondNow <= secondTo)
                                 {
                                     resultVerify = 3;
                                     Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
@@ -466,9 +468,10 @@ namespace SPHS.AppWindow
                                 var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
                                 string[] froms = deviceAccess.dateTimeFrom.Split('/');
                                 string[] tos = deviceAccess.dateTimeTo.Split('/');
-                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
-                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
-                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                var secondFrom = int.Parse(froms[0]) * 3600 + int.Parse(froms[1]) * 60 + int.Parse(froms[2]);
+                                var secondTo = int.Parse(tos[0]) * 3600 + int.Parse(tos[1]) * 60 + int.Parse(tos[2]);
+                                var secondNow = now.Hour * 3600 + now.Minute * 60 + now.Second;
+                                if (secondFrom <= secondNow && secondNow <= secondTo)
                                 {
                                     resultVerify = 3;
                                     Utils.postAPI(COLLECTIONS.parkingtickets, new parkingTickets()
@@ -529,10 +532,8 @@ namespace SPHS.AppWindow
         {
             try
             {
-                if (string.IsNullOrEmpty(Parameter_Special.USER_PRESENT.accessToken))
-                {
-                    Parameter_Special.USER_PRESENT = UserAPI.login(Parameter_Special.ACCOUNT_DEFAULT, Parameter_Special.PASSWORD_DEFAULT);
-                }
+                var jWTService = new JWTService();
+                Parameter_Special.USER_PRESENT.accessToken = jWTService.GenerateToken();
                 // get all device
                 var devices = getAPI(COLLECTIONS.devices, "");
                 foreach (devices device in devices)
@@ -550,30 +551,10 @@ namespace SPHS.AppWindow
                     }
                     else
                     {
-                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json");
+                        if (textJson != ClassToJsonString<devices>(device))
                         {
-                            byte[] bytes = new byte[fileStream.Length];
-                            int numBytesToRead = (int)fileStream.Length;
-                            int numBytesRead = 0;
-                            while (numBytesToRead > 0)
-                            {
-                                int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
-                                if (n == 0)
-                                    break;
-
-                                numBytesRead += n;
-                                numBytesToRead -= n;
-                            }
-
-                            string textJson = Encoding.UTF8.GetString(bytes);
-                            textJson = textJson.Trim();
-                            if (textJson != ClassToJsonString<devices>(device))
-                            {
-                                using (StreamWriter sw = new StreamWriter(fileStream))
-                                {
-                                    sw.WriteLine(ClassToJsonString<devices>(device));
-                                }
-                            }
+                            File.WriteAllText($"{Parameter_Special.FOLDER_DATA}\\device.{device._id}.json", ClassToJsonString<devices>(device));
                         }
                     }
 
@@ -594,30 +575,10 @@ namespace SPHS.AppWindow
                     }
                     else
                     {
-                        using (var fileStream = new FileStream($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json");
+                        if (textJson != ClassToJsonString<devices>(device))
                         {
-                            byte[] bytes = new byte[fileStream.Length];
-                            int numBytesToRead = (int)fileStream.Length;
-                            int numBytesRead = 0;
-                            while (numBytesToRead > 0)
-                            {
-                                int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
-                                if (n == 0)
-                                    break;
-
-                                numBytesRead += n;
-                                numBytesToRead -= n;
-                            }
-
-                            string textJson = Encoding.UTF8.GetString(bytes);
-                            textJson = textJson.Trim();
-                            if (textJson != userCompany)
-                            {
-                                using (StreamWriter sw = new StreamWriter(fileStream))
-                                {
-                                    sw.WriteLine(userCompany);
-                                }
-                            }
+                            File.WriteAllText($"{Parameter_Special.FOLDER_DATA}\\user.{device.companyId}.json", userCompany);
                         }
                     }
                 }
@@ -704,18 +665,19 @@ namespace SPHS.AppWindow
                                 var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
                                 string[] froms = deviceAccess.dateTimeFrom.Split('/');
                                 string[] tos = deviceAccess.dateTimeTo.Split('/');
-                                if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
-                                    && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
-                                    && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                                var secondFrom = int.Parse(froms[0]) * 3600 + int.Parse(froms[1]) * 60 + int.Parse(froms[2]);
+                                var secondTo = int.Parse(tos[0]) * 3600 + int.Parse(tos[1]) * 60 + int.Parse(tos[2]);
+                                var secondNow = now.Hour * 3600 + now.Minute * 60 + now.Second;
+                                if (secondFrom <= secondNow && secondNow <= secondTo)
                                 {
                                     resultVerify = 3;
-                                    Parameter_Special.LIST_QUEUE_EVENT.Add(new parkingTickets()
+                                    WriteEventLog(new parkingTickets()
                                     {
                                         author = _id,
                                         userId = _id,
                                         companyId = deviceId,
                                         port = "event",
-                                        description = "event",
+                                        description = "event qr-code",
                                         timeIn = stuffQRCode["createdTime"].ToString(),
                                         timeOut = stuffQRCode["createdTime"].ToString()
                                     });
@@ -756,18 +718,19 @@ namespace SPHS.AppWindow
                             var deviceAccess = JsonStringToClass<deviceAccess>(dataDeviceAccess);
                             string[] froms = deviceAccess.dateTimeFrom.Split('/');
                             string[] tos = deviceAccess.dateTimeTo.Split('/');
-                            if (int.Parse(froms[0]) <= now.Hour && int.Parse(tos[0]) >= now.Hour
-                                && int.Parse(froms[1]) <= now.Minute && int.Parse(tos[1]) >= now.Minute
-                                && int.Parse(froms[2]) <= now.Second && int.Parse(tos[2]) >= now.Second)
+                            var secondFrom = int.Parse(froms[0]) * 3600 + int.Parse(froms[1]) * 60 + int.Parse(froms[2]);
+                            var secondTo = int.Parse(tos[0]) * 3600 + int.Parse(tos[1]) * 60 + int.Parse(tos[2]);
+                            var secondNow = now.Hour * 3600 + now.Minute * 60 + now.Second;
+                            if (secondFrom <= secondNow && secondNow <= secondTo)
                             {
                                 resultVerify = 3;
-                                Parameter_Special.LIST_QUEUE_EVENT.Add(new parkingTickets()
+                                WriteEventLog(new parkingTickets()
                                 {
                                     author = stuff["data"][0]["_id"].ToString(),
                                     userId = stuff["data"][0]["_id"].ToString(),
                                     companyId = deviceId,
                                     port = "event",
-                                    description = "event",
+                                    description = "event card",
                                     timeIn = now.ToString(),
                                     timeOut = now.ToString()
                                 });
@@ -786,6 +749,57 @@ namespace SPHS.AppWindow
             }
 
             return resultVerify;
+        }
+
+        public static void WriteEventLog(parkingTickets eventLog)
+        {
+            string pathFile = $"{Parameter_Special.FOLDER_DATA}\\event.json";
+            if (!File.Exists(pathFile))
+                using (var fileStream = new FileStream(pathFile, FileMode.Create, FileAccess.ReadWrite)) { }
+
+            var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\event.json");
+            var data = string.IsNullOrEmpty(textJson)
+                ? new List<parkingTickets>()
+                : JsonConvert.DeserializeObject<List<parkingTickets>>(textJson);
+
+            data.Add(eventLog);
+
+            File.WriteAllText(pathFile, JsonConvert.SerializeObject(data));
+        }
+
+        public static void UpdateEventLog()
+        {
+            var jWTService = new JWTService();
+            Parameter_Special.USER_PRESENT.accessToken = jWTService.GenerateToken();
+
+            string pathFile = $"{Parameter_Special.FOLDER_DATA}\\event.json";
+            if (!File.Exists(pathFile))
+            {
+                using (var fileStream = new FileStream(pathFile, FileMode.Create, FileAccess.ReadWrite)) { }
+                return;
+            }
+            var textJson = File.ReadAllText($"{Parameter_Special.FOLDER_DATA}\\event.json");
+            if (string.IsNullOrEmpty(textJson)) return;
+
+            var data = JsonConvert.DeserializeObject<List<parkingTickets>>(textJson);
+            var dataSave = new List<parkingTickets>();
+
+            // send checkin
+            var dataCheckin = data.Where(d => d.port == "event");
+            var resPostEvent = ParkingTicketAPI.PostEvent(dataCheckin.ToList());
+            if(resPostEvent != null)
+            {
+                if(resPostEvent["errorName"] == null)
+                {
+                    if(resPostEvent["data"] != null)
+                    {
+                        dataSave.AddRange(JsonConvert.DeserializeObject<List<parkingTickets>>(resPostEvent["data"].ToString()));
+                    }
+                }
+            }
+
+
+            File.WriteAllText(pathFile, JsonConvert.SerializeObject(dataSave));
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SPHS.AppWindow.models;
 using SPHS.AppWindow.parameters;
 using System;
@@ -105,6 +106,27 @@ namespace SPHS.AppWindow.actions
                 client.DownloadFile(new Uri(url_in), new_path);
                 return new_path;
             }
+        }
+
+        public static JObject PostEvent(List<parkingTickets> eventLogs)
+        {
+            string url = Parameter_Special.ADDRESS_BASE_API + "/" + Parameter_Special.LINK_UPDATE_EVENT + $"?accessToken={Parameter_Special.USER_PRESENT.accessToken}";
+            using (var httpClient = new HttpClient())
+            {
+                var _data = new StringContent(JsonConvert.SerializeObject(eventLogs), Encoding.UTF8, "application/json");
+                var response = httpClient.PostAsync(url, _data);
+                response.Wait();
+                var _result = response.Result;
+                if (_result.IsSuccessStatusCode)
+                {
+                    var readTask = _result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var data = readTask.Result;
+                    JObject stuff = JObject.Parse(data);
+                    return stuff;
+                }
+            }
+            return null;
         }
     }
 }
