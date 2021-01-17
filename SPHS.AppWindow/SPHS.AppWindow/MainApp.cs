@@ -823,6 +823,13 @@ namespace SPHS.AppWindow
             if (!verify)
             {
                 if (string.IsNullOrEmpty(txtCardIdScan.Text)) return;
+                var _parkingTicket = ParkingTicketAPI.getParkingTicketIn(txtCardIdScan.Text);
+                if (_parkingTicket != null)
+                {
+                    MessageBox.Show("Vehicle existed");
+                    return;
+                }
+
                 if (_urlImage != null)
                 {
                     Utils.WriteEventLog(new parkingTickets()
@@ -842,6 +849,13 @@ namespace SPHS.AppWindow
 
             if (_urlImage != null)
             {
+                var _parkingTicket = ParkingTicketAPI.getParkingTicketIn(customerGo._id);
+                if (_parkingTicket != null)
+                {
+                    MessageBox.Show("Vehicle existed");
+                    return;
+                }
+
                 Utils.WriteEventLog(new parkingTickets()
                 {
                     port = string.IsNullOrEmpty(cbPortsCompany.Text) ? "port" : cbPortsCompany.Text,
