@@ -871,6 +871,21 @@ namespace SPHS.AppWindow
 
         private void btnPass_Click(object sender, EventArgs e)
         {
+            // check plate number vehicle
+            if (pic_vehicle_out.Image == null || picHistory.Image == null)
+            {
+                MessageBox.Show("Can not load image");
+                return;
+            }
+            Reconize(true, (Bitmap)pic_vehicle_out.Image, out var temp1, out var result1, out var temp3);
+            Reconize(true, (Bitmap)picHistory.Image, out var temp11, out var result2, out var temp33);
+            if (result1 != result2)
+            {
+                var igrone = MessageBox.Show("Image error! Do you want continue!", "Confirm igrone", MessageBoxButtons.YesNo);
+                if (igrone == DialogResult.No)
+                    return;
+            }
+
             int _money = 0;
             int.TryParse(lbTotalOut.Text, out _money);
 
